@@ -12,8 +12,8 @@ export const CONTAINERS: ContainerOffer[] = [
     title: "Contenedor EcoFlow",
     brand: "EcoFlow",
     price: 135000,
-    description: "Soluciones portátiles y de respaldo doméstico de alta gama.",
-    features: ["Generadores Portátiles", "Sistemas Delta Pro & Ultra", "Ideal Retail y Hogar"],
+    description: "Soluciones portátiles y de respaldo doméstico. Stock ya en La Habana (In-Bond).",
+    features: ["Generadores Portátiles", "Sistemas Delta Pro & Ultra", "Aceptamos USDT / Cripto", "Entrega Inmediata (Tradex)"],
     color: "cyan"
   },
   {
@@ -21,9 +21,9 @@ export const CONTAINERS: ContainerOffer[] = [
     title: "Contenedor Deye",
     brand: "Deye",
     price: 128600,
-    description: "Infraestructura híbrida industrial y residencial robusta.",
-    features: ["Inversores Híbridos 10kW", "Baterías LFP Rack/Mural", "Ideal Instaladores"],
-    color: "yellow" // Deye often associated with industrial/gold/yellow elements or just distinct from Cyan
+    description: "Infraestructura híbrida industrial. Inversores Split Phase 120V/240V para red cubana.",
+    features: ["Inversores 10kW Split Phase", "Baterías LFP Rack/Mural", "Inspección Física Permitida", "Pago USDT Disponible"],
+    color: "yellow"
   }
 ];
 
@@ -39,7 +39,7 @@ export const INVENTORY: InventoryItem[] = [
     sku: "SUN-10K-SG02LP2-US-AM3",
     quantity: 36,
     category: "Inverter",
-    description: "Inversor Híbrido Split Phase 10kW. Gestión inteligente de energía, soporta generador diesel y acople AC.",
+    description: "Inversor Híbrido Split Phase 10kW. Gestión inteligente de energía, soporta generador diesel y acople AC. Específico para voltaje US/Cuba.",
     specs: {
       capacity: "10 kW",
       output: "10000W (Split Phase 120/240V)",

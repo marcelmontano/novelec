@@ -1,6 +1,6 @@
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -14,19 +14,36 @@ export const Hero: React.FC = () => {
       </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        <div className="inline-flex items-center rounded-full bg-slate-800 px-4 py-1.5 text-sm font-semibold text-cyan-400 ring-1 ring-inset ring-cyan-400/20 mb-8">
-          <span className="flex h-2 w-2 rounded-full bg-cyan-400 mr-2 animate-pulse"></span>
-          Oferta Mayorista - Novelec
+        <div className="inline-flex items-center rounded-full bg-slate-800 px-4 py-1.5 text-sm font-semibold text-green-400 ring-1 ring-inset ring-green-400/20 mb-8 animate-fade-in-up">
+          <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
+          Stock Ya en La Habana - Almacén Tradex (In-Bond)
         </div>
         
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl mb-6">
-          Dos Oportunidades en <span className="gradient-text">Energía</span>
+          Energiza Cuba: <br className="hidden sm:block" />
+          <span className="gradient-text">Logra tu Propio Suministro</span>
         </h1>
         
-        <p className="max-w-2xl text-lg sm:text-xl text-slate-300 mb-12">
-          Seleccione su inversión. Disponemos de dos contenedores completos listos para envío a Cuba. 
-          Venta exclusiva por contenedor cerrado.
+        <p className="max-w-2xl text-lg sm:text-xl text-slate-300 mb-8">
+          Disponibilidad inmediata. Venta mayorista por contenedor cerrado.
+          Equipos listos para inspección física y nacionalización.
         </p>
+
+        {/* Trust Indicators */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12 text-sm font-medium text-slate-400">
+          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+            <Bitcoin className="w-4 h-4 text-yellow-500" />
+            <span>Aceptamos USDT/Cripto</span>
+          </div>
+          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+            <ShieldCheck className="w-4 h-4 text-cyan-500" />
+            <span>Inspección Física Permitida</span>
+          </div>
+          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+            <MapPin className="w-4 h-4 text-red-400" />
+            <span>Ubicación: Reparto Eléctrico</span>
+          </div>
+        </div>
         
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
@@ -59,7 +76,7 @@ export const Hero: React.FC = () => {
               </ul>
               
               <a
-                href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20me%20interesa%20el%20${encodeURIComponent(offer.title)}%20por%20${offer.price}€.`}
+                href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20me%20interesa%20el%20${encodeURIComponent(offer.title)}%20por%20${offer.price}€.%20Quisiera%20coordinar%20inspección%20en%20Tradex.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`mt-auto block rounded-md px-3 py-3 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${
