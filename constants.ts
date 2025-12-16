@@ -45,7 +45,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "10000W (Split Phase 120/240V)",
       extras: ["Carga/Descarga 250A", "Pantalla Táctil Color", "IP65", "Soporta Generador Diesel"]
     },
-    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/07/09/9.png"
+    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png"
   },
   {
     id: "seg51",

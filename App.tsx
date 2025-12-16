@@ -53,34 +53,39 @@ function App() {
            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="lg:text-center mb-12">
-                <p className="text-base font-semibold leading-7 text-cyan-400">¿Por qué invertir con Novelec?</p>
-                <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">Solución inmediata para la crisis energética</h2>
+                <p className="text-base font-semibold leading-7 text-cyan-400">Campaña de Solución Energética</p>
+                <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">¿Qué contenedor se adapta a su negocio?</h2>
                 <p className="mt-6 text-lg leading-8 text-slate-400 max-w-2xl mx-auto">
-                    Este contenedor ofrece una variedad de equipos diseñados específicamente para soportar largas horas sin electricidad, 
-                    desde cargas de teléfonos hasta respaldo completo de viviendas con aires acondicionados.
+                    Hemos diseñado dos cargas estratégicas para atacar diferentes necesidades del mercado energético actual.
                 </p>
               </div>
               <dl className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
-                  <div className="flex flex-col items-start">
-                    <div className="rounded-lg bg-slate-800 p-2 ring-1 ring-white/10">
-                        <span className="text-2xl">🔋</span>
+                  <div className="flex flex-col items-start bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                    <div className="rounded-lg bg-yellow-900/30 p-2 ring-1 ring-yellow-500/30 mb-4">
+                        <span className="text-2xl">🏗️</span>
                     </div>
-                    <dt className="mt-4 font-semibold text-white">Baterías LiFePO4</dt>
-                    <dd className="mt-2 leading-7 text-slate-400">Tecnología de larga duración con más de 3000 ciclos de vida útil. Inversión segura a largo plazo.</dd>
+                    <dt className="text-lg font-bold text-white">Perfil Instalador (Deye)</dt>
+                    <dd className="mt-2 text-base text-slate-400">
+                        Ideal para empresas de instalación. El contenedor Deye trae inversores de 10kW y baterías apilables, perfectos para crear sistemas fijos residenciales que soportan <strong>aires acondicionados y cargas pesadas</strong>.
+                    </dd>
                   </div>
-                   <div className="flex flex-col items-start">
-                    <div className="rounded-lg bg-slate-800 p-2 ring-1 ring-white/10">
-                        <span className="text-2xl">⚡</span>
+                   <div className="flex flex-col items-start bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                    <div className="rounded-lg bg-cyan-900/30 p-2 ring-1 ring-cyan-500/30 mb-4">
+                        <span className="text-2xl">🛍️</span>
                     </div>
-                    <dt className="mt-4 font-semibold text-white">Potencia Industrial</dt>
-                    <dd className="mt-2 leading-7 text-slate-400">Equipos como el Delta Pro Ultra manejan hasta 7.2kW, suficiente para negocios enteros.</dd>
+                    <dt className="text-lg font-bold text-white">Perfil Retail (EcoFlow)</dt>
+                    <dd className="mt-2 text-base text-slate-400">
+                        Enfocado en la venta rápida al consumidor final. Equipos "todo en uno" como el Delta Pro y generadores portátiles que <strong>no requieren instalación compleja</strong>. Alta rotación de inventario.
+                    </dd>
                   </div>
-                   <div className="flex flex-col items-start">
-                    <div className="rounded-lg bg-slate-800 p-2 ring-1 ring-white/10">
-                        <span className="text-2xl">🚛</span>
+                   <div className="flex flex-col items-start bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                    <div className="rounded-lg bg-green-900/30 p-2 ring-1 ring-green-500/30 mb-4">
+                        <span className="text-2xl">🤝</span>
                     </div>
-                    <dt className="mt-4 font-semibold text-white">Logística Novelec</dt>
-                    <dd className="mt-2 leading-7 text-slate-400">Un solo pago, un solo contenedor. Garantía y confianza de un distribuidor líder.</dd>
+                    <dt className="text-lg font-bold text-white">Garantía Novelec</dt>
+                    <dd className="mt-2 text-base text-slate-400">
+                        Al comprar el contenedor cerrado, obtiene el mejor precio del mercado. Gestionamos la logística para que usted se enfoque en la distribución y venta en Cuba.
+                    </dd>
                   </div>
               </dl>
            </div>
