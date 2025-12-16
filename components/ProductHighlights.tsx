@@ -1,59 +1,76 @@
 import React from 'react';
 import { INVENTORY } from '../constants';
+import { Zap, Battery, Cpu, CheckCircle } from 'lucide-react';
 
 export const ProductHighlights: React.FC = () => {
-  // Highlight the heavy hitters: Delta Pro, Delta Pro 3, Ultra
-  const highlights = INVENTORY.filter(i => ['deltapro', 'deltapro3', 'proultra'].includes(i.id));
+  // Highlights: Deye 10kW, Deye Battery 10.2, Delta Pro Ultra, Delta Pro 3
+  const highlightedIds = ['sun10k', 'seg102', 'proultra', 'deltapro3'];
+  const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
   return (
-    <section className="py-20 bg-slate-900">
+    <section className="py-24 bg-slate-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Equipos de Alto Rendimiento</h2>
-          <p className="mt-4 text-lg text-slate-400">Soluciones robustas para apagones prolongados y necesidades industriales.</p>
+        <div className="text-center mb-16">
+          <h2 className="text-base font-semibold text-cyan-400 tracking-wide uppercase">Potencia Premium</h2>
+          <p className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
+            Equipos Estrella del Contenedor
+          </p>
+          <p className="mt-4 max-w-2xl text-xl text-slate-400 mx-auto">
+            Este envío incluye lo último en tecnología híbrida de Deye y la portabilidad extrema de EcoFlow.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {highlights.map((item) => (
-            <div key={item.id} className="group relative flex flex-col overflow-hidden rounded-2xl bg-slate-800 border border-slate-700 transition-all hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-900/20">
-              <div className="aspect-h-3 aspect-w-4 bg-white sm:aspect-none sm:h-56 relative overflow-hidden">
-                 <img 
-                    src={item.imagePlaceholder} 
-                    alt={item.modelName}
-                    className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-110 p-4"
-                 />
-                 {/* Visual decoration */}
-                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-              </div>
-              <div className="flex flex-1 flex-col p-8">
-                <h3 className="text-xl font-bold text-white mb-2">
-                    {item.modelName}
-                </h3>
-                <p className="text-sm text-slate-400 mb-6 flex-grow">{item.description}</p>
+            <div key={item.id} className="flex flex-col overflow-hidden rounded-2xl bg-slate-800 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-[1.02]">
+              <div className="flex-shrink-0 h-64 w-full bg-white relative p-4 flex items-center justify-center">
+                {item.imagePlaceholder.includes('drive') ? (
+                     // Drive thumbnails can be weirdly sized, object-contain is safer
+                     <img className="h-full w-auto max-w-full object-contain" src={item.imagePlaceholder} alt={item.modelName} />
+                ) : (
+                     <img className="h-full w-full object-contain" src={item.imagePlaceholder} alt={item.modelName} />
+                )}
                 
-                <div className="space-y-3 mb-6">
-                    <div className="flex justify-between border-b border-slate-700 pb-2">
-                        <span className="text-slate-500 text-sm">Cantidad en Lote</span>
-                        <span className="text-white font-bold">{item.quantity} Unidades</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-700 pb-2">
-                        <span className="text-slate-500 text-sm">Capacidad</span>
-                        <span className="text-cyan-400 font-semibold">{item.specs.capacity}</span>
-                    </div>
-                     <div className="flex justify-between border-b border-slate-700 pb-2">
-                        <span className="text-slate-500 text-sm">Salida AC</span>
-                        <span className="text-slate-200">{item.specs.output || 'N/A'}</span>
-                    </div>
+                <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-700">
+                  x{item.quantity} Unidades
                 </div>
-                
-                <ul className="space-y-2">
-                    {item.specs.extras?.map((extra, idx) => (
-                        <li key={idx} className="flex items-center text-xs text-slate-400">
-                            <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 mr-2"></span>
-                            {extra}
-                        </li>
-                    ))}
-                </ul>
+              </div>
+              <div className="flex-1 p-8 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                     <p className="text-sm font-medium text-cyan-400 flex items-center gap-2">
+                        {item.category === 'Inverter' && <Cpu className="w-4 h-4" />}
+                        {item.category === 'Battery' && <Battery className="w-4 h-4" />}
+                        {item.category === 'Generator' && <Zap className="w-4 h-4" />}
+                        {item.category}
+                     </p>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{item.modelName}</h3>
+                  <p className="text-slate-400 mb-6 line-clamp-2">{item.description}</p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-700 pb-2">
+                        <span className="text-slate-300 text-sm">Capacidad</span>
+                        <span className="text-white font-medium">{item.specs.capacity}</span>
+                    </div>
+                    {item.specs.output && (
+                        <div className="flex items-center justify-between border-b border-slate-700 pb-2">
+                            <span className="text-slate-300 text-sm">Salida</span>
+                            <span className="text-white font-medium">{item.specs.output}</span>
+                        </div>
+                    )}
+                    <div className="pt-2">
+                        <ul className="grid grid-cols-2 gap-2">
+                            {item.specs.extras?.slice(0, 4).map((extra, idx) => (
+                                <li key={idx} className="flex items-start text-xs text-slate-400">
+                                    <CheckCircle className="h-3 w-3 text-cyan-500 mr-1.5 mt-0.5 flex-shrink-0" />
+                                    {extra}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

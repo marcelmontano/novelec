@@ -1,5 +1,5 @@
-import React from 'react';
-import { INVENTORY } from '../constants';
+import React, { useState } from 'react';
+import { INVENTORY, CONTAINERS } from '../constants';
 import { Battery, Zap, Cpu, Package } from 'lucide-react';
 
 const getIcon = (category: string) => {
@@ -12,12 +12,36 @@ const getIcon = (category: string) => {
 };
 
 export const InventoryTable: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'ecoflow' | 'deye'>('ecoflow');
+
+  const filteredInventory = INVENTORY.filter(item => item.containerId === activeTab);
+  const activeContainer = CONTAINERS.find(c => c.id === activeTab);
+
   return (
     <section id="inventory" className="py-20 bg-slate-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Inventario del Contenedor</h2>
-          <p className="mt-4 text-lg text-slate-400">Desglose detallado de las unidades incluidas en la venta.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Inventario Detallado</h2>
+          <p className="mt-4 text-lg text-slate-400">Seleccione el contenedor para ver su contenido específico.</p>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex justify-center mb-8">
+            <div className="bg-slate-900 p-1 rounded-xl inline-flex shadow-lg border border-slate-700">
+                {CONTAINERS.map(c => (
+                    <button
+                        key={c.id}
+                        onClick={() => setActiveTab(c.id)}
+                        className={`px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            activeTab === c.id 
+                            ? (c.id === 'ecoflow' ? 'bg-cyan-600 text-white shadow-lg' : 'bg-yellow-600 text-white shadow-lg') 
+                            : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                        }`}
+                    >
+                        Contenedor {c.brand}
+                    </button>
+                ))}
+            </div>
         </div>
 
         <div className="overflow-hidden rounded-xl border border-slate-700 shadow-2xl bg-slate-900/50">
@@ -28,11 +52,11 @@ export const InventoryTable: React.FC = () => {
                   <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Modelo</th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Categoría</th>
                   <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Especificaciones Clave</th>
-                  <th scope="col" className="px-6 py-4 text-center text-xs font-medium text-cyan-400 uppercase tracking-wider">Cantidad</th>
+                  <th scope="col" className="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider text-white">Cantidad</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-700">
-                {INVENTORY.map((item, index) => (
+                {filteredInventory.map((item, index) => (
                   <tr key={item.id} className={index % 2 === 0 ? 'bg-slate-800/30' : 'bg-transparent hover:bg-slate-800/50 transition-colors'}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -62,7 +86,9 @@ export const InventoryTable: React.FC = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-center">
-                      <span className="inline-flex items-center rounded-md bg-cyan-400/10 px-3 py-1 text-lg font-bold text-cyan-400 ring-1 ring-inset ring-cyan-400/20">
+                      <span className={`inline-flex items-center rounded-md px-3 py-1 text-lg font-bold ring-1 ring-inset ${
+                          activeTab === 'ecoflow' ? 'bg-cyan-400/10 text-cyan-400 ring-cyan-400/20' : 'bg-yellow-400/10 text-yellow-400 ring-yellow-400/20'
+                      }`}>
                         {item.quantity}
                       </span>
                     </td>
@@ -71,9 +97,15 @@ export const InventoryTable: React.FC = () => {
               </tbody>
               <tfoot className="bg-slate-900">
                   <tr>
-                      <td colSpan={3} className="px-6 py-4 text-right font-bold text-white text-lg">TOTAL UNIDADES</td>
-                      <td className="px-6 py-4 text-center font-bold text-cyan-400 text-xl">
-                          {INVENTORY.reduce((acc, item) => acc + item.quantity, 0)}
+                      <td colSpan={3} className="px-6 py-4 text-right font-bold text-white text-lg">TOTAL UNIDADES ({activeContainer?.brand})</td>
+                      <td className={`px-6 py-4 text-center font-bold text-xl ${activeTab === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
+                          {filteredInventory.reduce((acc, item) => acc + item.quantity, 0)}
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colSpan={3} className="px-6 py-2 text-right font-bold text-slate-400 text-sm">PRECIO LOTE</td>
+                      <td className="px-6 py-2 text-center font-bold text-white text-lg">
+                          €{activeContainer?.price.toLocaleString()}
                       </td>
                   </tr>
               </tfoot>

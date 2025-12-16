@@ -7,6 +7,7 @@ export interface ProductSpec {
 
 export interface InventoryItem {
   id: string;
+  containerId: 'ecoflow' | 'deye'; // New field to separate containers
   modelName: string;
   sku: string;
   quantity: number;
@@ -16,9 +17,18 @@ export interface InventoryItem {
   imagePlaceholder: string;
 }
 
+export interface ContainerOffer {
+  id: 'ecoflow' | 'deye';
+  title: string;
+  brand: string;
+  price: number;
+  description: string;
+  features: string[];
+  color: string;
+}
+
 export interface ContactInfo {
   phone: string;
   whatsapp: string;
-  price: number;
   currency: string;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { CONTACT_DETAILS } from '../constants';
-import { ShoppingBag, ArrowRight, Zap } from 'lucide-react';
+import { CONTACT_DETAILS, CONTAINERS } from '../constants';
+import { ArrowRight, Check } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <div className="relative overflow-hidden bg-slate-900 pt-16 pb-32 lg:pt-32 lg:pb-40">
+    <div className="relative overflow-hidden bg-slate-900 pt-16 pb-20 lg:pt-32 lg:pb-28">
+      {/* Background Effect */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M0 100 L100 0 L100 100 Z" fill="#22d3ee" />
@@ -12,59 +13,64 @@ export const Hero: React.FC = () => {
       </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        <div className="inline-flex items-center rounded-full bg-cyan-900/30 px-4 py-1.5 text-sm font-semibold text-cyan-400 ring-1 ring-inset ring-cyan-400/20 mb-8">
+        <div className="inline-flex items-center rounded-full bg-slate-800 px-4 py-1.5 text-sm font-semibold text-cyan-400 ring-1 ring-inset ring-cyan-400/20 mb-8">
           <span className="flex h-2 w-2 rounded-full bg-cyan-400 mr-2 animate-pulse"></span>
-          Oferta Exclusiva - Contenedor Completo
+          Oferta Mayorista - Novelec
         </div>
         
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl mb-6">
-          Energía para <span className="gradient-text">Cuba</span>
+          Dos Oportunidades en <span className="gradient-text">Energía</span>
         </h1>
         
-        <p className="max-w-2xl text-lg sm:text-xl text-slate-300 mb-10">
-          Oportunidad de inversión única. Adquiera un lote completo de generadores EcoFlow de última generación. Solución ideal para reventa, negocios o comunidades.
+        <p className="max-w-2xl text-lg sm:text-xl text-slate-300 mb-12">
+          Seleccione su inversión. Disponemos de dos contenedores completos listos para envío a Cuba. 
+          Venta exclusiva por contenedor cerrado.
         </p>
         
-        <div className="flex flex-col sm:flex-row items-center gap-6 mb-12">
-          <div className="flex flex-col items-center sm:items-end">
-            <span className="text-slate-400 text-sm uppercase tracking-wider font-semibold">Precio Total</span>
-            <span className="text-5xl font-bold text-white tracking-tight">
-              €{CONTACT_DETAILS.price.toLocaleString()}
-            </span>
-            <span className="text-cyan-400 text-xs mt-1">Pago desde el exterior</span>
-          </div>
-          
-          <div className="hidden sm:block h-12 w-px bg-slate-700"></div>
-          
-          <a 
-            href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20estoy%20interesado%20en%20el%20contenedor%20EcoFlow.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-cyan-500 px-8 py-4 font-bold text-white transition-all duration-300 hover:bg-cyan-400 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900"
-          >
-            <span className="mr-2">Contactar para Comprar</span>
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:animate-shimmer" style={{ backgroundSize: '200% 100%' }}></div>
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 text-center w-full max-w-4xl border-t border-slate-800 pt-8">
-            <div>
-                <div className="text-3xl font-bold text-white">120</div>
-                <div className="text-sm text-slate-400">Equipos Totales</div>
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+          {CONTAINERS.map((offer) => (
+            <div 
+              key={offer.id} 
+              className={`relative flex flex-col rounded-2xl border ${offer.id === 'ecoflow' ? 'border-cyan-500/30 bg-slate-800/50' : 'border-yellow-500/30 bg-slate-800/50'} p-8 shadow-2xl transition-transform hover:scale-[1.02]`}
+            >
+              <div className="mb-4">
+                <h3 className={`text-lg font-semibold uppercase tracking-wider ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
+                    {offer.brand}
+                </h3>
+                <h2 className="text-3xl font-bold text-white mt-2">{offer.title}</h2>
+              </div>
+              
+              <div className="flex items-baseline justify-center gap-x-2 my-6">
+                <span className="text-5xl font-bold tracking-tight text-white">€{offer.price.toLocaleString()}</span>
+                <span className="text-sm font-semibold leading-6 text-slate-400">Total</span>
+              </div>
+              
+              <p className="text-slate-300 mb-6 flex-grow">{offer.description}</p>
+              
+              <ul className="mb-8 space-y-3 text-sm leading-6 text-slate-300 text-left mx-auto max-w-xs">
+                {offer.features.map((feature) => (
+                  <li key={feature} className="flex gap-x-3">
+                    <Check className={`h-6 w-5 flex-none ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`} aria-hidden="true" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              
+              <a
+                href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20me%20interesa%20el%20${encodeURIComponent(offer.title)}%20por%20${offer.price}€.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-auto block rounded-md px-3 py-3 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${
+                    offer.id === 'ecoflow' 
+                    ? 'bg-cyan-600 hover:bg-cyan-500 focus-visible:outline-cyan-600' 
+                    : 'bg-yellow-600 hover:bg-yellow-500 focus-visible:outline-yellow-600'
+                }`}
+              >
+                Comprar {offer.brand} <ArrowRight className="inline-block w-4 h-4 ml-1"/>
+              </a>
             </div>
-            <div>
-                <div className="text-3xl font-bold text-white">4kW+</div>
-                <div className="text-sm text-slate-400">Potencia Máxima</div>
-            </div>
-             <div>
-                <div className="text-3xl font-bold text-white">LFP</div>
-                <div className="text-sm text-slate-400">Tecnología Duradera</div>
-            </div>
-             <div>
-                <div className="text-3xl font-bold text-white">100%</div>
-                <div className="text-sm text-slate-400">Listo para Enviar</div>
-            </div>
+          ))}
         </div>
       </div>
     </div>
