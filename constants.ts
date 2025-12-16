@@ -23,7 +23,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "500W (Surge 750W)",
       extras: ["LFP Battery (3000 cycles)", "EPS < 30ms"]
     },
-    imagePlaceholder: "https://picsum.photos/id/1/400/400"
+    imagePlaceholder: getDriveImage("1pKzI9KkeEWbr9dkeUmWGNksn_ARTI7u0")
   },
   {
     id: "delta2max",
@@ -37,7 +37,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "2400W (X-Boost 3100W)",
       extras: ["LFP Battery", "X-Stream Fast Charge"]
     },
-    imagePlaceholder: "https://picsum.photos/id/2/400/400"
+    imagePlaceholder: getDriveImage("1nDklpO94bxYo8yv3Y-eTeUcsaKSK855D")
   },
   {
     id: "deltapro",
@@ -51,7 +51,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "3600W (Surge 7200W)",
       extras: ["LFP Battery (3500 cycles)", "Soporta carga EV"]
     },
-    imagePlaceholder: getDriveImage("1lyIiyeeSsu1t0dWeOXR-o48V-RDbvE3r")
+    imagePlaceholder: getDriveImage("1GU3YRb2eWRRHdFaRA_vnrsayH31mlGQh")
   },
   {
     id: "deltapro3",
@@ -65,7 +65,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "4kW (Dual Voltage 120/240V)",
       extras: ["5 años de garantía", "Carga solar 4kW"]
     },
-    imagePlaceholder: getDriveImage("1ZcDUTvI9FfZyVEwogUDD_PuBm42Bx8Fs")
+    imagePlaceholder: getDriveImage("1685O-gizg2Hy9Mha1f6rBS6PTgk_pii4")
   },
   {
     id: "deltapro3eb",
@@ -92,7 +92,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "7.2kW - 21.6kW",
       extras: ["Online UPS 0ms", "Salida 120V/240V"]
     },
-    imagePlaceholder: getDriveImage("1dvXBL2i_HWwIUoxXhO3bmeisXHnvH0mP")
+    imagePlaceholder: getDriveImage("17TzfJfyDEF5WuOdGOeK-T-BhFQejt7li")
   },
   {
     id: "proultraeb",
