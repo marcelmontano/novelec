@@ -11,14 +11,15 @@ const Navbar = () => (
       <div className="flex items-center justify-between h-20">
         <div className="flex items-center">
           {/* Logo container with white background for visibility of the dark logo */}
-          <div className="bg-white px-4 py-2 rounded-lg shadow-sm">
+          <div className="bg-white px-4 py-2 rounded-lg shadow-sm flex-shrink-0">
             <img 
               src="https://i.imgur.com/FmnNcSz.png" 
               alt="Novelec Logo" 
               className="h-8 w-auto object-contain"
             />
           </div>
-          <div className="hidden sm:flex ml-4 flex-col justify-center border-l border-slate-700 pl-4 h-10">
+          {/* Removed 'hidden sm:flex' so the text is visible on all screen sizes */}
+          <div className="flex ml-4 flex-col justify-center border-l border-slate-700 pl-4 h-10">
             <span className="text-white font-semibold text-sm leading-tight">División Energía</span>
             <span className="text-slate-400 text-xs">Mercado Cuba</span>
           </div>

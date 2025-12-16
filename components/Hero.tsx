@@ -4,7 +4,8 @@ import { ArrowRight, Check } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <div className="relative overflow-hidden bg-slate-900 pt-16 pb-20 lg:pt-32 lg:pb-28">
+    // Increased pt from 16 to 28 (112px) to clear the Navbar height (80px) comfortably
+    <div className="relative overflow-hidden bg-slate-900 pt-28 pb-20 lg:pt-36 lg:pb-28">
       {/* Background Effect */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
