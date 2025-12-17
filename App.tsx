@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { InventoryTable } from './components/InventoryTable';
 import { ProductHighlights } from './components/ProductHighlights';
@@ -93,6 +94,7 @@ function App() {
         </section>
       </main>
       <ContactFooter />
+      <Analytics />
     </div>
   );
 }
