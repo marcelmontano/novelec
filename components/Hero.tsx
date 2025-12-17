@@ -4,8 +4,8 @@ import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    // Increased pt from 16 to 28 (112px) to clear the Navbar height (80px) comfortably
-    <div className="relative overflow-hidden bg-slate-900 pt-28 pb-20 lg:pt-36 lg:pb-28">
+    // Increased pt from 28 to 36 to clear the new h-24 Navbar height
+    <div className="relative overflow-hidden bg-slate-900 pt-36 pb-20 lg:pt-44 lg:pb-28">
       {/* Background Effect */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -14,63 +14,62 @@ export const Hero: React.FC = () => {
       </div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        <div className="inline-flex items-center rounded-full bg-slate-800 px-4 py-1.5 text-sm font-semibold text-green-400 ring-1 ring-inset ring-green-400/20 mb-8 animate-fade-in-up">
-          <span className="flex h-2 w-2 rounded-full bg-green-400 mr-2 animate-pulse"></span>
-          Stock Ya en La Habana - Almacén Tradex (In-Bond)
+        <div className="inline-flex items-center rounded-full bg-slate-800 px-5 py-2 text-sm font-bold text-green-400 ring-1 ring-inset ring-green-400/20 mb-10 animate-fade-in-up">
+          <span className="flex h-3 w-3 rounded-full bg-green-400 mr-3 animate-pulse"></span>
+          Stock en La Habana - Almacén Tradex (Régimen In-Bond)
         </div>
         
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl mb-6">
+        <h1 className="text-5xl font-black tracking-tighter text-white sm:text-7xl lg:text-8xl mb-8 leading-[1.1]">
           Energiza Cuba: <br className="hidden sm:block" />
-          <span className="gradient-text">Logra tu Propio Suministro</span>
+          <span className="gradient-text">Independencia Total</span>
         </h1>
         
-        <p className="max-w-2xl text-lg sm:text-xl text-slate-300 mb-8">
-          Disponibilidad inmediata. Venta mayorista por contenedor cerrado.
-          Equipos listos para inspección física y nacionalización.
+        <p className="max-w-3xl text-xl sm:text-2xl text-slate-300 mb-12 font-medium leading-relaxed">
+          Invierta hoy en el futuro de su negocio. Venta mayorista por contenedor cerrado con disponibilidad inmediata para inspección física.
         </p>
 
         {/* Trust Indicators */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 text-sm font-medium text-slate-400">
-          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
-            <Bitcoin className="w-4 h-4 text-yellow-500" />
-            <span>Aceptamos USDT/Cripto</span>
+        <div className="flex flex-wrap justify-center gap-6 mb-16 text-sm font-bold text-slate-300">
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <Bitcoin className="w-5 h-5 text-yellow-500" />
+            <span>USDT / Cripto Bienvenido</span>
           </div>
-          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
-            <ShieldCheck className="w-4 h-4 text-cyan-500" />
-            <span>Inspección Física Permitida</span>
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <ShieldCheck className="w-5 h-5 text-cyan-500" />
+            <span>Inspección 100% Permitida</span>
           </div>
-          <div className="flex items-center gap-1 bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
-            <MapPin className="w-4 h-4 text-red-400" />
-            <span>Ubicación: Reparto Eléctrico</span>
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <MapPin className="w-5 h-5 text-red-500" />
+            <span>Ubicación: Tradex, La Habana</span>
           </div>
         </div>
         
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
           {CONTAINERS.map((offer) => (
             <div 
               key={offer.id} 
-              className={`relative flex flex-col rounded-2xl border ${offer.id === 'ecoflow' ? 'border-cyan-500/30 bg-slate-800/50' : 'border-yellow-500/30 bg-slate-800/50'} p-8 shadow-2xl transition-transform hover:scale-[1.02]`}
+              className={`relative flex flex-col rounded-3xl border ${offer.id === 'ecoflow' ? 'border-cyan-500/30 bg-slate-800/40 shadow-cyan-500/5' : 'border-yellow-500/30 bg-slate-800/40 shadow-yellow-500/5'} p-10 shadow-2xl transition-all hover:scale-[1.03] hover:bg-slate-800/60`}
             >
-              <div className="mb-4">
-                <h3 className={`text-lg font-semibold uppercase tracking-wider ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
-                    {offer.brand}
+              <div className="mb-6">
+                <h3 className={`text-xs font-black uppercase tracking-[0.2em] mb-2 ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
+                    Contenedor Premium {offer.brand}
                 </h3>
-                <h2 className="text-3xl font-bold text-white mt-2">{offer.title}</h2>
+                <h2 className="text-4xl font-black text-white mt-1 leading-none">{offer.title}</h2>
               </div>
               
-              <div className="flex items-baseline justify-center gap-x-2 my-6">
-                <span className="text-5xl font-bold tracking-tight text-white">€{offer.price.toLocaleString()}</span>
-                <span className="text-sm font-semibold leading-6 text-slate-400">Total</span>
+              <div className="flex items-baseline justify-center gap-x-2 my-8">
+                <span className="text-6xl font-black tracking-tighter text-white">€{offer.price.toLocaleString()}</span>
+                <span className="text-sm font-black uppercase text-slate-500 tracking-widest">Total Neto</span>
               </div>
               
-              <p className="text-slate-300 mb-6 flex-grow">{offer.description}</p>
+              <p className="text-slate-300 mb-8 flex-grow text-lg leading-relaxed font-medium">{offer.description}</p>
               
-              <ul className="mb-8 space-y-3 text-sm leading-6 text-slate-300 text-left mx-auto max-w-xs">
+              <ul className="mb-10 space-y-4 text-sm leading-6 text-slate-300 text-left mx-auto max-w-xs">
                 {offer.features.map((feature) => (
-                  <li key={feature} className="flex gap-x-3">
-                    <Check className={`h-6 w-5 flex-none ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`} aria-hidden="true" />
-                    {feature}
+                  <li key={feature} className="flex gap-x-3 items-center">
+                    <Check className={`h-6 w-6 flex-none rounded-full p-1 ${offer.id === 'ecoflow' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-yellow-500/20 text-yellow-400'}`} aria-hidden="true" />
+                    <span className="font-semibold">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -79,13 +78,13 @@ export const Hero: React.FC = () => {
                 href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20me%20interesa%20el%20${encodeURIComponent(offer.title)}%20por%20${offer.price}€.%20Quisiera%20coordinar%20inspección%20en%20Tradex.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-auto block rounded-md px-3 py-3 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${
+                className={`mt-auto block rounded-2xl px-6 py-5 text-center text-lg font-black leading-6 text-white shadow-2xl transition-all transform hover:-translate-y-1 active:scale-95 ${
                     offer.id === 'ecoflow' 
-                    ? 'bg-cyan-600 hover:bg-cyan-500 focus-visible:outline-cyan-600' 
-                    : 'bg-yellow-600 hover:bg-yellow-500 focus-visible:outline-yellow-600'
+                    ? 'bg-cyan-600 hover:bg-cyan-500 shadow-cyan-600/30' 
+                    : 'bg-yellow-600 hover:bg-yellow-500 shadow-yellow-600/30'
                 }`}
               >
-                Comprar {offer.brand} <ArrowRight className="inline-block w-4 h-4 ml-1"/>
+                Solicitar Cotización <ArrowRight className="inline-block w-5 h-5 ml-2"/>
               </a>
             </div>
           ))}
