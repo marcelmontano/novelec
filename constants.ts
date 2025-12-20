@@ -103,13 +103,37 @@ export const INVENTORY: InventoryItem[] = [
     sku: "EFDELTA2Max-US",
     quantity: 20,
     category: "Generator",
-    description: "Potencia versátil para el hogar moderno. Con capacidad expandible hasta 6kWh, este equipo es capaz de alimentar electrodomésticos pesados como refrigeradores y bombas de agua. Su tecnología X-Stream permite la carga más rápida del mercado, una ventaja crucial para aprovechar ventanas cortas de suministro eléctrico.",
+    description: "La sucesora de la DELTA Max es aún más potente, con una capacidad de 2.048 Wh ampliable hasta 6.144 Wh mediante baterías extra. Con una salida de 2400W (X-Boost 3100W), puede alimentar casi cualquier electrodoméstico pesado e incluso cargar un coche eléctrico. Gracias a la tecnología X-Stream, se carga del 0 al 80% en solo 53 minutos desde la red eléctrica. Es la solución versátil perfecta para respaldo doméstico y movilidad con una vida útil de 3000 ciclos gracias a su química LiFePO4.",
     specs: {
-      capacity: "2048 Wh (Max 6kWh)",
-      output: "2400W (X-Boost 3100W)",
-      extras: ["LFP Battery", "X-Stream Fast Charge"]
+      capacity: "2048 Wh (Max 6144 Wh)",
+      output: "2400W (Pico 4800W) / X-Boost 3100W",
+      weight: "23 kg",
+      extras: [
+        "Química LFP (3000 ciclos al 80%)",
+        "X-Stream Fast Charge (81 min full)",
+        "Entrada Solar 1000W (Dual Port)",
+        "Monitorización vía App (WiFi/BT)",
+        "UPS integrada",
+        "USB-C 100W PD (x2)",
+        "Garantía de 5 años",
+        "Soporta Smart Generator Dual Fuel"
+      ]
     },
-    imagePlaceholder: getDriveImage("1nDklpO94bxYo8yv3Y-eTeUcsaKSK855D")
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-6.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-7.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-8.jpg"
+    ]
   },
   {
     id: "deltapro",
@@ -118,13 +142,30 @@ export const INVENTORY: InventoryItem[] = [
     sku: "DELTAPro-1600W-US",
     quantity: 20,
     category: "Generator",
-    description: "El estándar de oro en estaciones de energía portátiles. Con 3600W de salida, puede manejar casi cualquier carga doméstica, incluyendo aires acondicionados inverter. Es la solución 'todo-en-uno' más demandada por usuarios que buscan potencia máxima sin complicaciones de instalación eléctrica compleja.",
+    description: "La estación de energía más potente de la serie DELTA con 3600 Wh, ampliable hasta 25 kWh. Con una potencia de salida de 3600W (X-Boost 4500W), puede alimentar casi cualquier dispositivo, incluso coches eléctricos. Gracias a X-Stream, se carga del 0 al 80% en solo 1 hora desde un enchufe convencional. Ideal para respaldo doméstico total durante apagones prolongados.",
     specs: {
-      capacity: "3.6 kWh (Max 10.8kWh)",
-      output: "3600W (Surge 7200W)",
-      extras: ["LFP Battery (3500 cycles)", "Soporta carga EV"]
+      capacity: "3.6 kWh (Ampliable a 25kWh)",
+      output: "3600W (Pico 7200W) / X-Boost 4500W",
+      weight: "45 kg",
+      extras: [
+        "Química LFP (3500 ciclos al 80%)",
+        "Carga X-Stream (1.6h carga completa)",
+        "Entrada Solar 1600W (11-150V)",
+        "Compatible con Carga EV",
+        "Monitorización vía App EcoFlow",
+        "Función UPS integrada",
+        "USB-C 100W PD (x2)",
+        "Salida Anderson 12.6V 30A"
+      ]
     },
-    imagePlaceholder: getDriveImage("1GU3YRb2eWRRHdFaRA_vnrsayH31mlGQh")
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-6.jpg"
+    ]
   },
   {
     id: "deltapro3",
