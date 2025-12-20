@@ -136,14 +136,15 @@ export const InventoryTable: React.FC = () => {
                         className={`cursor-pointer transition-colors ${expandedRow === item.id ? 'bg-slate-800/80' : 'hover:bg-slate-800/40'}`}
                     >
                         <td className="px-4 sm:px-6 py-4">
-                            <div className="flex items-center max-w-[200px] sm:max-w-none">
-                                <ChevronDown className={`h-4 w-4 text-slate-500 mr-2 flex-shrink-0 transition-transform duration-300 ${expandedRow === item.id ? 'rotate-180 text-cyan-400' : ''}`} />
-                                <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-white overflow-hidden flex items-center justify-center p-1 border border-slate-700">
+                            <div className="flex items-start">
+                                <ChevronDown className={`h-4 w-4 text-slate-500 mr-2 flex-shrink-0 transition-transform duration-300 mt-1 ${expandedRow === item.id ? 'rotate-180 text-cyan-400' : ''}`} />
+                                <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-white overflow-hidden flex items-center justify-center p-1 border border-slate-700 mt-0.5">
                                     <img src={item.imagePlaceholder} alt="" className="h-full w-full object-contain" />
                                 </div>
-                                <div className="ml-3 min-w-0">
-                                    <div className="text-sm font-bold text-white truncate">{item.modelName}</div>
-                                    <div className="text-[10px] text-slate-500 font-mono truncate">{item.sku}</div>
+                                <div className="ml-3 min-w-0 flex-grow">
+                                    {/* Eliminado el 'truncate' y 'max-w' para que el nombre se vea completo */}
+                                    <div className="text-sm font-bold text-white leading-snug whitespace-normal break-words">{item.modelName}</div>
+                                    <div className="text-[10px] text-slate-500 font-mono mt-0.5 break-all">{item.sku}</div>
                                 </div>
                             </div>
                         </td>
