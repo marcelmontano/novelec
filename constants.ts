@@ -70,10 +70,10 @@ export const INVENTORY: InventoryItem[] = [
     specs: {
       capacity: "5.12 kWh",
       output: "100 Ah (51.2V)",
-      weight: "45 kg",
+      weight: "44 kg",
       extras: [
         "10 años de garantía",
-        "Ciclo de vida ≥6000 (25°C, 90% DOD)",
+        "Ciclo de vida ≥6000 (25°C, 80% DOD)",
         "Disyuntor incorporado 125A",
         "Montaje Pared, Suelo o Rack (19\")",
         "IP20 / Certificación UL1973, CE",
@@ -82,7 +82,8 @@ export const INVENTORY: InventoryItem[] = [
         "Update vía USB / Monitoreo Remoto"
       ]
     },
-    imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg"
+    imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg",
+    datasheetUrl: "https://drive.google.com/uc?export=download&id=1sXox2WziwDd7JGLZvFGpFfhtikuCejtR"
   },
   {
     id: "seg102",
@@ -107,7 +108,8 @@ export const INVENTORY: InventoryItem[] = [
         "Instalación compacta (710x540x133 mm)"
       ]
     },
-    imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg"
+    imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg",
+    datasheetUrl: "https://drive.google.com/uc?export=download&id=1sXox2WziwDd7JGLZvFGpFfhtikuCejtR"
   },
   
   // --- CONTENEDOR ECOFLOW ---
