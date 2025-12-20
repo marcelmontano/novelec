@@ -16,6 +16,7 @@ export interface InventoryItem {
   specs: ProductSpec;
   imagePlaceholder: string;
   additionalImages?: string[];
+  datasheetUrl?: string; // New optional field for PDF downloads
 }
 
 export interface ContainerOffer {

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { INVENTORY, CONTAINERS } from '../constants';
-import { Battery, Zap, Cpu, Package, FileSpreadsheet, ChevronDown, Info } from 'lucide-react';
+import { Battery, Zap, Cpu, Package, FileSpreadsheet, ChevronDown, Info, FileDown } from 'lucide-react';
 
 const getIcon = (category: string) => {
   switch (category) {
@@ -142,7 +142,6 @@ export const InventoryTable: React.FC = () => {
                                     <img src={item.imagePlaceholder} alt="" className="h-full w-full object-contain" />
                                 </div>
                                 <div className="ml-3 min-w-0 flex-grow">
-                                    {/* Eliminado el 'truncate' y 'max-w' para que el nombre se vea completo */}
                                     <div className="text-sm font-bold text-white leading-snug whitespace-normal break-words">{item.modelName}</div>
                                     <div className="text-[10px] text-slate-500 font-mono mt-0.5 break-all">{item.sku}</div>
                                 </div>
@@ -164,7 +163,6 @@ export const InventoryTable: React.FC = () => {
                     </tr>
                     {expandedRow === item.id && (
                         <tr className="bg-slate-900/60">
-                            {/* Ajuste crítico: colSpan 3 y ancho máximo restringido al viewport para evitar scroll lateral */}
                             <td colSpan={3} className="px-0 py-0 overflow-hidden max-w-[calc(100vw-2rem)]">
                                 <div className="p-4 sm:p-8 w-full block">
                                     <div className="flex flex-col lg:flex-row gap-8 w-full overflow-hidden">
@@ -175,6 +173,20 @@ export const InventoryTable: React.FC = () => {
                                                 additionalImages={item.additionalImages}
                                                 alt={item.modelName}
                                             />
+                                            {item.datasheetUrl && (
+                                                <a 
+                                                    href={item.datasheetUrl} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className={`mt-6 flex items-center justify-center gap-2 w-full py-4 rounded-xl border-2 font-black text-xs uppercase tracking-widest transition-all ${
+                                                        activeTab === 'ecoflow' 
+                                                        ? 'border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white' 
+                                                        : 'border-yellow-500/30 text-yellow-500 hover:bg-yellow-500 hover:text-white'
+                                                    }`}
+                                                >
+                                                    <FileDown size={18} /> Descargar Ficha Técnica PDF
+                                                </a>
+                                            )}
                                         </div>
 
                                         {/* Información Detallada */}

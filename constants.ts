@@ -45,7 +45,8 @@ export const INVENTORY: InventoryItem[] = [
       output: "10000W (Split Phase 120/240V)",
       extras: ["Carga/Descarga 250A", "Pantalla Táctil Color", "IP65", "Soporta Generador Diesel"]
     },
-    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png"
+    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png",
+    datasheetUrl: "https://www.deyeinverter.com/deyeinverter/2025/05/29/%E3%80%90b%E3%80%91datasheet_sun-5-12k-sg02lp2-us-am2_20250520_en.pdf"
   },
   {
     id: "seg51",
@@ -54,12 +55,21 @@ export const INVENTORY: InventoryItem[] = [
     sku: "SE-G5.1",
     quantity: 40,
     category: "Battery",
-    description: "Batería de Litio Ferro-fosfato (LFP) libre de cobalto, optimizada para máxima seguridad y longevidad en climas tropicales. Su diseño modular permite una escalabilidad sencilla para montaje en rack o pared, siendo el estándar preferido para instalaciones residenciales que buscan independencia energética con más de 6000 ciclos de vida útil.",
+    description: "Excelente solución de sistema de almacenamiento de energía (ESS) residencial. Su diseño modular permite una fácil expansión (hasta 64 unidades en paralelo) para autoconsumo eficiente. Equipada con celdas LFP sin cobalto, garantiza máxima seguridad, larga vida útil y densidad de potencia. Incluye BMS inteligente para protección completa y refrigeración natural.",
     specs: {
       capacity: "5.12 kWh",
-      output: "100 Ah",
-      weight: "44 kg",
-      extras: [">6000 Ciclos (25°C)", "IP20", "Profundidad Descarga 80%", "BMS Inteligente"]
+      output: "100 Ah (51.2V)",
+      weight: "45 kg",
+      extras: [
+        "10 años de garantía",
+        "Ciclo de vida ≥6000 (25°C, 90% DOD)",
+        "Disyuntor incorporado 125A",
+        "Montaje Pared, Suelo o Rack (19\")",
+        "IP20 / Certificación UL1973, CE",
+        "Comunicación CAN2.0 / RS485",
+        "Funcionamiento -20°C a 55°C",
+        "Update vía USB / Monitoreo Remoto"
+      ]
     },
     imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg"
   },
@@ -70,14 +80,23 @@ export const INVENTORY: InventoryItem[] = [
     sku: "SE-G10.2",
     quantity: 20,
     category: "Battery",
-    description: "Solución de almacenamiento masivo con 200Ah de capacidad. Ideal para infraestructuras comerciales o residencias de alto consumo que requieren autonomía extendida durante apagones prolongados. Ofrece una densidad energética superior y compatibilidad total con la gama híbrida de Deye, permitiendo sistemas de hasta 64 unidades en paralelo.",
+    description: "Batería de alta capacidad alimentada por química de fosfato de hierro y litio (LiFePO4). Diseñada para ofrecer un rendimiento y confiabilidad excepcionales tanto en entornos residenciales como comerciales. Admite una corriente máxima de descarga de 200A pico y mantiene el 70% de su capacidad al final de su vida útil. Conexión automática en red (sin DIP switches) y gestión inteligente vía BMS.",
     specs: {
       capacity: "10.24 kWh",
-      output: "200 Ah",
+      output: "200 Ah (51.2V)",
       weight: "85 kg",
-      extras: [">6000 Ciclos", "Cobalt Free LFP", "Escalable hasta 64 unidades"]
+      extras: [
+        "Ciclo de vida ≥6000 (25°C, 80% DOD)",
+        "5 años de garantía",
+        "Escalable hasta 64 unidades (327kWh)",
+        "Descarga pico 200A (10s)",
+        "Monitoreo remoto y activación externa",
+        "Disyuntor integrado y BMS inteligente",
+        "Comunicación CAN2.0 / RS485",
+        "Instalación compacta (710x540x133 mm)"
+      ]
     },
-    imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg"
+    imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg"
   },
   
   // --- CONTENEDOR ECOFLOW ---
