@@ -153,7 +153,7 @@ export const INVENTORY: InventoryItem[] = [
       capacity: "4000 Wh",
       extras: ["LFP Battery", "Integración perfecta"]
     },
-    imagePlaceholder: "https://picsum.photos/id/5/400/400"
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg"
   },
   {
     id: "proultra",
@@ -168,7 +168,7 @@ export const INVENTORY: InventoryItem[] = [
       output: "7.2kW - 21.6kW",
       extras: ["Online UPS 0ms", "Salida 120V/240V"]
     },
-    imagePlaceholder: getDriveImage("17TzfJfyDEF5WuOdGOeK-T-BhFQejt7li")
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg"
   },
   {
     id: "proultraeb",
@@ -183,6 +183,6 @@ export const INVENTORY: InventoryItem[] = [
       weight: "50.7 kg",
       extras: ["LFP Battery", "IP54"]
     },
-    imagePlaceholder: "https://picsum.photos/id/7/400/400"
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg"
   }
 ];
