@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Hero } from './components/Hero';
 import { InventoryTable } from './components/InventoryTable';
 import { ProductHighlights } from './components/ProductHighlights';
+import { ProfitabilityAnalysis } from './components/ProfitabilityAnalysis';
 import { ContactFooter } from './components/ContactFooter';
 import { Menu, X, MessageCircle } from 'lucide-react';
 
@@ -57,9 +58,8 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24"> {/* Increased height from h-20 to h-24 */}
+        <div className="flex items-center justify-between h-24">
           <div className="flex items-center">
-            {/* Logo container: Increased height from h-14 to h-20 and width to min-w-[180px] */}
             <div className="bg-white px-5 py-3 rounded-xl shadow-md flex-shrink-0 flex items-center justify-center min-w-[180px] h-20 transition-transform hover:scale-105">
               <NovelecLogo className="h-full w-auto" />
             </div>
@@ -69,18 +69,17 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-6">
-              <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
               <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Destacados</a>
+              <a href="#profitability" className="text-cyan-400 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Rentabilidad</a>
+              <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
               <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5">
                 Contactar Ahora
               </a>
             </div>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
           <div className="md:hidden">
             <button 
               onClick={toggleMenu}
@@ -98,11 +97,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Slide-out Panel */}
       <div 
         className={`md:hidden fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        {/* Backdrop overlay */}
         <div 
           className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
           onClick={closeMenu}
@@ -117,19 +114,26 @@ const Navbar = () => {
           </div>
 
           <div className="flex flex-col space-y-6">
+             <a 
+              href="#highlights" 
+              onClick={closeMenu}
+              className="text-slate-300 hover:text-white hover:bg-slate-800 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800"
+            >
+              Equipos Destacados
+            </a>
+            <a 
+              href="#profitability" 
+              onClick={closeMenu}
+              className="text-cyan-400 hover:text-white hover:bg-slate-800 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-cyan-500/30"
+            >
+              Cálculo de Ganancias
+            </a>
             <a 
               href="#inventory" 
               onClick={closeMenu}
               className="text-slate-300 hover:text-white hover:bg-slate-800 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800"
             >
               Inventario Completo
-            </a>
-            <a 
-              href="#highlights" 
-              onClick={closeMenu}
-              className="text-slate-300 hover:text-white hover:bg-slate-800 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800"
-            >
-              Equipos Destacados
             </a>
             
             <div className="pt-12 mt-auto">
@@ -160,6 +164,7 @@ function App() {
         <div id="highlights">
           <ProductHighlights />
         </div>
+        <ProfitabilityAnalysis />
         <InventoryTable />
         
         {/* Value Proposition Section */}
