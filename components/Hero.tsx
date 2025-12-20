@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck, Landmark } from 'lucide-react';
+import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck, Landmark, Tags } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -25,11 +26,17 @@ export const Hero: React.FC = () => {
         </h1>
         
         <p className="max-w-3xl text-xl sm:text-2xl text-slate-300 mb-12 font-medium leading-relaxed">
-          Invierta hoy en el futuro de su negocio. Venta mayorista por contenedor cerrado con disponibilidad inmediata para inspección física.
+          Invierta hoy en el futuro de su negocio. Venta mayorista por contenedor cerrado. 
+          <span className="text-cyan-400 font-bold"> Libres de Aranceles Aduanales </span> 
+          y listos para el proceso de nacionalización inmediata.
         </p>
 
         {/* Trust Indicators */}
         <div className="flex flex-wrap justify-center gap-6 mb-16 text-sm font-bold text-slate-300">
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <Tags className="w-5 h-5 text-purple-400" />
+            <span>Exento de Aranceles</span>
+          </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <Landmark className="w-5 h-5 text-emerald-500" />
             <span>Transferencia desde Exterior</span>
@@ -40,11 +47,7 @@ export const Hero: React.FC = () => {
           </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <ShieldCheck className="w-5 h-5 text-cyan-500" />
-            <span>Inspección 100% Permitida</span>
-          </div>
-          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
-            <MapPin className="w-5 h-5 text-red-500" />
-            <span>Ubicación: Tradex, La Habana</span>
+            <span>Solo Nacionalizar</span>
           </div>
         </div>
         

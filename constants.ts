@@ -1,3 +1,4 @@
+
 import { InventoryItem, ContactInfo, ContainerOffer } from './types';
 
 export const CONTACT_DETAILS: ContactInfo = {
@@ -13,7 +14,12 @@ export const CONTAINERS: ContainerOffer[] = [
     brand: "EcoFlow",
     price: 135000,
     description: "Soluciones portátiles y de respaldo doméstico premium. Stock ya en La Habana (In-Bond).",
-    features: ["Transferencia Bancaria (Ext.)", "Sistemas Delta Pro & Ultra", "Aceptamos USDT / Cripto", "Entrega Inmediata (Tradex)"],
+    features: [
+      "Exento de Aranceles (Libre de Impuestos)",
+      "Transferencia Bancaria (Ext.)",
+      "Sistemas Delta Pro & Ultra",
+      "Entrega Inmediata para Nacionalizar"
+    ],
     color: "cyan"
   },
   {
@@ -22,7 +28,12 @@ export const CONTAINERS: ContainerOffer[] = [
     brand: "Deye",
     price: 128600,
     description: "Infraestructura híbrida industrial. Inversores Split Phase 120V/240V específicos para la red cubana.",
-    features: ["Transferencia Bancaria (Ext.)", "Baterías LFP Rack/Mural", "Inspección Física Permitida", "Pago USDT Disponible"],
+    features: [
+      "Libre de Aranceles Aduanales",
+      "Baterías LFP Rack/Mural",
+      "Inspección Física Permitida",
+      "Listo para Proceso de Nacionalización"
+    ],
     color: "yellow"
   }
 ];

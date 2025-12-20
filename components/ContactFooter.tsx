@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
 import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
@@ -48,8 +49,8 @@ export const ContactFooter: React.FC = () => {
                 </div>
             ))}
              <div className="bg-slate-800/30 p-4 rounded-lg mt-8 border border-slate-700">
-               <p className="text-xs text-slate-400 text-center sm:text-left italic leading-relaxed">
-                  * Nota importante: El método de pago es mediante <strong>transferencia bancaria desde el exterior</strong>. La entrega se realiza bajo régimen In-Bond en Almacenes Tradex (La Habana) para su posterior nacionalización por parte del comprador.
+               <p className="text-xs text-slate-300 text-center sm:text-left italic leading-relaxed">
+                  * Nota importante: Estos contenedores están <strong>exentos de aranceles aduanales</strong> bajo la normativa vigente. La mercancía se encuentra en régimen In-Bond en Almacenes Tradex; el comprador solo debe realizar el <strong>proceso de nacionalización</strong> tras la adquisición. El pago se efectúa mediante transferencia bancaria desde el exterior.
               </p>
              </div>
           </div>
