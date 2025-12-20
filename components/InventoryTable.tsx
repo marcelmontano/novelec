@@ -16,7 +16,7 @@ const ExpandedGallery: React.FC<{ mainImage: string; additionalImages?: string[]
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <div className="flex flex-col gap-3 w-full max-w-full">
       {/* Contenedor de imagen optimizado para móviles */}
       <div className="w-full rounded-xl bg-white p-2 flex items-center justify-center overflow-hidden border border-slate-700 relative group min-h-[240px] max-h-[400px]">
         <img 
@@ -120,12 +120,12 @@ export const InventoryTable: React.FC = () => {
 
         <div className="overflow-hidden rounded-2xl border border-slate-700 shadow-2xl bg-slate-900/40">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-700">
+            <table className="min-w-full divide-y divide-slate-700 table-fixed sm:table-auto">
               <thead className="bg-slate-900/80">
                 <tr>
-                  <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-widest">Producto</th>
+                  <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-widest w-[70%] sm:w-auto">Producto</th>
                   <th className="hidden sm:table-cell px-6 py-4 text-left text-[10px] font-black text-slate-500 uppercase tracking-widest">Categoría</th>
-                  <th className="px-4 sm:px-6 py-4 text-center text-[10px] font-black text-slate-500 uppercase tracking-widest">Cant.</th>
+                  <th className="px-4 sm:px-6 py-4 text-center text-[10px] font-black text-slate-500 uppercase tracking-widest w-[30%] sm:w-auto">Cant.</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800">
@@ -137,13 +137,13 @@ export const InventoryTable: React.FC = () => {
                     >
                         <td className="px-4 sm:px-6 py-4">
                             <div className="flex items-center">
-                                <ChevronDown className={`h-4 w-4 text-slate-500 mr-2 transition-transform duration-300 ${expandedRow === item.id ? 'rotate-180 text-cyan-400' : ''}`} />
+                                <ChevronDown className={`h-4 w-4 text-slate-500 mr-2 flex-shrink-0 transition-transform duration-300 ${expandedRow === item.id ? 'rotate-180 text-cyan-400' : ''}`} />
                                 <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-white overflow-hidden flex items-center justify-center p-1 border border-slate-700">
                                     <img src={item.imagePlaceholder} alt="" className="h-full w-full object-contain" />
                                 </div>
                                 <div className="ml-3 min-w-0">
-                                    <div className="text-sm font-bold text-white truncate max-w-[140px] sm:max-w-none">{item.modelName}</div>
-                                    <div className="text-[10px] text-slate-500 font-mono">{item.sku}</div>
+                                    <div className="text-sm font-bold text-white truncate">{item.modelName}</div>
+                                    <div className="text-[10px] text-slate-500 font-mono truncate">{item.sku}</div>
                                 </div>
                             </div>
                         </td>
@@ -163,11 +163,12 @@ export const InventoryTable: React.FC = () => {
                     </tr>
                     {expandedRow === item.id && (
                         <tr className="bg-slate-900/60">
-                            <td colSpan={4} className="px-0 py-0">
-                                <div className="p-4 sm:p-8 whitespace-normal break-words">
-                                    <div className="flex flex-col lg:flex-row gap-8">
+                            {/* Importante: el td expandido debe estar limitado para no estirar la tabla */}
+                            <td colSpan={3} className="px-0 py-0 max-w-0 overflow-hidden">
+                                <div className="p-4 sm:p-8 w-full max-w-full">
+                                    <div className="flex flex-col lg:flex-row gap-8 max-w-full">
                                         {/* Galería */}
-                                        <div className="lg:w-1/2 w-full">
+                                        <div className="lg:w-1/2 w-full max-w-full">
                                             <ExpandedGallery 
                                                 mainImage={item.imagePlaceholder} 
                                                 additionalImages={item.additionalImages}
@@ -175,48 +176,48 @@ export const InventoryTable: React.FC = () => {
                                             />
                                         </div>
 
-                                        {/* Información Detallada */}
-                                        <div className="flex-1 space-y-8">
-                                            <div className="bg-slate-800/40 p-5 rounded-2xl border border-slate-700/50">
+                                        {/* Información Detallada - Uso de break-words y overflow-wrap para evitar scroll lateral */}
+                                        <div className="flex-1 space-y-8 min-w-0 max-w-full">
+                                            <div className="bg-slate-800/40 p-4 sm:p-5 rounded-2xl border border-slate-700/50 w-full overflow-hidden">
                                                 <h4 className="text-xs font-black text-cyan-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                                                     <Info size={14} /> DESCRIPCIÓN
                                                 </h4>
-                                                <p className="text-slate-300 text-sm leading-relaxed font-medium">
+                                                <p className="text-slate-300 text-sm leading-relaxed font-medium whitespace-normal break-words overflow-wrap-anywhere">
                                                     {item.description}
                                                 </p>
                                             </div>
 
-                                            <div className="bg-slate-800/20 p-5 rounded-2xl border border-slate-700/30">
+                                            <div className="bg-slate-800/20 p-4 sm:p-5 rounded-2xl border border-slate-700/30 w-full overflow-hidden">
                                                 <h4 className="text-xs font-black text-white uppercase tracking-widest mb-4 border-b border-slate-700 pb-2">
                                                     ESPECIFICACIONES TÉCNICAS
                                                 </h4>
-                                                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                    <div className="flex flex-col gap-1">
+                                                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                                                    <div className="flex flex-col gap-1 min-w-0">
                                                         <dt className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Capacidad</dt>
-                                                        <dd className="text-sm text-slate-200 font-bold">{item.specs.capacity}</dd>
+                                                        <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.capacity}</dd>
                                                     </div>
                                                     {item.specs.output && (
-                                                        <div className="flex flex-col gap-1">
+                                                        <div className="flex flex-col gap-1 min-w-0">
                                                             <dt className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Salida</dt>
-                                                            <dd className="text-sm text-slate-200 font-bold">{item.specs.output}</dd>
+                                                            <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.output}</dd>
                                                         </div>
                                                     )}
                                                     {item.specs.weight && (
-                                                        <div className="flex flex-col gap-1">
+                                                        <div className="flex flex-col gap-1 min-w-0">
                                                             <dt className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Peso</dt>
-                                                            <dd className="text-sm text-slate-200 font-bold">{item.specs.weight}</dd>
+                                                            <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.weight}</dd>
                                                         </div>
                                                     )}
                                                 </dl>
 
                                                 {item.specs.extras && item.specs.extras.length > 0 && (
-                                                     <div className="mt-8">
+                                                     <div className="mt-8 w-full">
                                                         <dt className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">CARACTERÍSTICAS EXTRA</dt>
-                                                        <ul className="grid grid-cols-1 gap-2">
+                                                        <ul className="grid grid-cols-1 gap-2 w-full">
                                                             {item.specs.extras.map((ex, i) => (
-                                                                <li key={i} className="flex items-center text-xs text-slate-300 bg-slate-900/50 px-3 py-2 rounded-lg border border-slate-700/30">
+                                                                <li key={i} className="flex items-center text-xs text-slate-300 bg-slate-900/50 px-3 py-2 rounded-lg border border-slate-700/30 w-full overflow-hidden">
                                                                      <div className={`mr-3 h-1.5 w-1.5 rounded-full flex-shrink-0 ${activeTab === 'ecoflow' ? 'bg-cyan-500' : 'bg-yellow-500'}`}></div>
-                                                                     {ex}
+                                                                     <span className="break-words">{ex}</span>
                                                                 </li>
                                                             ))}
                                                         </ul>
