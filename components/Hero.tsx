@@ -1,6 +1,6 @@
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck, Landmark } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -30,6 +30,10 @@ export const Hero: React.FC = () => {
 
         {/* Trust Indicators */}
         <div className="flex flex-wrap justify-center gap-6 mb-16 text-sm font-bold text-slate-300">
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <Landmark className="w-5 h-5 text-emerald-500" />
+            <span>Transferencia desde Exterior</span>
+          </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <Bitcoin className="w-5 h-5 text-yellow-500" />
             <span>USDT / Cripto Bienvenido</span>

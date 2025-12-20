@@ -13,7 +13,7 @@ export const CONTAINERS: ContainerOffer[] = [
     brand: "EcoFlow",
     price: 135000,
     description: "Soluciones portátiles y de respaldo doméstico premium. Stock ya en La Habana (In-Bond).",
-    features: ["Generadores Portátiles", "Sistemas Delta Pro & Ultra", "Aceptamos USDT / Cripto", "Entrega Inmediata (Tradex)"],
+    features: ["Transferencia Bancaria (Ext.)", "Sistemas Delta Pro & Ultra", "Aceptamos USDT / Cripto", "Entrega Inmediata (Tradex)"],
     color: "cyan"
   },
   {
@@ -22,7 +22,7 @@ export const CONTAINERS: ContainerOffer[] = [
     brand: "Deye",
     price: 128600,
     description: "Infraestructura híbrida industrial. Inversores Split Phase 120V/240V específicos para la red cubana.",
-    features: ["Inversores 10kW Split Phase", "Baterías LFP Rack/Mural", "Inspección Física Permitida", "Pago USDT Disponible"],
+    features: ["Transferencia Bancaria (Ext.)", "Baterías LFP Rack/Mural", "Inspección Física Permitida", "Pago USDT Disponible"],
     color: "yellow"
   }
 ];

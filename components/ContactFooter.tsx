@@ -10,7 +10,7 @@ export const ContactFooter: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
             <div className="bg-white inline-block px-6 py-4 rounded-xl mb-8 shadow-md">
-                <NovelecLogo className="h-16 w-auto" /> {/* Increased from h-6 to h-16 */}
+                <NovelecLogo className="h-16 w-auto" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-4">Contacto Directo</h3>
             <p className="text-slate-400 mb-8 leading-relaxed">
@@ -47,9 +47,9 @@ export const ContactFooter: React.FC = () => {
                     </a>
                 </div>
             ))}
-             <div className="bg-slate-800/30 p-4 rounded-lg mt-8">
-               <p className="text-xs text-slate-500 text-center sm:text-left italic">
-                  * Nota importante: El pago debe gestionarse desde el exterior. La entrega se realiza bajo régimen In-Bond en Almacenes Tradex (La Habana) para su posterior nacionalización.
+             <div className="bg-slate-800/30 p-4 rounded-lg mt-8 border border-slate-700">
+               <p className="text-xs text-slate-400 text-center sm:text-left italic leading-relaxed">
+                  * Nota importante: El método de pago es mediante <strong>transferencia bancaria desde el exterior</strong>. La entrega se realiza bajo régimen In-Bond en Almacenes Tradex (La Habana) para su posterior nacionalización por parte del comprador.
               </p>
              </div>
           </div>
