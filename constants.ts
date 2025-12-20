@@ -207,13 +207,31 @@ export const INVENTORY: InventoryItem[] = [
     sku: "EFDeltaProUltra-US",
     quantity: 8,
     category: "Inverter",
-    description: "La cúspide de la ingeniería de EcoFlow. Un sistema de respaldo para toda la casa con tecnología Online UPS de 0ms que protege los equipos más sensibles. Su capacidad de entrega escalable hasta 21.6kW lo sitúa en una categoría propia para clientes premium y negocios que no pueden permitirse un segundo de oscuridad.",
+    description: "El corazón potente del ecosistema modular DELTA Pro Ultra. Este inversor de 6900W (hasta 21.6kW en sistemas combinados) es capaz de alimentar toda una casa, incluyendo los electrodomésticos más exigentes como bombas de calor y cargadores de vehículos eléctricos. Gracias a la tecnología X-Fusion y su conmutación UPS de <20ms, garantiza un suministro ininterrumpido y seguro para equipos electrónicos sensibles. Es compatible con paneles solares de alta potencia (hasta 5600W PV) y puede gestionarse inteligentemente vía App con la función Storm Guard para protección automática ante eventos meteorológicos.",
     specs: {
-      capacity: "N/A (Inversor)",
-      output: "7.2kW - 21.6kW",
-      extras: ["Online UPS 0ms", "Salida 120V/240V"]
+      capacity: "Modular (hasta 30kWh)",
+      output: "6900W (Pico 10300W)",
+      weight: "32.1 kg",
+      extras: [
+        "UPS < 20ms",
+        "Salida AC 230V / 16A-30A",
+        "Tecnología X-Fusion",
+        "Input Solar 5600W (80-450V)",
+        "Certificación IP54",
+        "Garantía de 5 años",
+        "Funcionamiento <30dB",
+        "Carga EV hasta 6900W",
+        "USB-C 100W PD (x2)",
+        "WiFi y Bluetooth integrados"
+      ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg"
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-5.jpg"
+    ]
   },
   {
     id: "proultraeb",
