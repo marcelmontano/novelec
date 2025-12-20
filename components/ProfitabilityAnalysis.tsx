@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TrendingUp, BarChart3, PieChart, DollarSign, ArrowUpRight, Info, Scale, CheckCircle2, LayoutDashboard } from 'lucide-react';
+import { TrendingUp, BarChart3, PieChart, DollarSign, ArrowUpRight, Info, Scale, CheckCircle2, LayoutDashboard, Share2, Check } from 'lucide-react';
 
 const ECOFLOW_PROFIT = [
   { model: "EcoFlow E980-US", qty: 40, min: 600, max: 980 },
@@ -52,84 +52,110 @@ const METRICS = {
   }
 };
 
-/**
- * Custom Visual Chart Component
- * Shows side-by-side bars for Profit Potential
- */
 const ProfitComparisonChart = () => {
-  const maxVal = Math.max(METRICS.ecoflow.maxProfit, METRICS.deye.maxProfit);
-  
-  const getPct = (val: number) => (val / maxVal) * 100;
+  const totalEco = METRICS.ecoflow.cost + METRICS.ecoflow.maxProfit;
+  const totalDeye = METRICS.deye.cost + METRICS.deye.maxProfit;
+  const maxScale = Math.max(totalEco, totalDeye);
+
+  const getPct = (val: number) => (val / maxScale) * 100;
+
+  const Bar = ({ data, brandColor }: { data: typeof METRICS.ecoflow, brandColor: string }) => (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h5 className="text-xl font-black tracking-tighter" style={{ color: brandColor }}>
+          {data.label.toUpperCase()} 
+          <span className="text-slate-500 text-xs ml-2 font-bold">INVERSIÓN: €{(data.cost/1000).toFixed(1)}K</span>
+        </h5>
+        <div className="flex items-center gap-2">
+           <span className="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+             MAX ROI: {data.maxRoi}
+           </span>
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="h-14 w-full bg-slate-800/50 rounded-2xl overflow-hidden flex shadow-inner border border-slate-800">
+          <div 
+            style={{ width: `${getPct(data.cost)}%` }} 
+            className="h-full bg-slate-700/50 border-r border-slate-900/50 flex items-center justify-center relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <span className="text-[10px] font-black text-slate-500 uppercase tracking-tighter opacity-0 sm:opacity-100">Coste</span>
+          </div>
+          
+          <div 
+            style={{ width: `${getPct(data.minProfit)}%` }} 
+            className="h-full bg-emerald-500 flex items-center justify-center relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.1)] transition-all hover:brightness-110"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+            <span className="text-[10px] font-black text-emerald-950 px-1 truncate">€{(data.minProfit/1000).toFixed(1)}K</span>
+          </div>
+
+          <div 
+            style={{ width: `${getPct(data.maxProfit - data.minProfit)}%` }} 
+            className="h-full bg-emerald-500/20 border-l border-emerald-500/30 flex items-center justify-center relative overflow-hidden"
+          >
+            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 11px)' }}></div>
+            <span className="text-[10px] font-black text-emerald-400/60 px-1 truncate">+{((data.maxProfit - data.minProfit)/1000).toFixed(1)}K</span>
+          </div>
+        </div>
+
+        <div className="mt-2 flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-500 px-1">
+          <div className="flex flex-col">
+            <span className="text-slate-300">€{(data.cost/1000).toFixed(1)}K</span>
+            <span>Inv. Recuperada</span>
+          </div>
+          <div className="flex flex-col text-center">
+            <span className="text-emerald-400">€{((data.cost + data.minProfit)/1000).toFixed(1)}K</span>
+            <span>Garantizado (In+Ga)</span>
+          </div>
+          <div className="flex flex-col text-right">
+             <span className="text-white">€{((data.cost + data.maxProfit)/1000).toFixed(1)}K</span>
+             <span>Venta Total Estimada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
-      <div className="flex items-center justify-between mb-8">
-        <h4 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-2">
-          <LayoutDashboard className="text-emerald-400" size={20} /> Matriz de Rendimiento
+    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-10 shadow-2xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
+        <h4 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
+          <LayoutDashboard className="text-emerald-400" size={24} /> 
+          Matriz de Rendimiento
         </h4>
-        <div className="flex gap-4 text-[10px] font-bold uppercase tracking-widest">
-            <div className="flex items-center gap-1.5"><div className="w-3 h-3 bg-slate-700 rounded-sm"></div> <span className="text-slate-500">Inversión</span></div>
-            <div className="flex items-center gap-1.5"><div className="w-3 h-3 bg-emerald-500 rounded-sm"></div> <span className="text-slate-400">Ganancia Mínima</span></div>
-            <div className="flex items-center gap-1.5"><div className="w-3 h-3 border border-emerald-500/50 bg-emerald-500/10 rounded-sm"></div> <span className="text-slate-400">Potencial Upside</span></div>
+        <div className="flex flex-wrap gap-4 text-[9px] font-black uppercase tracking-widest border-t sm:border-t-0 sm:border-l border-slate-800 pt-4 sm:pt-0 sm:pl-6">
+            <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-slate-700 rounded shadow-sm"></div> 
+                <span className="text-slate-500">Inversión</span>
+            </div>
+            <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-emerald-500 rounded shadow-sm"></div> 
+                <span className="text-emerald-500">Ganancia Mínima</span>
+            </div>
+            <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-emerald-500/20 border border-emerald-500/30 rounded"></div> 
+                <span className="text-emerald-500/60">Potencial Upside</span>
+            </div>
         </div>
       </div>
 
-      <div className="space-y-12">
-        {/* ECOFLOW BAR */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-end">
-            <span className="text-lg font-black text-cyan-400">ECOFLOW <span className="text-slate-600 text-xs ml-2">COSTO: €135K</span></span>
-            <span className="text-sm font-bold text-white">Potencial: <span className="text-emerald-400">€189,234</span></span>
-          </div>
-          <div className="h-12 w-full bg-slate-800 rounded-xl overflow-hidden flex relative group">
-             {/* Min Profit Block */}
-             <div 
-                style={{ width: `${getPct(METRICS.ecoflow.minProfit)}%` }} 
-                className="h-full bg-emerald-500 relative transition-all group-hover:brightness-110 flex items-center px-4"
-             >
-                <span className="text-[10px] font-black text-emerald-950 truncate">€71K MIN</span>
-             </div>
-             {/* Max Potential Block */}
-             <div 
-                style={{ width: `${getPct(METRICS.ecoflow.maxProfit - METRICS.ecoflow.minProfit)}%` }} 
-                className="h-full bg-emerald-500/20 border-l border-emerald-500/30 flex items-center px-4"
-             >
-                <span className="text-[10px] font-black text-emerald-400/50 truncate">UP TO +€118K</span>
-             </div>
-             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-500">140.2% ROI MAX</div>
-          </div>
-        </div>
-
-        {/* DEYE BAR */}
-        <div className="space-y-3">
-          <div className="flex justify-between items-end">
-            <span className="text-lg font-black text-yellow-500">DEYE <span className="text-slate-600 text-xs ml-2">COSTO: €128.6K</span></span>
-            <span className="text-sm font-bold text-white">Potencial: <span className="text-emerald-400">€169,800</span></span>
-          </div>
-          <div className="h-12 w-full bg-slate-800 rounded-xl overflow-hidden flex relative group">
-             {/* Min Profit Block */}
-             <div 
-                style={{ width: `${getPct(METRICS.deye.minProfit)}%` }} 
-                className="h-full bg-emerald-500 relative transition-all group-hover:brightness-110 flex items-center px-4"
-             >
-                <span className="text-[10px] font-black text-emerald-950 truncate">€116.4K MIN (SEGURO)</span>
-             </div>
-             {/* Max Potential Block */}
-             <div 
-                style={{ width: `${getPct(METRICS.deye.maxProfit - METRICS.deye.minProfit)}%` }} 
-                className="h-full bg-emerald-500/20 border-l border-emerald-500/30 flex items-center px-4"
-             >
-                <span className="text-[10px] font-black text-emerald-400/50 truncate">UP TO +€53K</span>
-             </div>
-             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-500">132.0% ROI MAX</div>
-          </div>
-        </div>
+      <div className="space-y-16">
+        <Bar data={METRICS.ecoflow} brandColor="#22d3ee" />
+        <Bar data={METRICS.deye} brandColor="#eab308" />
       </div>
 
-      <div className="mt-10 p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl">
-        <p className="text-xs text-slate-400 text-center italic">
-          * El gráfico muestra que <span className="text-yellow-500 font-bold">Deye</span> ofrece una base de ganancia mucho más sólida (menor riesgo), mientras que <span className="text-cyan-400 font-bold">EcoFlow</span> tiene un potencial de crecimiento superior si se captan los precios máximos de mercado.
-        </p>
+      <div className="mt-12 p-6 bg-slate-950/50 border border-slate-800 rounded-2xl">
+        <div className="flex gap-4 items-start">
+            <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 mt-1">
+                <span className="block p-0.5"><Info size={18} /></span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed italic">
+              Este gráfico visualiza el <span className="text-white font-bold">Retorno Total de la Inversión</span>. 
+              La barra muestra la escala completa del negocio: desde la recuperación del capital (gris) hasta la ganancia neta garantizada (verde sólido) y el crecimiento potencial máximo (rayado).
+            </p>
+        </div>
       </div>
     </div>
   );
@@ -137,37 +163,62 @@ const ProfitComparisonChart = () => {
 
 export const ProfitabilityAnalysis: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'ecoflow' | 'deye'>('ecoflow');
+  const [copied, setCopied] = useState(false);
   
   const currentData = activeTab === 'ecoflow' ? ECOFLOW_PROFIT : DEYE_PROFIT;
   const currentMetrics = METRICS[activeTab];
 
+  const handleShare = () => {
+    try {
+      // Usamos la API de URL para construir un enlace limpio sin duplicados
+      const cleanUrl = new URL(window.location.href);
+      cleanUrl.hash = 'profitability';
+      const urlString = cleanUrl.toString();
+      
+      navigator.clipboard.writeText(urlString);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error("Error generating share link", e);
+    }
+  };
+
   return (
-    <section id="profitability" className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Background decoration */}
+    <section id="profitability" className="py-24 bg-slate-950 relative overflow-hidden scroll-mt-24">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-5 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold mb-4">
             <TrendingUp size={16} /> Oportunidad de Inversión Analizada
           </div>
           <h2 className="text-4xl font-black text-white sm:text-5xl lg:text-6xl tracking-tight mb-6">
             Análisis de <span className="gradient-text">Rentabilidad Real</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-8">
             Proyecciones basadas en precios reales de mercado en Cuba (Revolico & Facebook).
           </p>
+          
+          <button 
+            onClick={handleShare}
+            className={`group flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 font-bold text-sm ${
+                copied 
+                ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' 
+                : 'bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white'
+            }`}
+          >
+            {copied ? <Check size={18} className="animate-bounce" /> : <Share2 size={18} className="group-hover:rotate-12 transition-transform" />}
+            {copied ? '¡Enlace de Análisis Copiado!' : 'Compartir este Análisis con un Socio'}
+          </button>
         </div>
 
-        {/* NEW VISUAL CHART SECTION */}
         <div className="mb-16">
             <ProfitComparisonChart />
         </div>
 
-        {/* Tab Switcher */}
         <div className="flex justify-center mb-12">
           <div className="bg-slate-900 p-1.5 rounded-2xl inline-flex border border-slate-800 shadow-2xl">
             <button
@@ -189,7 +240,6 @@ export const ProfitabilityAnalysis: React.FC = () => {
           </div>
         </div>
 
-        {/* Selected Container ROI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl transition-all hover:border-slate-700 group">
             <div className="flex justify-between items-start mb-6">
@@ -261,7 +311,6 @@ export const ProfitabilityAnalysis: React.FC = () => {
           </div>
         </div>
 
-        {/* Detailed List for Active Container */}
         <div className="bg-slate-900/50 border border-slate-800 rounded-3xl overflow-hidden mb-20 shadow-2xl backdrop-blur-sm">
           <div className="px-8 py-6 border-b border-slate-800 bg-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4">
             <h3 className="text-xl font-bold text-white flex items-center gap-2 uppercase tracking-tighter">
@@ -298,7 +347,6 @@ export const ProfitabilityAnalysis: React.FC = () => {
           </div>
         </div>
 
-        {/* COMPARISON VERSUS TABLE */}
         <div className="mb-24">
             <div className="flex items-center gap-4 mb-10">
                 <div className="h-px bg-slate-800 flex-grow"></div>
