@@ -133,13 +133,41 @@ export const INVENTORY: InventoryItem[] = [
     sku: "EFDELTAPRO3-US",
     quantity: 8,
     category: "Generator",
-    description: "La nueva frontera del respaldo energético. Con salida nativa de 120/240V y una arquitectura ultra-eficiente, redefine la versatilidad portátil. Soporta cargas solares masivas de hasta 4kW, convirtiéndolo en un micro-grid personal robusto capaz de alimentar casas enteras con 0ms de transferencia.",
+    description: "La sucesora de la DELTA Pro, con 4.096 Wh es aún más potente que su predecesora. Gracias a su potencia de 4000W, puede alimentar casi todos los dispositivos electrónicos, ¡incluso un coche eléctrico! Utiliza tecnología X-Quiet (basada en GaN) para un funcionamiento ultrasilencioso (30dB) y función UPS con conmutación en menos de 10ms. Es la solución definitiva para independencia energética total.",
     specs: {
-      capacity: "4 kWh (Max 36kWh)",
-      output: "4kW (Dual Voltage 120/240V)",
-      extras: ["5 años de garantía", "Carga solar 4kW"]
+      capacity: "4096 Wh (Ampliable a 12kWh)",
+      output: "4000W (Pico 8000W) - 230V AC",
+      weight: "51.5 kg",
+      extras: [
+        "UPS < 10ms",
+        "X-Quiet (Silencioso 30dB)",
+        "Química LFP (4000 ciclos)",
+        "WiFi y Bluetooth integrados",
+        "Carga Solar hasta 2600W",
+        "Carga EV 4000W (1h full)",
+        "Carga X-Stream 0-80% en 1h",
+        "Garantía de 5 años"
+      ]
     },
-    imagePlaceholder: getDriveImage("1685O-gizg2Hy9Mha1f6rBS6PTgk_pii4")
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-2.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-11.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-10.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-9.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-8.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-7.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-6.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-1.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-6.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario.jpg"
+    ]
   },
   {
     id: "deltapro3eb",
