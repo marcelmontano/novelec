@@ -15,6 +15,7 @@ export interface InventoryItem {
   description: string;
   specs: ProductSpec;
   imagePlaceholder: string;
+  additionalImages?: string[];
 }
 
 export interface ContainerOffer {

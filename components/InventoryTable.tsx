@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { INVENTORY, CONTAINERS } from '../constants';
 import { Battery, Zap, Cpu, Package, FileSpreadsheet, ChevronDown, Info } from 'lucide-react';
 
@@ -9,6 +9,44 @@ const getIcon = (category: string) => {
     case 'Inverter': return <Cpu className="h-5 w-5 text-blue-400" />;
     default: return <Package className="h-5 w-5 text-slate-400" />;
   }
+};
+
+const ExpandedGallery: React.FC<{ mainImage: string; additionalImages?: string[]; alt: string }> = ({ mainImage, additionalImages, alt }) => {
+  const images = useMemo(() => [mainImage, ...(additionalImages || [])], [mainImage, additionalImages]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="aspect-square w-full rounded-lg bg-white p-4 flex items-center justify-center overflow-hidden border border-slate-700 relative group">
+        <img 
+            src={images[activeIndex]} 
+            alt={`${alt} view ${activeIndex + 1}`} 
+            className="h-full w-full object-contain transition-all duration-300" 
+        />
+        {images.length > 1 && (
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur px-2 py-1 rounded text-[10px] text-white font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                {activeIndex + 1} / {images.length}
+            </div>
+        )}
+      </div>
+      
+      {images.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-700">
+            {images.map((img, idx) => (
+                <button
+                    key={idx}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`flex-shrink-0 w-12 h-12 rounded border-2 transition-all overflow-hidden bg-white ${
+                        activeIndex === idx ? 'border-cyan-500 scale-105 shadow-lg' : 'border-slate-800 opacity-60 hover:opacity-100'
+                    }`}
+                >
+                    <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
+                </button>
+            ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export const InventoryTable: React.FC = () => {
@@ -167,19 +205,19 @@ export const InventoryTable: React.FC = () => {
                             <td colSpan={4} className="px-0 sm:px-6 py-4">
                                 <div className="rounded-b-lg sm:rounded-lg bg-slate-900/50 p-6 border border-slate-700/50 shadow-inner">
                                     <div className="flex flex-col lg:flex-row gap-8">
-                                        {/* Large Image Section */}
+                                        {/* Large Image Section / Gallery */}
                                         <div className="lg:w-64 flex-shrink-0">
-                                            <div className="aspect-square w-full rounded-lg bg-white p-4 flex items-center justify-center overflow-hidden border border-slate-700">
-                                                {item.imagePlaceholder.includes('picsum') ? (
+                                            {item.imagePlaceholder.includes('picsum') ? (
+                                                <div className="aspect-square w-full rounded-lg bg-white p-4 flex items-center justify-center overflow-hidden border border-slate-700">
                                                     <span className="text-4xl font-bold text-slate-300">{item.id.toUpperCase().substring(0,2)}</span>
-                                                ) : (
-                                                    <img 
-                                                        src={item.imagePlaceholder} 
-                                                        alt={item.modelName} 
-                                                        className="h-full w-full object-contain" 
-                                                    />
-                                                )}
-                                            </div>
+                                                </div>
+                                            ) : (
+                                                <ExpandedGallery 
+                                                    mainImage={item.imagePlaceholder} 
+                                                    additionalImages={item.additionalImages}
+                                                    alt={item.modelName}
+                                                />
+                                            )}
                                         </div>
 
                                         {/* Text Details Section */}

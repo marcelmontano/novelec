@@ -148,12 +148,29 @@ export const INVENTORY: InventoryItem[] = [
     sku: "DELTAProEB-US",
     quantity: 4,
     category: "Battery",
-    description: "Módulo de expansión inteligente para el sistema Delta Pro 3. Permite duplicar la autonomía del sistema base de manera instantánea, ideal para usuarios que requieren respaldo prolongado durante cortes eléctricos críticos sin sacrificar espacio ni movilidad.",
+    description: "Batería de expansión de alta potencia de 4.096 Wh diseñada para aumentar fácilmente la capacidad de su estación DELTA Pro 3. Gracias a su diseño plug-and-play y estructura apilable, es ideal para respaldo doméstico crítico, permitiendo alcanzar hasta 12 kWh de almacenamiento total. Utiliza tecnología LiFePo4 (LFP) para una seguridad extrema y longevidad excepcional.",
     specs: {
-      capacity: "4000 Wh",
-      extras: ["LFP Battery", "Integración perfecta"]
+      capacity: "4096 Wh",
+      weight: "33 kg",
+      extras: [
+        "4000 Ciclos hasta el 80% cap.",
+        "Celda LiFePo4 (LFP)",
+        "Garantía de 5 años",
+        "Diseño Apilable Plug-and-Play",
+        "Dimensiones: 69.3 x 29.5 x 21.5 cm",
+        "Salida Extra Battery Port"
+      ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg"
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-combo-1.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-5.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-6.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-7.jpg"
+    ]
   },
   {
     id: "proultra",
