@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck, Landmark, Tags } from 'lucide-react';
+import { ArrowRight, Check, MapPin, Bitcoin, ShieldCheck, Landmark, Tags, Award } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -17,37 +17,37 @@ export const Hero: React.FC = () => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         <div className="inline-flex items-center rounded-full bg-slate-800 px-5 py-2 text-sm font-bold text-green-400 ring-1 ring-inset ring-green-400/20 mb-10 animate-fade-in-up">
           <span className="flex h-3 w-3 rounded-full bg-green-400 mr-3 animate-pulse"></span>
-          Stock en La Habana - Almacén Tradex (Régimen In-Bond)
+          Distribuidor Autorizado EcoFlow • Entrega en La Habana
         </div>
         
         <h1 className="text-5xl font-black tracking-tighter text-white sm:text-7xl lg:text-8xl mb-8 leading-[1.1]">
-          Energiza Cuba: <br className="hidden sm:block" />
-          <span className="gradient-text">Independencia Total</span>
+          Suministro de <br className="hidden sm:block" />
+          <span className="gradient-text">Primera Mano</span>
         </h1>
         
         <p className="max-w-3xl text-xl sm:text-2xl text-slate-300 mb-12 font-medium leading-relaxed">
-          Invierta hoy en el futuro de su negocio. Venta mayorista por contenedor cerrado. 
-          <span className="text-cyan-400 font-bold"> Libres de Aranceles Aduanales </span> 
-          y listos para el proceso de nacionalización inmediata.
+          Novelec es su canal directo para equipos originales EcoFlow y Deye en Cuba. 
+          Venta mayorista <span className="text-cyan-400 font-bold">Sin Intermediarios</span>, 
+          libres de aranceles y con soporte oficial de fábrica.
         </p>
 
         {/* Trust Indicators */}
         <div className="flex flex-wrap justify-center gap-6 mb-16 text-sm font-bold text-slate-300">
+          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
+            <Award className="w-5 h-5 text-yellow-500" />
+            <span>Distribuidor Oficial</span>
+          </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <Tags className="w-5 h-5 text-purple-400" />
             <span>Exento de Aranceles</span>
           </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <Landmark className="w-5 h-5 text-emerald-500" />
-            <span>Transferencia desde Exterior</span>
-          </div>
-          <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
-            <Bitcoin className="w-5 h-5 text-yellow-500" />
-            <span>USDT / Cripto Bienvenido</span>
+            <span>Garantía de Fábrica</span>
           </div>
           <div className="flex items-center gap-2 bg-slate-800/80 px-5 py-2 rounded-full border border-slate-700 shadow-xl">
             <ShieldCheck className="w-5 h-5 text-cyan-500" />
-            <span>Solo Nacionalizar</span>
+            <span>Equipos 100% Originales</span>
           </div>
         </div>
         
@@ -60,14 +60,14 @@ export const Hero: React.FC = () => {
             >
               <div className="mb-6">
                 <h3 className={`text-xs font-black uppercase tracking-[0.2em] mb-2 ${offer.id === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
-                    Contenedor Premium {offer.brand}
+                    {offer.brand} Authorized Partner
                 </h3>
                 <h2 className="text-4xl font-black text-white mt-1 leading-none">{offer.title}</h2>
               </div>
               
               <div className="flex items-baseline justify-center gap-x-2 my-8">
                 <span className="text-6xl font-black tracking-tighter text-white">€{offer.price.toLocaleString()}</span>
-                <span className="text-sm font-black uppercase text-slate-500 tracking-widest">Total Neto</span>
+                <span className="text-sm font-black uppercase text-slate-500 tracking-widest">Total Directo</span>
               </div>
               
               <p className="text-slate-300 mb-8 flex-grow text-lg leading-relaxed font-medium">{offer.description}</p>
@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
                     : 'bg-yellow-600 hover:bg-yellow-500 shadow-yellow-600/30'
                 }`}
               >
-                Solicitar Cotización <ArrowRight className="inline-block w-5 h-5 ml-2"/>
+                Solicitar Cotización Directa <ArrowRight className="inline-block w-5 h-5 ml-2"/>
               </a>
             </div>
           ))}

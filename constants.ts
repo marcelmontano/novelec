@@ -13,12 +13,12 @@ export const CONTAINERS: ContainerOffer[] = [
     title: "Contenedor EcoFlow",
     brand: "EcoFlow",
     price: 135000,
-    description: "Soluciones portátiles y de respaldo doméstico premium. Stock ya en La Habana (In-Bond).",
+    description: "Distribuidor Autorizado Novelec. Equipos de primera mano con respaldo directo de fábrica. Stock ya en La Habana (In-Bond).",
     features: [
-      "Exento de Aranceles (Libre de Impuestos)",
-      "Transferencia Bancaria (Ext.)",
-      "Sistemas Delta Pro & Ultra",
-      "Entrega Inmediata para Nacionalizar"
+      "Distribuidor Oficial (Primera Mano)",
+      "Exento de Aranceles Aduanales",
+      "Garantía de Fábrica EcoFlow",
+      "Transferencia Bancaria (Ext.)"
     ],
     color: "cyan"
   },
@@ -27,12 +27,12 @@ export const CONTAINERS: ContainerOffer[] = [
     title: "Contenedor Deye",
     brand: "Deye",
     price: 128600,
-    description: "Infraestructura híbrida industrial. Inversores Split Phase 120V/240V específicos para la red cubana.",
+    description: "Infraestructura híbrida industrial. Soluciones de alta ingeniería para la red cubana directamente desde el canal oficial.",
     features: [
+      "Canal de Distribución Directo",
       "Libre de Aranceles Aduanales",
-      "Baterías LFP Rack/Mural",
-      "Inspección Física Permitida",
-      "Listo para Proceso de Nacionalización"
+      "Soporte Técnico Especializado",
+      "Inspección Física en Tradex"
     ],
     color: "yellow"
   }
