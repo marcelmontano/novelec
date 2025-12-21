@@ -7,6 +7,8 @@ export const CONTACT_DETAILS: ContactInfo = {
   currency: "EUR"
 };
 
+export const PAYMENT_NOTICE = "Pago aceptado únicamente mediante transferencia bancaria desde el extranjero.";
+
 export const LOGISTICS = {
   warehouse: "Almacenes Tradex (Reparto Eléctrico)",
   importer: "Cubaelectrónica",

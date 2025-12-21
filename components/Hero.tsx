@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { CONTACT_DETAILS, CONTAINERS, LOGISTICS } from '../constants';
-import { ArrowRight, Check, MapPin, ShieldCheck, Award, Warehouse } from 'lucide-react';
+import { CONTACT_DETAILS, CONTAINERS, LOGISTICS, PAYMENT_NOTICE } from '../constants';
+import { ArrowRight, Check, MapPin, ShieldCheck, Award, Warehouse, CreditCard } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -47,7 +47,7 @@ export const Hero: React.FC = () => {
         </div>
         
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl mb-12">
           {CONTAINERS.map((offer) => (
             <div 
               key={offer.id} 
@@ -90,6 +90,12 @@ export const Hero: React.FC = () => {
               </a>
             </div>
           ))}
+        </div>
+
+        {/* Payment Policy Notice */}
+        <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-800/50 border border-slate-700 rounded-2xl text-slate-300 text-sm font-bold shadow-xl animate-fade-in-up">
+          <CreditCard className="w-5 h-5 text-cyan-400" />
+          <span>{PAYMENT_NOTICE}</span>
         </div>
       </div>
     </div>

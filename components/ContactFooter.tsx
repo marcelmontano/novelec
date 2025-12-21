@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { CONTACT_DETAILS, CONTAINERS, LOGISTICS, METRICS } from '../constants';
-import { Phone, MessageCircle, ArrowRight, ShieldCheck, MapPin, Award } from 'lucide-react';
+import { CONTACT_DETAILS, CONTAINERS, LOGISTICS, METRICS, PAYMENT_NOTICE } from '../constants';
+import { Phone, MessageCircle, ArrowRight, ShieldCheck, MapPin, Award, CreditCard } from 'lucide-react';
 import { NovelecLogo } from '../App';
 
 export const ContactFooter: React.FC = () => {
@@ -44,7 +44,6 @@ export const ContactFooter: React.FC = () => {
                 <div key={offer.id} className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-slate-600 transition-colors">
                     <div className="text-center sm:text-left">
                         <div className="font-bold text-white text-lg">{offer.brand} en Tradex</div>
-                        {/* Fix: use the imported METRICS constant */}
                         <div className="text-emerald-500 text-sm font-black uppercase mt-1">Beneficio Neto: €{(METRICS[offer.id].minProfit/1000).toFixed(0)}k - €{(METRICS[offer.id].maxProfit/1000).toFixed(0)}k</div>
                     </div>
                     <a 
@@ -57,8 +56,14 @@ export const ContactFooter: React.FC = () => {
                     </a>
                 </div>
             ))}
-             <div className="bg-slate-800/30 p-4 rounded-lg mt-8 border border-slate-700">
-               <p className="text-xs text-slate-300 text-center sm:text-left italic leading-relaxed">
+             <div className="bg-slate-800/30 p-6 rounded-lg mt-8 border border-slate-700">
+               <div className="flex items-start gap-4 mb-4">
+                 <CreditCard className="h-5 w-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                 <p className="text-sm text-white font-bold leading-relaxed">
+                   {PAYMENT_NOTICE}
+                 </p>
+               </div>
+               <p className="text-xs text-slate-300 text-center sm:text-left italic leading-relaxed pt-2 border-t border-slate-700">
                   * Novelec es Distribuidor Autorizado. Mercancía disponible para inspección física en <strong>Reparto Eléctrico (Almacenes Tradex)</strong>. Importación oficial vía <strong>Cubaelectrónica</strong>. Equipos exentos de aranceles bajo régimen In-Bond.
               </p>
              </div>
