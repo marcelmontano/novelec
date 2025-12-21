@@ -15,7 +15,7 @@ export const LOGISTICS = {
 };
 
 export const STRATEGIC_DOCS = {
-  memorandum: "https://drive.google.com/uc?export=download&id=1GhYldnnthEopmMJdxXkGG3YSsoAO5Tkp",
+  memorandum: "https://drive.google.com/uc?export=download&id=1dmuRx1lQ8c4oWc7ZkStyKyvkYzKoY1l-",
   presentation: "https://drive.google.com/uc?export=download&id=1Y4arw_IVsKACjAtxTgqmhkMHXsPn2axt"
 };
 
