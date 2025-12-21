@@ -4,13 +4,12 @@ import { Hero } from './components/Hero';
 import { InventoryTable } from './components/InventoryTable';
 import { ProductHighlights } from './components/ProductHighlights';
 import { ProfitabilityAnalysis } from './components/ProfitabilityAnalysis';
+import { StrategicBriefing } from './components/StrategicBriefing';
 import { ContactFooter } from './components/ContactFooter';
 import { Menu, X, MessageCircle, ShieldCheck } from 'lucide-react';
 
 /**
  * NovelecLogo: Reconstrucción vectorial de alta precisión de la identidad de marca Novelec.
- * Implementado como SVG puro para garantizar que se visualice correctamente en todos los entornos,
- * sin depender de servidores de imágenes externos que puedan fallar o ser bloqueados.
  */
 export const NovelecLogo = ({ className = "h-12" }: { className?: string }) => {
   return (
@@ -23,21 +22,15 @@ export const NovelecLogo = ({ className = "h-12" }: { className?: string }) => {
       aria-label="Novelec Logo"
     >
       <title>Novelec - El Valor del Servicio</title>
-      
-      {/* Rectángulo redondeado principal del icono */}
       <path 
         d="M10 20C10 14.4772 14.4772 10 20 10H65C70.5228 10 75 14.4772 75 20V80C75 85.5228 70.5228 90 65 90H20C14.4772 90 10 93.2843 10 85V15Z" 
         fill="#004685" 
       />
-      
-      {/* Símbolo 'n' estilizado dentro del cuadro azul */}
       <rect x="28" y="32" width="10" height="38" fill="white" />
       <path 
         d="M28 42C28 36.4772 32.4772 32 38 32H50C55.5228 32 60 36.4772 60 42V70H50V42C50 40.8954 49.1046 40 48 40H40C38.8954 40 38 40.8954 38 42V70H28V42Z" 
         fill="white" 
       />
-      
-      {/* Texto de la marca: novelec */}
       <text 
         x="85" 
         y="65" 
@@ -46,8 +39,6 @@ export const NovelecLogo = ({ className = "h-12" }: { className?: string }) => {
       >
         novelec
       </text>
-      
-      {/* Eslogan corporativo */}
       <text 
         x="88" 
         y="85" 
@@ -71,7 +62,6 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           <div className="flex items-center">
-            {/* Contenedor del Logo con distintivo de Distribuidor Autorizado */}
             <div className="relative">
               <div className="bg-white px-5 py-3 rounded-xl shadow-md flex-shrink-0 flex items-center justify-center min-w-[180px] h-20 transition-transform hover:scale-105">
                 <NovelecLogo className="h-full" />
@@ -90,7 +80,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-6">
               <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Equipos</a>
-              <a href="#profitability" className="text-cyan-400 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Rentabilidad</a>
+              <a href="#profitability" className="text-cyan-400 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inversión</a>
               <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
               <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5">
                 Contactar Ahora
@@ -144,7 +134,7 @@ const Navbar = () => {
               onClick={closeMenu}
               className="text-cyan-400 hover:text-white hover:bg-slate-800 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-cyan-500/30"
             >
-              Cálculo de Ganancias
+              Análisis Inversión
             </a>
             <a 
               href="#inventory" 
@@ -175,6 +165,7 @@ const App = () => {
       <Navbar />
       <main>
         <Hero />
+        <StrategicBriefing />
         <div id="highlights">
           <ProductHighlights />
         </div>

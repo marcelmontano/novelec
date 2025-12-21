@@ -7,18 +7,30 @@ export const CONTACT_DETAILS: ContactInfo = {
   currency: "EUR"
 };
 
+export const LOGISTICS = {
+  warehouse: "Almacenes Tradex (Reparto Eléctrico)",
+  importer: "Cubaelectrónica",
+  status: "In-Bond (Mercancía en Cuba)",
+  details: "Equipos listos para inspección física y nacionalización inmediata."
+};
+
+export const STRATEGIC_DOCS = {
+  memorandum: "https://drive.google.com/uc?export=download&id=1GhYldnnthEopmMJdxXkGG3YSsoAO5Tkp",
+  presentation: "https://drive.google.com/uc?export=download&id=1Y4arw_IVsKACjAtxTgqmhkMHXsPn2axt"
+};
+
 export const CONTAINERS: ContainerOffer[] = [
   {
     id: 'ecoflow',
     title: "Contenedor EcoFlow",
     brand: "EcoFlow",
     price: 135000,
-    description: "Distribuidor Autorizado Novelec. Equipos de primera mano con respaldo directo de fábrica. Stock ya en La Habana (In-Bond).",
+    description: "Distribución Novelec vía Cubaelectrónica. Ubicados en Almacenes Tradex (Reparto Eléctrico). Máxima rotación y ganancia rápida.",
     features: [
-      "Distribuidor Oficial (Primera Mano)",
-      "Exento de Aranceles Aduanales",
-      "Garantía de Fábrica EcoFlow",
-      "Transferencia Bancaria (Ext.)"
+      "Importado por Cubaelectrónica",
+      "Stock Físico en Tradex",
+      "Beneficio Neto: hasta €189k",
+      "Garantía Oficial Novelec"
     ],
     color: "cyan"
   },
@@ -27,16 +39,52 @@ export const CONTAINERS: ContainerOffer[] = [
     title: "Contenedor Deye",
     brand: "Deye",
     price: 128600,
-    description: "Infraestructura híbrida industrial. Soluciones de alta ingeniería para la red cubana directamente desde el canal oficial.",
+    description: "Solución industrial robusta en Almacenes Tradex. Alta demanda en el sector privado (MIPYMES). Retorno seguro y estable.",
     features: [
-      "Canal de Distribución Directo",
-      "Libre de Aranceles Aduanales",
-      "Soporte Técnico Especializado",
-      "Inspección Física en Tradex"
+      "Canal Oficial Cubaelectrónica",
+      "Ubicación: Reparto Eléctrico",
+      "Ganancia Limpia: hasta €169k",
+      "Inspección Física Disponible"
     ],
     color: "yellow"
   }
 ];
+
+// Investment metrics for ROI and profit analysis
+export const METRICS = {
+  ecoflow: {
+    label: "EcoFlow",
+    cost: 135000,
+    minRev: 223880,
+    maxRev: 352428,
+    avgRev: 288000,
+    minProfit: 71010,
+    maxProfit: 189234,
+    avgProfit: 130000,
+    minRoi: "52.6%",
+    maxRoi: "140.2%",
+    avgRoi: "94.6%",
+    units: 120,
+    valUnitMin: 583,
+    color: "#22d3ee" // Cyan
+  },
+  deye: {
+    label: "Deye",
+    cost: 128600,
+    minRev: 262900,
+    maxRev: 347400,
+    avgRev: 305150,
+    minProfit: 116400,
+    maxProfit: 169800,
+    avgProfit: 143100,
+    minRoi: "90.5%",
+    maxRoi: "132.0%",
+    avgRoi: "111.3%",
+    units: 96,
+    valUnitMin: 586,
+    color: "#eab308" // Yellow
+  }
+};
 
 // Helper to convert Drive view links to thumbnail links for direct embedding
 const getDriveImage = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
@@ -234,7 +282,7 @@ export const INVENTORY: InventoryItem[] = [
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-4.jpg",
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-3.jpg",
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-1.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-6.jpg",
+      "https://www.ecoflow.Cl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-6.jpg",
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-5.jpg",
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-4.jpg",
       "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-3.jpg",
