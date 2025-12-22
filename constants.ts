@@ -92,7 +92,7 @@ export const METRICS = {
 const getDriveImage = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
 
 export const INVENTORY: InventoryItem[] = [
-  // --- CONTENEDOR DEYE ---
+  // --- CONTENEDOR DEYE (Total: €128,600) ---
   {
     id: "sun10k",
     containerId: 'deye',
@@ -107,10 +107,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["Carga/Descarga 250A", "Pantalla Táctil Color", "IP65"]
     },
     imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png",
-    unitCostEur: 900,
-    unitCostUsd: 1050,
-    marketPrice: 2500,
-    targetPrice: 2700,
+    unitCostEur: 1598.62,
+    unitCostUsd: 1870.38,
+    marketPrice: 2800,
+    targetPrice: 2900,
     tag: "Alta Demanda MIPYME"
   },
   {
@@ -127,10 +127,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["LiFePO4 Safe Chemistry", "Vida útil >6000 ciclos"]
     },
     imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg",
-    unitCostEur: 500,
-    unitCostUsd: 585,
-    marketPrice: 1650,
-    targetPrice: 1800,
+    unitCostEur: 888.12,
+    unitCostUsd: 1039.10,
+    marketPrice: 1900,
+    targetPrice: 2050,
     tag: "Rotación Rápida"
   },
   {
@@ -147,14 +147,14 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["Capacidad Industrial 200Ah", "Ciclo ≥6000"]
     },
     imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg",
-    unitCostEur: 1000,
-    unitCostUsd: 1170,
-    marketPrice: 2400,
-    targetPrice: 2600,
+    unitCostEur: 1776.24,
+    unitCostUsd: 2078.20,
+    marketPrice: 2700,
+    targetPrice: 2900,
     tag: "Margen Industrial"
   },
   
-  // --- CONTENEDOR ECOFLOW ---
+  // --- CONTENEDOR ECOFLOW (Total: €135,000) ---
   {
     id: "e980",
     containerId: 'ecoflow',
@@ -169,8 +169,8 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["LFP Battery (3000 cycles)"]
     },
     imagePlaceholder: getDriveImage("1pKzI9KkeEWbr9dkeUmWGNksn_ARTI7u0"),
-    unitCostEur: 600,
-    unitCostUsd: 700,
+    unitCostEur: 470.93,
+    unitCostUsd: 550.99,
     marketPrice: 800,
     targetPrice: 850,
     tag: "Producto Gancho"
@@ -189,10 +189,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["X-Stream Fast Charge"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station.jpg",
-    unitCostEur: 900,
-    unitCostUsd: 1050,
-    marketPrice: 1400,
-    targetPrice: 1500,
+    unitCostEur: 706.40,
+    unitCostUsd: 826.49,
+    marketPrice: 1500,
+    targetPrice: 1600,
     tag: "Best Seller"
   },
   {
@@ -209,10 +209,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["Expandible hasta 25kWh"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station.jpg",
-    unitCostEur: 1600,
-    unitCostUsd: 1870,
-    marketPrice: 2800,
-    targetPrice: 2900,
+    unitCostEur: 1255.81,
+    unitCostUsd: 1469.30,
+    marketPrice: 2950,
+    targetPrice: 3050,
     tag: "Estándar de Oro"
   },
   {
@@ -229,10 +229,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["UPS < 10ms"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-2.jpg",
-    unitCostEur: 1700,
-    unitCostUsd: 1990,
-    marketPrice: 2850,
-    targetPrice: 2950,
+    unitCostEur: 1334.30,
+    unitCostUsd: 1561.13,
+    marketPrice: 3000,
+    targetPrice: 3100,
     tag: "Novedad Q1 2026"
   },
   {
@@ -248,10 +248,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["4000 Ciclos LFP"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg",
-    unitCostEur: 1300,
-    unitCostUsd: 1520,
-    marketPrice: 2400,
-    targetPrice: 2500,
+    unitCostEur: 1020.35,
+    unitCostUsd: 1193.81,
+    marketPrice: 2600,
+    targetPrice: 2700,
     tag: "Upsell Estratégico"
   },
   {
@@ -268,8 +268,8 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["Whole Home Backup"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg",
-    unitCostEur: 2400,
-    unitCostUsd: 2800,
+    unitCostEur: 1883.72,
+    unitCostUsd: 2203.95,
     marketPrice: 4800,
     targetPrice: 5200,
     tag: "Solución Top Tier"
@@ -287,10 +287,10 @@ export const INVENTORY: InventoryItem[] = [
       extras: ["IP54 Outdoor Ready"]
     },
     imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg",
-    unitCostEur: 3000,
-    unitCostUsd: 3510,
-    marketPrice: 6000,
-    targetPrice: 6200,
+    unitCostEur: 2354.65,
+    unitCostUsd: 2754.94,
+    marketPrice: 6300,
+    targetPrice: 6500,
     tag: "Margen Máximo"
   }
 ];

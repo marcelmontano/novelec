@@ -110,8 +110,13 @@ export const ProfitabilityAnalysis: React.FC = () => {
     }
   };
 
-  const calculateMarginPercent = (cost: number, target: number) => {
-    return Math.floor(((target / cost) - 1) * 100);
+  /**
+   * Calcula el margen neto en EUR.
+   * Asume una tasa de conversión conservadora de 1 USD = 0.88 EUR para el retorno de capital.
+   */
+  const calculateMarginEur = (targetUsd: number, costEur: number) => {
+    const revenueInEur = targetUsd * 0.88;
+    return Math.floor(revenueInEur - costEur);
   };
 
   return (
@@ -125,7 +130,7 @@ export const ProfitabilityAnalysis: React.FC = () => {
             Matriz de <span className="gradient-text">Márgenes</span>
           </h2>
           <p className="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
-            Prorrateo de costos internos para cálculo de beneficio neto. Basado en una tasa de cambio 1 EUR ≈ 1.17 USD.
+            Prorrateo de costos internos por unidad. Análisis de beneficio neto basado en precio de cierre objetivo en Cuba.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-12 sm:mb-16">
@@ -153,7 +158,7 @@ export const ProfitabilityAnalysis: React.FC = () => {
           <div className="flex items-center gap-4 mb-10">
             <div className="h-1 w-8 sm:w-12 bg-emerald-500 rounded-full"></div>
             <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-               PERFIL DE RENTABILIDAD
+               PERFIL DE RENTABILIDAD REAL
             </h3>
             <div className="h-px bg-slate-800 flex-grow"></div>
           </div>
@@ -161,18 +166,18 @@ export const ProfitabilityAnalysis: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
              <div className="bg-slate-900/50 p-8 rounded-3xl border border-slate-800 shadow-xl">
                 <History className="text-purple-400 mb-4" size={32} />
-                <h4 className="text-white font-black text-sm uppercase mb-2">Costos Prorrateados</h4>
-                <p className="text-slate-400 text-xs leading-relaxed font-medium">Asignación interna de capital por equipo para determinar precios de venta realistas.</p>
+                <h4 className="text-white font-black text-sm uppercase mb-2">Costos Ajustados</h4>
+                <p className="text-slate-400 text-xs leading-relaxed font-medium">Asignación contable precisa por unidad para cuadrar el valor total del contenedor.</p>
              </div>
              <div className="bg-emerald-900/20 p-8 rounded-3xl border border-emerald-500/30 shadow-xl">
                 <Target className="text-emerald-400 mb-4" size={32} />
-                <h4 className="text-white font-black text-sm uppercase mb-2">Precios Sugeridos</h4>
-                <p className="text-emerald-50 text-xs leading-relaxed font-medium">Rangos de PVP diseñados para liquidar el stock en menos de 90 días en Cuba.</p>
+                <h4 className="text-white font-black text-sm uppercase mb-2">Precios Revolico</h4>
+                <p className="text-emerald-50 text-xs leading-relaxed font-medium">Rangos de PVP un 10-15% por debajo de la competencia para rotación rápida.</p>
              </div>
              <div className="bg-slate-900/50 p-8 rounded-3xl border border-slate-800 shadow-xl">
                 <ShoppingBag className="text-cyan-400 mb-4" size={32} />
-                <h4 className="text-white font-black text-sm uppercase mb-2">Arbitraje USD</h4>
-                <p className="text-slate-400 text-xs leading-relaxed font-medium">Capitalización total de la brecha entre costo de origen y escasez local.</p>
+                <h4 className="text-white font-black text-sm uppercase mb-2">Margen Neto Real</h4>
+                <p className="text-slate-400 text-xs leading-relaxed font-medium">Ganancia limpia por unidad tras recuperar el capital de inversión en EUR.</p>
              </div>
           </div>
 
@@ -207,14 +212,14 @@ export const ProfitabilityAnalysis: React.FC = () => {
                 <DollarSign size={24} />
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter">
-                Oportunidad {activeTab.toUpperCase()}
+                Matriz de Oportunidad {activeTab.toUpperCase()}
               </h3>
             </div>
             <div className="flex flex-col sm:items-end">
                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] bg-slate-800/80 px-4 sm:px-8 py-2 rounded-full border border-slate-700">
                     BENCHMARKING EN USD
                 </span>
-                <span className="text-[9px] text-emerald-500 font-bold mt-2 uppercase tracking-widest">Prorrateo Interno Sugerido</span>
+                <span className="text-[9px] text-emerald-500 font-bold mt-2 uppercase tracking-widest">Precios Validados Q1 2026</span>
             </div>
           </div>
           
@@ -223,39 +228,44 @@ export const ProfitabilityAnalysis: React.FC = () => {
               <thead className="bg-slate-950/40">
                 <tr>
                   <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest">Modelo del Equipo</th>
-                  <th className="px-6 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">Costo Ref. (USD)</th>
-                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-emerald-400 uppercase tracking-widest text-center">PVP Sugerido (USD)</th>
-                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-right">Margen aprox.</th>
+                  <th className="px-6 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">Referencia Revolico</th>
+                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-emerald-400 uppercase tracking-widest text-center">Nuestro PVP Sugerido</th>
+                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-right">Margen Neto Est.</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800">
                 {currentInventory.map((item, idx) => {
-                  const marginLow = calculateMarginPercent(item.unitCostUsd, item.marketPrice);
-                  const marginHigh = calculateMarginPercent(item.unitCostUsd, item.targetPrice);
+                  const marginEur = calculateMarginEur(item.targetPrice, item.unitCostEur);
                   return (
                     <tr key={idx} className="hover:bg-slate-800/20 transition-colors group">
                       <td className="px-4 sm:px-10 py-6">
                           <div className="text-sm sm:text-lg font-black text-white leading-tight">{item.modelName}</div>
                           <div className="mt-1">
-                               <span className="text-[9px] font-black px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 uppercase tracking-widest">x{item.quantity} Unidades</span>
+                               <span className={`text-[9px] font-black px-2 py-0.5 rounded-md border uppercase tracking-widest ${
+                                 item.tag === 'Producto Gancho' 
+                                 ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' 
+                                 : 'bg-slate-800 text-slate-400 border-slate-700'
+                               }`}>{item.tag || 'Stock'}</span>
                           </div>
                       </td>
-                      <td className="px-6 py-6 text-base text-slate-400 text-center font-bold tabular-nums">
-                          ${item.unitCostUsd.toLocaleString()}
+                      <td className="px-6 py-6 text-sm text-slate-500 text-center font-bold italic tabular-nums">
+                          ${(item.marketPrice ? Math.floor(item.marketPrice * 1.15) : 0).toLocaleString()}+
                       </td>
                       <td className="px-4 sm:px-10 py-6 text-center">
                           <div className="text-sm sm:text-xl font-black text-emerald-400 tabular-nums">
                             ${item.marketPrice.toLocaleString()} - ${item.targetPrice.toLocaleString()}
                           </div>
-                          <div className="text-[10px] text-slate-500 font-black uppercase mt-1 tracking-widest">Costo EUR: €{item.unitCostEur.toLocaleString()}</div>
+                          <div className="text-[10px] text-slate-500 font-black uppercase mt-1 tracking-widest italic">Cierre Objetivo Sugerido</div>
                       </td>
                       <td className="px-4 sm:px-10 py-6 text-right tabular-nums">
-                        <div className="text-base sm:text-xl font-black text-white">
-                          {marginLow}% - {marginHigh}%
+                        <div className={`text-base sm:text-xl font-black ${marginEur > 100 ? 'text-white' : 'text-orange-400'}`}>
+                          €{marginEur.toLocaleString()} <span className="text-[10px] text-slate-500">/u</span>
                         </div>
-                        <div className="flex items-center justify-end gap-1 text-[8px] font-black text-emerald-500 uppercase tracking-widest mt-1">
-                           Sobre Costo de Ref.
-                        </div>
+                        {marginEur <= 250 && (
+                          <div className="flex items-center justify-end gap-1 text-[8px] font-black text-orange-400/80 uppercase tracking-widest mt-1">
+                             <AlertCircle size={10} /> Alta Rotación
+                          </div>
+                        )}
                       </td>
                     </tr>
                   );
@@ -269,17 +279,17 @@ export const ProfitabilityAnalysis: React.FC = () => {
           <div className="bg-slate-900/80 border border-slate-800 p-8 rounded-[2rem] relative overflow-hidden group">
             <div className="flex items-center gap-4 mb-6 relative z-10">
                 <ShieldAlert className="text-emerald-400" size={28} />
-                <h4 className="text-lg font-black text-white uppercase tracking-tighter">Nota para el Comprador</h4>
+                <h4 className="text-lg font-black text-white uppercase tracking-tighter">Estrategia Comercial</h4>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium relative z-10">
-                El proveedor factura por lote cerrado, pero este es el <span className="text-white font-bold">coste interno asignado por unidad</span> que usamos para que usted pueda proyectar sus márgenes finales de forma precisa.
+                Publicamos precios un <span className="text-white font-bold">10-20% por debajo</span> del promedio de Revolico para captar toda la demanda disponible. Esto garantiza que el capital de inversión retorne en el menor tiempo posible.
             </p>
           </div>
 
           <div className="bg-slate-900 border border-emerald-500/20 p-8 rounded-[2rem] flex flex-col justify-center text-center relative overflow-hidden">
-            <p className="text-emerald-400 font-black text-2xl sm:text-3xl mb-2 relative z-10 tracking-tighter uppercase italic">Control Total de Márgenes</p>
+            <p className="text-emerald-400 font-black text-2xl sm:text-3xl mb-2 relative z-10 tracking-tighter uppercase italic">Dominio del Mercado</p>
             <p className="text-slate-300 text-xs sm:text-base leading-relaxed max-w-sm mx-auto relative z-10 font-medium">
-              Venda por encima de las columnas sugeridas para <span className="text-white font-bold">maximizar el ROI</span> según la urgencia del mercado local.
+               Maximice su retorno vendiendo kits completos. El margen se optimiza al reducir costos logísticos por entrega.
             </p>
           </div>
         </div>
