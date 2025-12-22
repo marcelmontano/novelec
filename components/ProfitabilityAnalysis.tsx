@@ -9,37 +9,14 @@ import {
   FileText, 
   DollarSign, 
   ShieldAlert,
-  BarChart3,
-  ArrowUpRight,
-  Target
+  Target,
+  ShoppingBag,
+  History,
+  AlertCircle
 } from 'lucide-react';
-import { STRATEGIC_DOCS, METRICS } from '../constants';
+import { STRATEGIC_DOCS, METRICS, INVENTORY } from '../constants';
 
-const ECOFLOW_PROFIT = [
-  { model: "EcoFlow E980-US", qty: 40, min: 600, max: 980 },
-  { model: "EcoFlow DELTA 2 Max", qty: 20, min: 1100, max: 2000 },
-  { model: "EcoFlow DELTA Pro", qty: 20, min: 2800, max: 3000 },
-  { model: "Delta Pro 3", qty: 8, min: 2800, max: 3000 },
-  { model: "Delta Pro 3 Extra Battery", qty: 4, min: 2250, max: 2838 },
-  { model: "EcoFlow Delta Pro Ultra (Inv)", qty: 8, min: 5100, max: 5100 },
-  { model: "Delta Pro Ultra Battery", qty: 20, min: 6000, max: 6730 },
-];
-
-const DEYE_PROFIT = [
-  { model: "Deye SUN-10K Inverter", qty: 36, min: 2500, max: 2900 },
-  { model: "Deye SE-G5.1 Pro-B Battery", qty: 40, min: 1500, max: 2000 },
-  { model: "Deye SE-G10.2 Battery", qty: 20, min: 2200, max: 2800 },
-];
-
-/**
- * Gráfico visual comparativo de barras de alto impacto
- */
 const ROIVisualChart = () => {
-  const maxRevenue = Math.max(
-    METRICS.ecoflow.cost + METRICS.ecoflow.maxProfit,
-    METRICS.deye.cost + METRICS.deye.maxProfit
-  );
-  
   const ComparisonBar = ({ brand }: { brand: 'ecoflow' | 'deye' }) => {
     const data = METRICS[brand];
     const isEco = brand === 'ecoflow';
@@ -62,7 +39,6 @@ const ROIVisualChart = () => {
           </div>
         </div>
 
-        {/* Bar Stack */}
         <div className="space-y-8 relative z-10">
           <div className="space-y-2">
             <div className="flex justify-between text-[9px] font-black text-slate-500 uppercase tracking-widest px-1">
@@ -119,7 +95,7 @@ export const ProfitabilityAnalysis: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'ecoflow' | 'deye'>('ecoflow');
   const [copied, setCopied] = useState(false);
   
-  const currentData = activeTab === 'ecoflow' ? ECOFLOW_PROFIT : DEYE_PROFIT;
+  const currentInventory = INVENTORY.filter(i => i.containerId === activeTab);
 
   const handleShare = () => {
     try {
@@ -134,27 +110,22 @@ export const ProfitabilityAnalysis: React.FC = () => {
     }
   };
 
+  const calculateMarginPercent = (cost: number, target: number) => {
+    return Math.floor(((target / cost) - 1) * 100);
+  };
+
   return (
     <section id="profitability" className="py-16 sm:py-24 bg-slate-950 relative overflow-hidden scroll-mt-24">
-      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
-        <svg width="100%" height="100%">
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1"/>
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col items-center text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-            <Target size={14} /> Análisis de Inversión Novelec
+            <Target size={14} /> Estrategia de Arbitraje Energético
           </div>
           <h2 className="text-4xl sm:text-7xl font-black text-white tracking-tighter mb-8 uppercase leading-none">
-            La <span className="gradient-text">Ruta del Dinero</span>
+            Matriz de <span className="gradient-text">Márgenes</span>
           </h2>
-          <p className="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 font-medium">
-            Compare el rendimiento neto de su capital. Arbitraje energético directo: compre a coste de fábrica, venda a precio de mercado.
+          <p className="text-base sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
+            Prorrateo de costos internos para cálculo de beneficio neto. Basado en una tasa de cambio 1 EUR ≈ 1.17 USD.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-12 sm:mb-16">
@@ -167,7 +138,7 @@ export const ProfitabilityAnalysis: React.FC = () => {
               }`}
             >
               {copied ? <Check size={18} /> : <Share2 size={18} />}
-              {copied ? 'Copiado' : 'Compartir Análisis'}
+              {copied ? 'Copiado' : 'Compartir Estrategia'}
             </button>
             <a 
               href={STRATEGIC_DOCS.presentation}
@@ -182,78 +153,30 @@ export const ProfitabilityAnalysis: React.FC = () => {
           <div className="flex items-center gap-4 mb-10">
             <div className="h-1 w-8 sm:w-12 bg-emerald-500 rounded-full"></div>
             <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
-               RENDIMIENTO VISUAL
+               PERFIL DE RENTABILIDAD
             </h3>
             <div className="h-px bg-slate-800 flex-grow"></div>
           </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+             <div className="bg-slate-900/50 p-8 rounded-3xl border border-slate-800 shadow-xl">
+                <History className="text-purple-400 mb-4" size={32} />
+                <h4 className="text-white font-black text-sm uppercase mb-2">Costos Prorrateados</h4>
+                <p className="text-slate-400 text-xs leading-relaxed font-medium">Asignación interna de capital por equipo para determinar precios de venta realistas.</p>
+             </div>
+             <div className="bg-emerald-900/20 p-8 rounded-3xl border border-emerald-500/30 shadow-xl">
+                <Target className="text-emerald-400 mb-4" size={32} />
+                <h4 className="text-white font-black text-sm uppercase mb-2">Precios Sugeridos</h4>
+                <p className="text-emerald-50 text-xs leading-relaxed font-medium">Rangos de PVP diseñados para liquidar el stock en menos de 90 días en Cuba.</p>
+             </div>
+             <div className="bg-slate-900/50 p-8 rounded-3xl border border-slate-800 shadow-xl">
+                <ShoppingBag className="text-cyan-400 mb-4" size={32} />
+                <h4 className="text-white font-black text-sm uppercase mb-2">Arbitraje USD</h4>
+                <p className="text-slate-400 text-xs leading-relaxed font-medium">Capitalización total de la brecha entre costo de origen y escasez local.</p>
+             </div>
+          </div>
+
           <ROIVisualChart />
-        </div>
-
-        <div className="mb-24">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px bg-slate-800 flex-grow"></div>
-            <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-              <Scale className="text-emerald-400" size={24} /> COMPARATIVA DIRECTA
-            </h3>
-            <div className="h-px bg-slate-800 flex-grow"></div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            <div className="lg:col-span-7 bg-slate-900/50 border border-slate-800 rounded-[2rem] overflow-hidden shadow-2xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-slate-800/40">
-                      <th className="px-4 sm:px-8 py-5 text-[9px] font-black text-slate-500 uppercase tracking-widest">Métrica</th>
-                      <th className="px-4 sm:px-8 py-5 text-[10px] font-black text-cyan-400 uppercase tracking-widest text-center">EcoFlow</th>
-                      <th className="px-4 sm:px-8 py-5 text-[10px] font-black text-yellow-500 uppercase tracking-widest text-center">Deye</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800">
-                    {[
-                      { m: "Ganancia Mín.", e: "€71k", d: "€116k" },
-                      { m: "Ganancia Máx.", e: "€189k", d: "€169k" },
-                      { m: "ROI Mínimo", e: "52.6%", d: "90.5%" },
-                      { m: "ROI Máximo", e: "140.2%", d: "132%" },
-                    ].map((row, i) => (
-                      <tr key={i} className="hover:bg-slate-800/30 transition-colors">
-                        <td className="px-4 sm:px-8 py-4 text-[11px] font-bold text-slate-400 uppercase">{row.m}</td>
-                        <td className="px-4 sm:px-8 py-4 text-base font-black text-white text-center tabular-nums">{row.e}</td>
-                        <td className="px-4 sm:px-8 py-4 text-base font-black text-white text-center tabular-nums">{row.d}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              <div className="flex-1 bg-slate-900/40 p-8 rounded-[2rem] border border-slate-800 shadow-xl relative overflow-hidden group">
-                <h4 className="text-sm font-black text-white mb-6 uppercase tracking-tighter relative z-10">Veredicto</h4>
-                <div className="space-y-4 relative z-10">
-                  <div className="flex gap-4">
-                    <CheckCircle2 className="text-emerald-400 flex-shrink-0" size={18} />
-                    <p className="text-slate-400 text-xs leading-relaxed">
-                      <strong className="text-white">Deye:</strong> Perfil defensivo. Seguridad del 90% de ROI mínimo.
-                    </p>
-                  </div>
-                  <div className="flex gap-4">
-                    <CheckCircle2 className="text-cyan-400 flex-shrink-0" size={18} />
-                    <p className="text-slate-400 text-xs leading-relaxed">
-                      <strong className="text-white">EcoFlow:</strong> Perfil de crecimiento. Mayor techo de ganancia unitaria.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-emerald-600 p-8 rounded-[2rem] shadow-2xl relative overflow-hidden">
-                <p className="text-white font-black text-sm mb-2 uppercase tracking-tighter">Recomendación</p>
-                <p className="text-emerald-50 text-[11px] leading-relaxed font-medium italic">
-                  "Ambas opciones capitalizan la crisis energética actual. La decisión depende de su canal de distribución."
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="flex justify-center mb-10">
@@ -284,13 +207,14 @@ export const ProfitabilityAnalysis: React.FC = () => {
                 <DollarSign size={24} />
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tighter">
-                Desglose {activeTab.toUpperCase()}
+                Oportunidad {activeTab.toUpperCase()}
               </h3>
             </div>
-            <div>
-                <span className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] bg-slate-800/80 px-4 sm:px-8 py-2 rounded-full border border-slate-700">
-                    VALORES UNITARIOS EN USD
+            <div className="flex flex-col sm:items-end">
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] bg-slate-800/80 px-4 sm:px-8 py-2 rounded-full border border-slate-700">
+                    BENCHMARKING EN USD
                 </span>
+                <span className="text-[9px] text-emerald-500 font-bold mt-2 uppercase tracking-widest">Prorrateo Interno Sugerido</span>
             </div>
           </div>
           
@@ -298,25 +222,44 @@ export const ProfitabilityAnalysis: React.FC = () => {
             <table className="w-full text-left">
               <thead className="bg-slate-950/40">
                 <tr>
-                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest">Modelo</th>
-                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">Cant.</th>
-                  <th className="hidden md:table-cell px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">P. Min</th>
-                  <th className="hidden md:table-cell px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">P. Max</th>
-                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-right">Total Max</th>
+                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest">Modelo del Equipo</th>
+                  <th className="px-6 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-center">Costo Ref. (USD)</th>
+                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-emerald-400 uppercase tracking-widest text-center">PVP Sugerido (USD)</th>
+                  <th className="px-4 sm:px-10 py-6 text-[9px] font-black text-slate-500 uppercase tracking-widest text-right">Margen aprox.</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800">
-                {currentData.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/20 transition-colors group">
-                    <td className="px-4 sm:px-10 py-6 text-sm sm:text-lg font-black text-white leading-tight">{item.model}</td>
-                    <td className="px-4 sm:px-10 py-6 text-sm sm:text-lg font-black text-slate-500 text-center">x{item.qty}</td>
-                    <td className="hidden md:table-cell px-10 py-6 text-sm text-slate-400 text-center tabular-nums">${item.min.toLocaleString()}</td>
-                    <td className="hidden md:table-cell px-10 py-6 text-sm text-slate-400 text-center tabular-nums">${item.max.toLocaleString()}</td>
-                    <td className={`px-4 sm:px-10 py-6 text-base sm:text-xl font-black text-right tabular-nums ${activeTab === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`}>
-                      ${(item.max * item.qty).toLocaleString()}
-                    </td>
-                  </tr>
-                ))}
+                {currentInventory.map((item, idx) => {
+                  const marginLow = calculateMarginPercent(item.unitCostUsd, item.marketPrice);
+                  const marginHigh = calculateMarginPercent(item.unitCostUsd, item.targetPrice);
+                  return (
+                    <tr key={idx} className="hover:bg-slate-800/20 transition-colors group">
+                      <td className="px-4 sm:px-10 py-6">
+                          <div className="text-sm sm:text-lg font-black text-white leading-tight">{item.modelName}</div>
+                          <div className="mt-1">
+                               <span className="text-[9px] font-black px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 uppercase tracking-widest">x{item.quantity} Unidades</span>
+                          </div>
+                      </td>
+                      <td className="px-6 py-6 text-base text-slate-400 text-center font-bold tabular-nums">
+                          ${item.unitCostUsd.toLocaleString()}
+                      </td>
+                      <td className="px-4 sm:px-10 py-6 text-center">
+                          <div className="text-sm sm:text-xl font-black text-emerald-400 tabular-nums">
+                            ${item.marketPrice.toLocaleString()} - ${item.targetPrice.toLocaleString()}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-black uppercase mt-1 tracking-widest">Costo EUR: €{item.unitCostEur.toLocaleString()}</div>
+                      </td>
+                      <td className="px-4 sm:px-10 py-6 text-right tabular-nums">
+                        <div className="text-base sm:text-xl font-black text-white">
+                          {marginLow}% - {marginHigh}%
+                        </div>
+                        <div className="flex items-center justify-end gap-1 text-[8px] font-black text-emerald-500 uppercase tracking-widest mt-1">
+                           Sobre Costo de Ref.
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -326,17 +269,17 @@ export const ProfitabilityAnalysis: React.FC = () => {
           <div className="bg-slate-900/80 border border-slate-800 p-8 rounded-[2rem] relative overflow-hidden group">
             <div className="flex items-center gap-4 mb-6 relative z-10">
                 <ShieldAlert className="text-emerald-400" size={28} />
-                <h4 className="text-lg font-black text-white uppercase tracking-tighter">Arbitraje Fiscal</h4>
+                <h4 className="text-lg font-black text-white uppercase tracking-tighter">Nota para el Comprador</h4>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium relative z-10">
-                Al operar bajo el régimen In-Bond, la mercancía no paga aranceles hasta su venta. Inspección física en <span className="text-white font-bold">Tradex</span> disponible.
+                El proveedor factura por lote cerrado, pero este es el <span className="text-white font-bold">coste interno asignado por unidad</span> que usamos para que usted pueda proyectar sus márgenes finales de forma precisa.
             </p>
           </div>
 
           <div className="bg-slate-900 border border-emerald-500/20 p-8 rounded-[2rem] flex flex-col justify-center text-center relative overflow-hidden">
-            <p className="text-emerald-400 font-black text-2xl sm:text-3xl mb-2 relative z-10 tracking-tighter uppercase italic">Retorno: 48 Ventas</p>
+            <p className="text-emerald-400 font-black text-2xl sm:text-3xl mb-2 relative z-10 tracking-tighter uppercase italic">Control Total de Márgenes</p>
             <p className="text-slate-300 text-xs sm:text-base leading-relaxed max-w-sm mx-auto relative z-10 font-medium">
-              Recupere el <span className="text-white font-bold">100% de su inversión</span> vendiendo el <span className="text-white font-bold">40% del stock</span>.
+              Venda por encima de las columnas sugeridas para <span className="text-white font-bold">maximizar el ROI</span> según la urgencia del mercado local.
             </p>
           </div>
         </div>

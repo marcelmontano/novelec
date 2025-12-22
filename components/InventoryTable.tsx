@@ -32,7 +32,6 @@ const ExpandedGallery: React.FC<{ mainImage: string; additionalImages?: string[]
 
   return (
     <div className="flex flex-col gap-3 w-full max-w-full overflow-hidden">
-      {/* Contenedor de imagen optimizado para móviles */}
       <div className="w-full rounded-xl bg-white p-2 flex items-center justify-center overflow-hidden border border-slate-700 relative group min-h-[220px] max-h-[400px]">
         <img 
             src={images[activeIndex]} 
@@ -46,7 +45,6 @@ const ExpandedGallery: React.FC<{ mainImage: string; additionalImages?: string[]
         )}
       </div>
       
-      {/* Miniaturas optimizadas para scroll táctil */}
       {images.length > 1 && (
         <div className="flex gap-2 overflow-x-auto py-2 px-1 scrollbar-hide snap-x">
             {images.map((img, idx) => (
@@ -79,21 +77,37 @@ export const InventoryTable: React.FC = () => {
 
   const downloadCSV = () => {
     if (!activeContainer) return;
-    const headers = ["Modelo", "SKU", "Categoría", "Cantidad", "Especificaciones", "Costo Unitario (Est)", "Precio Venta Unitario", "Margen Total Estimado"];
-    const rows = filteredInventory.map(item => [
-        `"${item.modelName.replace(/"/g, '""')}"`,
-        `"${item.sku}"`,
-        item.category,
-        item.quantity,
-        `"${item.specs.capacity} ${item.specs.output || ''}"`.trim(),
-        "", "", ""
-    ].join(","));
+    const headers = [
+      "Modelo", 
+      "SKU", 
+      "Categoría", 
+      "Cantidad", 
+      "Costo Ref (EUR)", 
+      "Costo Ref (USD)", 
+      "Sugerido Venta (USD Min)", 
+      "Sugerido Venta (USD Max)", 
+      "Margen Est (%)"
+    ];
+    const rows = filteredInventory.map(item => {
+        const marginAvg = (( (item.marketPrice + item.targetPrice) / 2 ) / item.unitCostUsd - 1) * 100;
+        return [
+            `"${item.modelName.replace(/"/g, '""')}"`,
+            `"${item.sku}"`,
+            item.category,
+            item.quantity,
+            item.unitCostEur,
+            item.unitCostUsd,
+            item.marketPrice,
+            item.targetPrice,
+            `${marginAvg.toFixed(1)}%`
+        ].join(",");
+    });
     const csvContent = [headers.join(","), ...rows].join("\n");
     const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `Inventario_Novelec_${activeContainer.brand}.csv`);
+    link.setAttribute("download", `Analisis_Margenes_Novelec_${activeContainer.brand}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -104,7 +118,7 @@ export const InventoryTable: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl uppercase tracking-tighter">Inventario Detallado</h2>
-          <p className="mt-3 text-base text-slate-400">Seleccione un producto para inspeccionar sus especificaciones técnicas.</p>
+          <p className="mt-3 text-base text-slate-400 italic">Prorrateo de costos internos disponible para inspección de margen.</p>
         </div>
 
         <div className="flex flex-col items-center mb-8 gap-6">
@@ -129,7 +143,7 @@ export const InventoryTable: React.FC = () => {
                 className="group inline-flex items-center gap-3 px-8 py-3.5 text-[10px] font-black text-slate-400 bg-slate-900 border border-slate-700 rounded-full hover:bg-slate-800 hover:text-white transition-all uppercase tracking-[0.2em]"
             >
                 <FileSpreadsheet className={`h-4 w-4 ${activeTab === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'}`} />
-                Exportar para Excel (.CSV)
+                Descargar Matriz de Márgenes (.CSV)
             </button>
         </div>
 
@@ -181,76 +195,48 @@ export const InventoryTable: React.FC = () => {
                             <td colSpan={3} className="px-0 py-0 overflow-hidden max-w-[calc(100vw-2rem)]">
                                 <div className="p-4 sm:p-8 w-full block">
                                     <div className="flex flex-col lg:flex-row gap-8 w-full overflow-hidden">
-                                        {/* Galería */}
                                         <div className="lg:w-1/2 w-full flex-shrink-0">
                                             <ExpandedGallery 
                                                 mainImage={item.imagePlaceholder} 
                                                 additionalImages={item.additionalImages}
                                                 alt={item.modelName}
                                             />
-                                            {item.datasheetUrl && (
-                                                <a 
-                                                    href={item.datasheetUrl} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className={`mt-6 flex items-center justify-center gap-3 w-full py-4 rounded-xl border-2 font-black text-[10px] uppercase tracking-[0.2em] transition-all shadow-lg ${
-                                                        activeTab === 'ecoflow' 
-                                                        ? 'border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white shadow-cyan-900/20' 
-                                                        : 'border-yellow-500/30 text-yellow-500 hover:bg-yellow-500 hover:text-white shadow-yellow-900/20'
-                                                    }`}
-                                                >
-                                                    <FileDown size={18} /> Descargar Ficha Técnica PDF
-                                                </a>
-                                            )}
                                         </div>
 
-                                        {/* Información Detallada */}
                                         <div className="flex-1 space-y-6 min-w-0">
                                             <div className="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/50 w-full shadow-inner">
                                                 <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-                                                    <Info size={14} /> INFORMACIÓN DEL PRODUCTO
+                                                    <Info size={14} /> ANÁLISIS DE COSTO UNITARIO
                                                 </h4>
-                                                <p className="text-slate-300 text-sm leading-relaxed font-medium whitespace-normal break-words overflow-wrap-anywhere">
-                                                    {item.description}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                                                        <span className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1">Costo Ref. (EUR)</span>
+                                                        <span className="text-xl font-black text-white">€{item.unitCostEur.toLocaleString()}</span>
+                                                    </div>
+                                                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                                                        <span className="block text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1">Costo Ref. (USD)</span>
+                                                        <span className="text-xl font-black text-white">${item.unitCostUsd.toLocaleString()}</span>
+                                                    </div>
+                                                </div>
+                                                <p className="mt-4 text-[10px] text-slate-500 leading-relaxed">
+                                                    * Costos prorrateados internamente basados en el valor de mercado actual. Úselos como base para el cálculo de su ROI final.
                                                 </p>
                                             </div>
 
                                             <div className="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/30 w-full">
                                                 <h4 className="text-[10px] font-black text-white uppercase tracking-[0.2em] mb-5 border-b border-slate-700/50 pb-3">
-                                                    ESPECIFICACIONES DEL EQUIPO
+                                                    ESPECIFICACIONES TÉCNICAS
                                                 </h4>
                                                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-10">
                                                     <div className="flex flex-col gap-1">
                                                         <dt className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Capacidad Nominal</dt>
                                                         <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.capacity}</dd>
                                                     </div>
-                                                    {item.specs.output && (
-                                                        <div className="flex flex-col gap-1">
-                                                            <dt className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Salida Máxima</dt>
-                                                            <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.output}</dd>
-                                                        </div>
-                                                    )}
-                                                    {item.specs.weight && (
-                                                        <div className="flex flex-col gap-1">
-                                                            <dt className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Peso Neto</dt>
-                                                            <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.weight}</dd>
-                                                        </div>
-                                                    )}
+                                                    <div className="flex flex-col gap-1">
+                                                        <dt className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Salida Máxima</dt>
+                                                        <dd className="text-sm text-slate-200 font-bold break-words">{item.specs.output || 'N/A'}</dd>
+                                                    </div>
                                                 </dl>
-
-                                                {item.specs.extras && item.specs.extras.length > 0 && (
-                                                     <div className="mt-8">
-                                                        <dt className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4">CARACTERÍSTICAS CLAVE</dt>
-                                                        <ul className="grid grid-cols-1 gap-2.5">
-                                                            {item.specs.extras.map((ex, i) => (
-                                                                <li key={i} className="flex items-center text-[11px] text-slate-300 bg-slate-900/50 px-4 py-2.5 rounded-xl border border-slate-700/30 group/item hover:border-slate-500 transition-colors">
-                                                                     <div className={`mr-3 h-1.5 w-1.5 rounded-full flex-shrink-0 ${activeTab === 'ecoflow' ? 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]'}`}></div>
-                                                                     <span className="break-words font-medium">{ex}</span>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                     </div>
-                                                )}
                                             </div>
                                         </div>
                                     </div>

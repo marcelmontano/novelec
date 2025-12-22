@@ -1,3 +1,4 @@
+
 export interface ProductSpec {
   capacity: string;
   output?: string;
@@ -7,7 +8,7 @@ export interface ProductSpec {
 
 export interface InventoryItem {
   id: string;
-  containerId: 'ecoflow' | 'deye'; // New field to separate containers
+  containerId: 'ecoflow' | 'deye';
   modelName: string;
   sku: string;
   quantity: number;
@@ -16,7 +17,13 @@ export interface InventoryItem {
   specs: ProductSpec;
   imagePlaceholder: string;
   additionalImages?: string[];
-  datasheetUrl?: string; // New optional field for PDF downloads
+  datasheetUrl?: string;
+  // Campos de estrategia de precios
+  unitCostEur: number;
+  unitCostUsd: number;
+  marketPrice: number; // Precio publicado sugerido (rango bajo)
+  targetPrice: number; // Precio publicado sugerido (rango alto)
+  tag?: string;
 }
 
 export interface ContainerOffer {
