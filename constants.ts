@@ -92,68 +92,6 @@ export const METRICS = {
 const getDriveImage = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
 
 export const INVENTORY: InventoryItem[] = [
-  // --- CONTENEDOR DEYE (Total: €128,600) ---
-  {
-    id: "sun10k",
-    containerId: 'deye',
-    modelName: "Deye SUN-10K-SG02LP2-US-AM3",
-    sku: "SUN-10K-SG02LP2-US-AM3",
-    quantity: 36,
-    category: "Inverter",
-    description: "Inversor híbrido de alto rendimiento diseñado específicamente para la red eléctrica cubana (120V/240V).",
-    specs: {
-      capacity: "10 kW",
-      output: "10000W (Split Phase 120/240V)",
-      extras: ["Carga/Descarga 250A", "Pantalla Táctil Color", "IP65"]
-    },
-    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png",
-    unitCostEur: 1598.62,
-    unitCostUsd: 1870.38,
-    marketPrice: 2800,
-    targetPrice: 2900,
-    tag: "Alta Demanda MIPYME"
-  },
-  {
-    id: "seg51",
-    containerId: 'deye',
-    modelName: "Deye SE-G5.1 Pro-B",
-    sku: "SE-G5.1",
-    quantity: 40,
-    category: "Battery",
-    description: "Excelente solución de sistema de almacenamiento de energía (ESS) residencial.",
-    specs: {
-      capacity: "5.12 kWh",
-      output: "100 Ah (51.2V)",
-      extras: ["LiFePO4 Safe Chemistry", "Vida útil >6000 ciclos"]
-    },
-    imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg",
-    unitCostEur: 888.12,
-    unitCostUsd: 1039.10,
-    marketPrice: 1900,
-    targetPrice: 2050,
-    tag: "Rotación Rápida"
-  },
-  {
-    id: "seg102",
-    containerId: 'deye',
-    modelName: "Deye SE-G10.2",
-    sku: "SE-G10.2",
-    quantity: 20,
-    category: "Battery",
-    description: "Batería de alta capacidad alimentada por química de fosfato de hierro y litio (LiFePO4).",
-    specs: {
-      capacity: "10.24 kWh",
-      output: "200 Ah (51.2V)",
-      extras: ["Capacidad Industrial 200Ah", "Ciclo ≥6000"]
-    },
-    imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg",
-    unitCostEur: 1776.24,
-    unitCostUsd: 2078.20,
-    marketPrice: 2700,
-    targetPrice: 2900,
-    tag: "Margen Industrial"
-  },
-  
   // --- CONTENEDOR ECOFLOW (Total: €135,000) ---
   {
     id: "e980",
@@ -292,5 +230,67 @@ export const INVENTORY: InventoryItem[] = [
     marketPrice: 6300,
     targetPrice: 6500,
     tag: "Margen Máximo"
+  },
+
+  // --- CONTENEDOR DEYE (Total: €128,600) ---
+  {
+    id: "sun10k",
+    containerId: 'deye',
+    modelName: "Deye SUN-10K-SG02LP2-US-AM3",
+    sku: "SUN-10K-SG02LP2-US-AM3",
+    quantity: 36,
+    category: "Inverter",
+    description: "Inversor híbrido de alto rendimiento diseñado específicamente para la red eléctrica cubana.",
+    specs: {
+      capacity: "10 kW",
+      output: "10000W (Split Phase 120/240V)",
+      extras: ["Carga/Descarga 250A", "IP65"]
+    },
+    imagePlaceholder: "https://www.deyeinverter.com/deyeinverter/2025/12/05/SUN-5-12K-SG01LP1-USEU2.png",
+    unitCostEur: 1598.62,
+    unitCostUsd: 1870.38,
+    marketPrice: 2800,
+    targetPrice: 2900,
+    tag: "Alta Demanda MIPYME"
+  },
+  {
+    id: "seg51",
+    containerId: 'deye',
+    modelName: "Deye SE-G5.1 Pro-B",
+    sku: "SE-G5.1",
+    quantity: 40,
+    category: "Battery",
+    description: "Excelente solución de sistema de almacenamiento de energía residencial.",
+    specs: {
+      capacity: "5.12 kWh",
+      output: "100 Ah (51.2V)",
+      extras: ["LiFePO4 Chemistry", "Ciclo ≥6000"]
+    },
+    imagePlaceholder: "https://deye.com/wp-content/uploads/2024/04/se-g5.1-pro-b.jpg",
+    unitCostEur: 888.12,
+    unitCostUsd: 1039.10,
+    marketPrice: 1900,
+    targetPrice: 2050,
+    tag: "Rotación Rápida"
+  },
+  {
+    id: "seg102",
+    containerId: 'deye',
+    modelName: "Deye SE-G10.2",
+    sku: "SE-G10.2",
+    quantity: 20,
+    category: "Battery",
+    description: "Batería de alta capacidad alimentada por química LiFePO4.",
+    specs: {
+      capacity: "10.24 kWh",
+      output: "200 Ah (51.2V)",
+      extras: ["Capacidad 200Ah", "Ciclo ≥6000"]
+    },
+    imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg",
+    unitCostEur: 1776.24,
+    unitCostUsd: 2078.20,
+    marketPrice: 2700,
+    targetPrice: 2900,
+    tag: "Margen Industrial"
   }
 ];
