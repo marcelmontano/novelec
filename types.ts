@@ -1,3 +1,4 @@
+
 export interface ProductSpec {
   capacity: string;
   output?: string;
@@ -24,6 +25,9 @@ export interface ContainerOffer {
   title: string;
   brand: string;
   price: number;
+  // Added missing properties found in constants.ts
+  offerNumber: string;
+  date: string;
   description: string;
   features: string[];
   color: string;
