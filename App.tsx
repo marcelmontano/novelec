@@ -5,7 +5,7 @@ import { InventoryTable } from './components/InventoryTable';
 import { ProductHighlights } from './components/ProductHighlights';
 import { ProfitabilityAnalysis } from './components/ProfitabilityAnalysis';
 import { ContactFooter } from './components/ContactFooter';
-import { Menu, X, MessageCircle, ShieldCheck } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 
 /**
  * NovelecLogo: Reconstrucción vectorial de alta precisión de la identidad de marca Novelec.
@@ -71,25 +71,19 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           <div className="flex items-center">
-            {/* Contenedor del Logo con distintivo de Distribuidor Autorizado */}
-            <div className="relative">
-              <div className="bg-white px-5 py-3 rounded-xl shadow-md flex-shrink-0 flex items-center justify-center min-w-[180px] h-20 transition-transform hover:scale-105">
-                <NovelecLogo className="h-full" />
-              </div>
-              <div className="absolute -bottom-2 -right-2 bg-emerald-600 text-white text-[8px] font-black px-2 py-1 rounded-md shadow-lg flex items-center gap-1 uppercase tracking-widest border border-emerald-400">
-                <ShieldCheck size={10} /> Distribuidor Autorizado
-              </div>
+            {/* Contenedor del Logo: El fondo blanco resalta los colores corporativos (Azul/Gris) */}
+            <div className="bg-white px-5 py-3 rounded-xl shadow-md flex-shrink-0 flex items-center justify-center min-w-[180px] h-20 transition-transform hover:scale-105">
+              <NovelecLogo className="h-full" />
             </div>
-            
-            <div className="hidden lg:flex ml-8 flex-col justify-center border-l border-slate-700 pl-6 h-12">
-              <span className="text-white font-bold text-base leading-tight">Canal Oficial EcoFlow</span>
-              <span className="text-slate-400 text-xs tracking-wider">VENTA DIRECTA • CUBA</span>
+            <div className="flex ml-6 flex-col justify-center border-l border-slate-700 pl-6 h-12">
+              <span className="text-white font-bold text-base leading-tight">División Energía</span>
+              <span className="text-slate-400 text-xs tracking-wider">MERCADO CUBA</span>
             </div>
           </div>
 
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-6">
-              <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Equipos</a>
+              <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Destacados</a>
               <a href="#profitability" className="text-cyan-400 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Rentabilidad</a>
               <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
               <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5">

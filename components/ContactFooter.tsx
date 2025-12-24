@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { Phone, MessageCircle, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import { NovelecLogo } from '../App';
 
 export const ContactFooter: React.FC = () => {
@@ -10,37 +10,33 @@ export const ContactFooter: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <div className="relative bg-white inline-block px-6 py-4 rounded-xl mb-8 shadow-md">
+            <div className="bg-white inline-block px-6 py-4 rounded-xl mb-8 shadow-md">
                 <NovelecLogo className="h-16 w-auto" />
-                <div className="absolute -bottom-3 -right-3 bg-emerald-600 text-white text-[7px] font-black px-2 py-1 rounded border border-emerald-400 shadow-xl uppercase tracking-widest">
-                  Official Partner
-                </div>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Canal Directo de Fábrica</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">Contacto Directo</h3>
             <p className="text-slate-400 mb-8 leading-relaxed">
-              Novelec es el distribuidor de primera mano para soluciones energéticas EcoFlow en Cuba. 
-              Garantizamos equipos 100% auténticos, soporte técnico oficial y el mejor precio de mercado al eliminar intermediarios.
+              Novelec facilita la adquisición de estos contenedores para el mercado cubano.
+              Contáctenos para detalles de logística, pago y documentación legal para la importación.
             </p>
             <div className="flex flex-col space-y-5">
                <div className="flex items-center text-slate-300 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
                     <Phone className="h-6 w-6 text-cyan-400 mr-4" />
-                    <span className="font-semibold">Soporte Comercial: <a href={`tel:+53${CONTACT_DETAILS.phone}`} className="text-white hover:text-cyan-400 transition-colors">+53 {CONTACT_DETAILS.phone}</a></span>
+                    <span className="font-semibold">Llamar: <a href={`tel:+53${CONTACT_DETAILS.phone}`} className="text-white hover:text-cyan-400 transition-colors">+53 {CONTACT_DETAILS.phone}</a></span>
                </div>
                <div className="flex items-center text-slate-300 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
                     <MessageCircle className="h-6 w-6 text-green-500 mr-4" />
-                    <span className="font-semibold">WhatsApp Directo: <a href={`https://wa.me/${CONTACT_DETAILS.whatsapp}`} className="text-white hover:text-green-500 transition-colors">+53 {CONTACT_DETAILS.phone}</a></span>
+                    <span className="font-semibold">WhatsApp: <a href={`https://wa.me/${CONTACT_DETAILS.whatsapp}`} className="text-white hover:text-green-500 transition-colors">+53 {CONTACT_DETAILS.phone}</a></span>
                </div>
             </div>
           </div>
           
           <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-2">Iniciar Proceso de Compra Oficial</h3>
+            <h3 className="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-2">Iniciar Proceso de Compra</h3>
             {CONTAINERS.map(offer => (
                 <div key={offer.id} className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-slate-600 transition-colors">
                     <div className="text-center sm:text-left">
                         <div className="font-bold text-white text-lg">Contenedor {offer.brand}</div>
                         <div className="text-cyan-400 font-mono">€{offer.price.toLocaleString()}</div>
-                        <div className="text-[10px] text-emerald-500 font-black uppercase mt-1">Precio Directo de Distribuidor</div>
                     </div>
                     <a 
                         href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20deseo%20comprar%20el%20contenedor%20${offer.brand}%20por%20${offer.price.toLocaleString()}%20Euros.`}
@@ -54,14 +50,14 @@ export const ContactFooter: React.FC = () => {
             ))}
              <div className="bg-slate-800/30 p-4 rounded-lg mt-8 border border-slate-700">
                <p className="text-xs text-slate-300 text-center sm:text-left italic leading-relaxed">
-                  * Novelec es Distribuidor Autorizado: Estos contenedores están <strong>exentos de aranceles aduanales</strong> y se venden de <strong>primera mano</strong>. La mercancía se encuentra en régimen In-Bond en Almacenes Tradex; tras la adquisición, el comprador gestiona la nacionalización. Soporte y garantía oficial EcoFlow incluidos.
+                  * Nota importante: Estos contenedores están <strong>exentos de aranceles aduanales</strong> bajo la normativa vigente. La mercancía se encuentra en régimen In-Bond en Almacenes Tradex; el comprador solo debe realizar el <strong>proceso de nacionalización</strong> tras la adquisición. El pago se efectúa mediante transferencia bancaria desde el exterior.
               </p>
              </div>
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-slate-900 text-center">
             <p className="text-sm text-slate-600 font-medium">
-              &copy; {new Date().getFullYear()} Novelec Cuba • Canal de Distribución Oficial EcoFlow & Deye
+              &copy; {new Date().getFullYear()} Novelec Cuba • División de Energías Renovables
             </p>
         </div>
       </div>
