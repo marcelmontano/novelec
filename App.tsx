@@ -5,8 +5,7 @@ import { InventoryTable } from './components/InventoryTable';
 import { ProductHighlights } from './components/ProductHighlights';
 import { ProfitabilityAnalysis } from './components/ProfitabilityAnalysis';
 import { ContactFooter } from './components/ContactFooter';
-import { AIAdvisor } from './components/AIAdvisor';
-import { Menu, X, MessageCircle, Sparkles } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 
 /**
  * NovelecLogo: Reconstrucción vectorial de alta precisión de la identidad de marca Novelec.
@@ -75,9 +74,6 @@ const Navbar = () => {
             <div className="ml-10 flex items-baseline space-x-6">
               <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Destacados</a>
               <a href="#profitability" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Rentabilidad</a>
-              <a href="#ai-advisor" className="flex items-center gap-1.5 text-cyan-400 hover:text-white px-3 py-2 rounded-md text-sm font-bold transition-colors">
-                <Sparkles size={14} /> Asesor IA
-              </a>
               <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
               <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5">
                 Contactar Ahora
@@ -108,7 +104,6 @@ const Navbar = () => {
           <div className="flex flex-col space-y-6">
             <a href="#highlights" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Equipos</a>
             <a href="#profitability" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Rentabilidad</a>
-            <a href="#ai-advisor" onClick={closeMenu} className="text-cyan-400 hover:text-white bg-cyan-500/10 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-cyan-500/30">Asesor IA</a>
             <a href="#inventory" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Inventario</a>
             <div className="pt-12 mt-auto">
               <a href={`https://wa.me/5358183649`} className="flex items-center justify-center gap-3 w-full bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-5 rounded-2xl text-xl font-black shadow-2xl shadow-cyan-900/20">
@@ -132,7 +127,6 @@ const App = () => {
           <ProductHighlights />
         </div>
         <ProfitabilityAnalysis />
-        <AIAdvisor />
         <InventoryTable />
       </main>
       <ContactFooter />
