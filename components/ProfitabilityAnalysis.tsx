@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { TrendingUp, BarChart3, PieChart, DollarSign, ArrowUpRight, Info, Scale, CheckCircle2, LayoutDashboard, Share2, Check, Target, ShoppingCart, Wallet, ArrowRight } from 'lucide-react';
+import { TrendingUp, BarChart3, PieChart, DollarSign, ArrowUpRight, Info, Scale, CheckCircle2, LayoutDashboard, Share2, Check, Target, ShoppingCart, Wallet, ArrowRight, Star, ShieldCheck } from 'lucide-react';
+import { INVENTORY } from '../constants';
 
 const ECOFLOW_UNIT_ECONOMICS = [
   { 
@@ -10,7 +11,8 @@ const ECOFLOW_UNIT_ECONOMICS = [
     qty: 20,
     margin: "51% - 157%",
     gainUnit: "$323 - $1,223",
-    note: "Ofertas competitivas en FB desde $1,100."
+    note: "Ofertas competitivas en FB desde $1,100.",
+    isHighMargin: true
   },
   { 
     model: "DELTA Pro", 
@@ -19,7 +21,8 @@ const ECOFLOW_UNIT_ECONOMICS = [
     qty: 20,
     margin: "102% - 117%",
     gainUnit: "$1,419 - $1,619",
-    note: "Precios muy consistentes en Revolico."
+    note: "Precios muy consistentes en Revolico.",
+    isHighMargin: true
   },
   { 
     model: "DELTA Pro 3", 
@@ -37,7 +40,8 @@ const ECOFLOW_UNIT_ECONOMICS = [
     qty: 4,
     margin: "100% - 152%",
     gainUnit: "$1,128 - $1,716",
-    note: "Alta variación de precios detectada."
+    note: "Alta variación de precios detectada.",
+    isHighMargin: true
   },
   { 
     model: "E980-US Generator", 
@@ -55,7 +59,8 @@ const ECOFLOW_UNIT_ECONOMICS = [
     qty: 8,
     margin: "146%",
     gainUnit: "$3,028",
-    note: "Equipo más costoso y de mayor margen."
+    note: "Equipo más costoso y de mayor margen.",
+    isHighMargin: true
   },
   { 
     model: "Delta Pro Ultra Battery", 
@@ -64,7 +69,8 @@ const ECOFLOW_UNIT_ECONOMICS = [
     qty: 20,
     margin: "131% - 159%",
     gainUnit: "$3,410 - $4,140",
-    note: "Aporta el 54% del ingreso total."
+    note: "Aporta el 54% del ingreso total.",
+    isHighMargin: true
   }
 ];
 
@@ -85,7 +91,8 @@ const DEYE_UNIT_ECONOMICS = [
     qty: 40,
     margin: "53% - 104%",
     gainUnit: "$523 - $1,023",
-    note: "Base de retorno mínima del 90%."
+    note: "Base de retorno mínima del 90%.",
+    isHighMargin: true
   },
   { 
     model: "Batería SE-G10.2", 
@@ -122,9 +129,12 @@ const UnitEconomicsTable = ({ brand }: { brand: 'ecoflow' | 'deye' }) => {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
       <div className="px-8 py-6 bg-slate-950/50 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h4 className={`text-xl font-black uppercase tracking-tighter ${brandColor}`}>
-          Economía Unitaria (Venta al Público)
-        </h4>
+        <div className="flex items-center gap-3">
+            <h4 className={`text-xl font-black uppercase tracking-tighter ${brandColor}`}>
+            Economía Unitaria (Venta al Público)
+            </h4>
+            {brand === 'ecoflow' && <span className="bg-cyan-500/10 text-cyan-400 text-[9px] px-2 py-1 rounded-full border border-cyan-500/20 font-black">CANAL OFICIAL</span>}
+        </div>
         <div className="flex items-center gap-3">
             <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
                 Data: Facebook & Revolico
@@ -136,45 +146,77 @@ const UnitEconomicsTable = ({ brand }: { brand: 'ecoflow' | 'deye' }) => {
           <thead>
             <tr className="bg-slate-900/50">
               <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Producto</th>
+              <th className="px-4 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Stock Disp.</th>
               <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Inviertes (€)</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Precio al que lo puedes revender</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Margen Estimado</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Ganancia Bruta</th>
+              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">PVP Revendedor</th>
+              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Margen (%)</th>
+              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Rentabilidad</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800">
-            {data.map((item, i) => (
-              <tr key={i} className="hover:bg-slate-800/20 transition-colors group">
-                <td className="px-6 py-5">
-                  <div className="text-sm font-bold text-white">{item.model}</div>
-                  <div className="text-[10px] text-slate-500 mt-1 font-medium">{item.note}</div>
-                </td>
-                <td className="px-6 py-5 text-sm font-mono text-slate-400">€{item.cost.toLocaleString()}</td>
-                <td className="px-6 py-5 text-sm font-black text-white">{item.retailRange}</td>
-                <td className="px-6 py-5">
-                  <div className="flex flex-col">
-                    <span className="text-sm font-black text-emerald-400">{item.margin}</span>
-                    <span className="text-[10px] text-slate-500 font-bold">Ganas: {item.gainUnit} por unid.</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5 text-right">
-                  <div className="text-xs font-black text-slate-500 uppercase mb-1">x{item.qty} Unidades</div>
-                  <div className={`inline-block px-3 py-1 rounded-lg text-[10px] font-black bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-widest`}>
-                    ALTA RENTABILIDAD
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {data.map((item, i) => {
+              // Buscar la cantidad exacta en INVENTORY para asegurar veracidad
+              const invItem = INVENTORY.find(inv => inv.modelName.includes(item.model) || item.model.includes(inv.modelName));
+              const displayQty = invItem ? invItem.quantity : item.qty;
+
+              return (
+                <tr key={i} className={`hover:bg-slate-800/20 transition-colors group ${item.isHighMargin ? 'bg-emerald-500/5' : ''}`}>
+                  <td className="px-6 py-5">
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-white">{item.model}</span>
+                            {item.isHighMargin && (
+                                <span className="flex items-center gap-1 bg-emerald-500/20 text-emerald-400 text-[8px] px-1.5 py-0.5 rounded font-black tracking-tighter uppercase border border-emerald-500/30">
+                                    <Star size={8} fill="currentColor" /> Top Margen
+                                </span>
+                            )}
+                        </div>
+                        <div className="text-[10px] text-slate-500 mt-1 font-medium">{item.note}</div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-5 text-center">
+                    <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black border ${
+                        brand === 'ecoflow' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400' : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400'
+                    }`}>
+                        {displayQty}
+                    </span>
+                  </td>
+                  <td className="px-6 py-5 text-sm font-mono text-slate-400">€{item.cost.toLocaleString()}</td>
+                  <td className="px-6 py-5 text-sm font-black text-white">{item.retailRange}</td>
+                  <td className="px-6 py-5">
+                    <div className="flex flex-col">
+                      <span className={`text-sm font-black ${item.isHighMargin ? 'text-emerald-400' : 'text-slate-200'}`}>{item.margin}</span>
+                      <span className="text-[10px] text-slate-500 font-bold">Ganas: {item.gainUnit}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5 text-right">
+                    <div className={`inline-block px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
+                        item.isHighMargin 
+                        ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
+                        : 'bg-slate-800 text-slate-400 border-slate-700'
+                    }`}>
+                        {item.isHighMargin ? 'Ganancia Premium' : 'Retorno Seguro'}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
       <div className="p-6 bg-slate-950/30 border-t border-slate-800">
-        <div className="flex gap-4 items-start">
-          <Info size={16} className={brandColor + " mt-0.5 flex-shrink-0"} />
-          <p className="text-[11px] text-slate-400 leading-relaxed">
-            *Análisis basado en precios actuales reportados en <strong>Facebook Marketplace</strong> y <strong>Revolico</strong>. 
-            La variabilidad de precios requiere una estrategia de venta flexible, permitiendo liquidar inventario rápido o maximizar margen según la urgencia del comprador.
-          </p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div className="flex gap-4 items-start">
+                <Info size={16} className={brandColor + " mt-0.5 flex-shrink-0"} />
+                <p className="text-[11px] text-slate-400 leading-relaxed max-w-2xl">
+                    *Análisis basado en precios actuales reportados en <strong>Facebook Marketplace</strong> y <strong>Revolico</strong>. 
+                    Los productos marcados como <span className="text-emerald-400 font-bold">Top Margen</span> representan las mejores oportunidades de ROI para el inversor mayorista.
+                </p>
+            </div>
+            {/* Fix: Added ShieldCheck icon which was missing from imports */}
+            <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                <ShieldCheck size={14} className="text-emerald-500" /> Verificado por Novelec
+            </div>
         </div>
       </div>
     </div>
@@ -269,7 +311,7 @@ export const ProfitabilityAnalysis: React.FC = () => {
             </div>
         </div>
 
-        {/* Restauración de la Tabla */}
+        {/* Tabla Actualizada con Stock e High Margin */}
         <div className="mb-20 animate-fade-in-up">
           <UnitEconomicsTable brand={activeTab} />
         </div>
