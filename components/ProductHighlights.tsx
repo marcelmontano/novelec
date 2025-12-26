@@ -1,69 +1,160 @@
+
 import React from 'react';
 import { INVENTORY } from '../constants';
-import { Zap, Battery, Cpu, CheckCircle } from 'lucide-react';
+// Added 'Check' to the imports from lucide-react
+import { Zap, Battery, Cpu, CheckCircle, Check, TrendingUp, DollarSign, Star, ShieldCheck, Globe, Info, ShoppingBag } from 'lucide-react';
 
 export const ProductHighlights: React.FC = () => {
   // Highlights: Deye 10kW, Deye Battery 10.2, Delta Pro Ultra, Delta Pro 3
   const highlightedIds = ['sun10k', 'seg102', 'proultra', 'deltapro3'];
   const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
+  /**
+   * Datos de mercado alineados con ProfitabilityAnalysis.tsx
+   * Costo: Precio unitario al comprar el contenedor completo (en Euros).
+   * PVP: Precio de venta estimado en el mercado informal de Cuba (en USD).
+   */
+  const marketData: Record<string, { unitCost: string; pvp: string; profit: string; marketInsight: string; qualityFactor: string }> = {
+    'sun10k': {
+      unitCost: "€1,598",
+      pvp: "$2,500 - $3,200 USD",
+      profit: "$900 - $1,500 USD",
+      marketInsight: "Equipo crítico para negocios (MIPYMES) y residencias con alto consumo de climatización. La demanda es masiva ante la inestabilidad de la red.",
+      qualityFactor: "Grado industrial con componentes de alta gama. Soporta integración con generadores diésel y tiene una vida útil superior a 15 años."
+    },
+    'seg102': {
+      unitCost: "€1,776",
+      pvp: "$2,200 - $3,000 USD",
+      profit: "$500 - $1,200 USD",
+      marketInsight: "La solución de almacenamiento más robusta del mercado. Se vende como el complemento indispensable del inversor de 10kW.",
+      qualityFactor: "Química LiFePO4 (LFP) con 6000 ciclos de carga. BMS inteligente que protege las celdas contra el calor extremo de Cuba."
+    },
+    'proultra': {
+      unitCost: "€1,883",
+      pvp: "$5,200 - $6,000 USD",
+      profit: "$3,000+ USD",
+      marketInsight: "Producto de nicho premium. Es el margen de ganancia más alto por unidad del contenedor, ideal para clientes corporativos o embajadas.",
+      qualityFactor: "Tecnología modular revolucionaria. Funcionamiento ultra-silencioso y diseño plug-and-play que no requiere instalaciones complejas."
+    },
+    'deltapro3': {
+      unitCost: "€1,334",
+      pvp: "$2,800 - $3,500 USD",
+      profit: "$1,400 - $2,100 USD",
+      marketInsight: "El equipo más buscado en Revolico. Su portabilidad y potencia lo hacen el favorito de familias que buscan respaldo inmediato sin obras.",
+      qualityFactor: "Carga ultra-rápida (0-80% en 1 hora). Baterías LFP seguras para uso en interiores y conmutación UPS de grado médico."
+    }
+  };
+
   return (
-    <section className="py-24 bg-slate-900">
+    <section className="py-24 bg-slate-900 border-t border-slate-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-base font-semibold text-cyan-400 tracking-wide uppercase">Potencia Premium</h2>
-          <p className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
-            Equipos Estrella del Contenedor
-          </p>
-          <p className="mt-4 max-w-2xl text-xl text-slate-400 mx-auto">
-            Este envío incluye lo último en tecnología híbrida de Deye y la portabilidad extrema de EcoFlow.
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest mb-6">
+            <Star size={14} fill="currentColor" /> Selección Elite Novelec
+          </div>
+          <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tighter uppercase mb-6">
+            Equipos <span className="gradient-text">Estrella</span> del Contenedor
+          </h2>
+          <p className="mt-4 max-w-3xl text-xl text-slate-400 mx-auto leading-relaxed">
+            Este envío exclusivo agrupa la tecnología más demandada en Cuba. Equipos de alta eficiencia con el mayor retorno de inversión del mercado.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          {highlights.map((item) => (
-            <div key={item.id} className="flex flex-col overflow-hidden rounded-2xl bg-slate-800 shadow-xl border border-slate-700 transition-transform duration-300 hover:scale-[1.02]">
-              <div className="flex-shrink-0 h-64 w-full bg-white relative p-4 flex items-center justify-center">
-                {item.imagePlaceholder.includes('drive') ? (
-                     // Drive thumbnails can be weirdly sized, object-contain is safer
-                     <img className="h-full w-auto max-w-full object-contain" src={item.imagePlaceholder} alt={item.modelName} />
-                ) : (
-                     <img className="h-full w-full object-contain" src={item.imagePlaceholder} alt={item.modelName} />
-                )}
-                
-                <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-700">
-                  x{item.quantity} Unidades
-                </div>
-              </div>
-              <div className="flex-1 p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                     <p className="text-sm font-medium text-cyan-400 flex items-center gap-2">
-                        {item.category === 'Inverter' && <Cpu className="w-4 h-4" />}
-                        {item.category === 'Battery' && <Battery className="w-4 h-4" />}
-                        {item.category === 'Generator' && <Zap className="w-4 h-4" />}
-                        {item.category}
-                     </p>
+          {highlights.map((item) => {
+            const market = marketData[item.id] || { unitCost: "Consultar", pvp: "Consultar", profit: "Alto", marketInsight: "Alta demanda", qualityFactor: "Alta calidad" };
+            const isEcoFlow = item.containerId === 'ecoflow';
+            const accentColor = isEcoFlow ? 'cyan' : 'yellow';
+
+            return (
+              <div key={item.id} className="flex flex-col overflow-hidden rounded-[2.5rem] bg-slate-800/50 shadow-2xl border border-slate-700/50 transition-all duration-500 hover:border-slate-500 hover:-translate-y-2 group">
+                <div className="flex-shrink-0 h-72 w-full bg-white relative p-6 flex items-center justify-center overflow-hidden">
+                  <img 
+                    className="h-full w-auto max-w-full object-contain transition-transform duration-700 group-hover:scale-110" 
+                    src={item.imagePlaceholder} 
+                    alt={item.modelName} 
+                  />
+                  <div className={`absolute top-6 left-6 bg-slate-900/90 backdrop-blur px-4 py-2 rounded-2xl border border-${accentColor}-500/30 flex flex-col items-center`}>
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Stock</span>
+                    <span className={`text-2xl font-black text-${accentColor}-400 leading-none mt-1`}>x{item.quantity}</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{item.modelName}</h3>
-                  <p className="text-slate-400 mb-6 line-clamp-2">{item.description}</p>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                        <span className="text-slate-300 text-sm">Capacidad</span>
-                        <span className="text-white font-medium">{item.specs.capacity}</span>
+                  <div className={`absolute top-6 right-6 bg-${accentColor}-500 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-lg uppercase tracking-widest`}>
+                    {isEcoFlow ? 'EcoFlow' : 'Deye'}
+                  </div>
+                </div>
+
+                <div className="flex-1 p-8 sm:p-10 flex flex-col">
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`bg-${accentColor}-500/10 text-${accentColor}-400 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest border border-${accentColor}-500/20`}>
+                        {item.category}
+                      </span>
+                      <span className="bg-emerald-500/10 text-emerald-400 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest border border-emerald-500/20 flex items-center gap-1">
+                        <ShieldCheck size={10} /> Calidad Certificada
+                      </span>
                     </div>
-                    {item.specs.output && (
-                        <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                            <span className="text-slate-300 text-sm">Salida</span>
-                            <span className="text-white font-medium">{item.specs.output}</span>
+                    <h3 className="text-3xl font-black text-white mb-4 leading-tight">{item.modelName}</h3>
+                    <p className="text-slate-400 text-sm leading-relaxed mb-6 italic">"{item.description.substring(0, 160)}..."</p>
+                  </div>
+
+                  {/* Sección de Rentabilidad Detallada: Costo vs Reventa */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-700/50 shadow-inner group/pvp relative overflow-hidden flex flex-col justify-between min-h-[140px]">
+                      <div>
+                        <div className="flex items-center gap-2 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                          <TrendingUp size={14} /> Tu Margen de Negocio
                         </div>
-                    )}
-                    <div className="pt-2">
-                        <ul className="grid grid-cols-2 gap-2">
+                        <div className="space-y-3">
+                          <div>
+                            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Precio en el Contenedor</span>
+                            <span className="text-xl font-black text-white">{market.unitCost} <span className="text-xs text-slate-500">/ unidad</span></span>
+                          </div>
+                          <div>
+                            <span className="text-[9px] text-cyan-500 font-black uppercase tracking-widest block flex items-center gap-1">
+                              <ShoppingBag size={10} /> A cuánto lo revendes
+                            </span>
+                            <span className="text-xl font-black text-cyan-400">{market.pvp}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/20 shadow-inner group/profit flex flex-col justify-center min-h-[140px]">
+                      <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-2">
+                        <DollarSign size={14} /> Ganancia Limpia
+                      </div>
+                      <div className="text-3xl font-black text-emerald-400">{market.profit}</div>
+                      <div className="text-[9px] text-emerald-500/60 font-bold uppercase tracking-tight mt-2 flex items-center gap-1">
+                        <Check size={10} /> Beneficio neto por unidad
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6 flex-grow">
+                    <div className="bg-slate-900/40 p-5 rounded-2xl border border-slate-700/30">
+                      <h4 className={`text-[10px] font-black text-${accentColor}-400 uppercase tracking-widest mb-3 flex items-center gap-2`}>
+                        <Globe size={14} /> Contexto Mercado Cuba
+                      </h4>
+                      <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                        {market.marketInsight}
+                      </p>
+                    </div>
+
+                    <div className="bg-slate-900/40 p-5 rounded-2xl border border-slate-700/30">
+                      <h4 className="text-[10px] font-black text-white uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <Star size={14} className="text-yellow-500" /> ¿Por qué es Alta Calidad?
+                      </h4>
+                      <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                        {market.qualityFactor}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-700/50">
+                        <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Especificaciones Clave</h4>
+                        <ul className="grid grid-cols-2 gap-3">
                             {item.specs.extras?.slice(0, 4).map((extra, idx) => (
-                                <li key={idx} className="flex items-start text-xs text-slate-400">
-                                    <CheckCircle className="h-3 w-3 text-cyan-500 mr-1.5 mt-0.5 flex-shrink-0" />
+                                <li key={idx} className="flex items-start text-[11px] text-slate-400 leading-tight">
+                                    <CheckCircle className={`h-3 w-3 text-${accentColor}-500 mr-2 mt-0.5 flex-shrink-0`} />
                                     {extra}
                                 </li>
                             ))}
@@ -72,8 +163,15 @@ export const ProductHighlights: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
+        </div>
+        
+        <div className="mt-20 p-8 rounded-[2rem] bg-gradient-to-r from-cyan-600/10 to-yellow-600/10 border border-slate-700 text-center">
+          <p className="text-slate-300 text-lg font-medium leading-relaxed max-w-4xl mx-auto">
+            <span className="text-white font-black uppercase text-sm block mb-4 tracking-[0.2em]">Resumen de Calidad</span>
+            Novelec solo importa equipos con certificación internacional (UL/CE) y química de Litio Ferro-fosfato (LFP), garantizando que su inversión no se deprecie y ofrezca seguridad total en el entorno climático de Cuba.
+          </p>
         </div>
       </div>
     </section>
