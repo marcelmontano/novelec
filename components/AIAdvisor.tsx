@@ -2,14 +2,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { INVENTORY, CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { Sparkles, Send, Bot, User, MessageSquare, ShieldCheck, Zap, Info } from 'lucide-react';
+import { Sparkles, Send, Bot, User, MessageSquare, ShieldCheck, Zap, Info, Award } from 'lucide-react';
 
 export const AIAdvisor: React.FC = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{role: 'user' | 'ai', text: string}[]>([
     { 
       role: 'ai', 
-      text: '¡Hola! Soy el Asesor Experto de **Novelec**. Conozco cada detalle de los contenedores **EcoFlow** y **Deye** en Almacenes Tradex.\n\n¿Quieres saber sobre rentabilidad, especificaciones técnicas o cómo es el proceso de compra?' 
+      text: '¡Hola! Soy el Asesor Experto de **Novelec**. Somos **proveedores directos** de **EcoFlow** y **Deye** en Cuba.\n\nConozco cada detalle de los contenedores en Almacenes Tradex. ¿Quieres saber sobre rentabilidad, garantía directa de fábrica o logística?' 
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,9 +49,12 @@ export const AIAdvisor: React.FC = () => {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
       const context = `
-        Eres el ASESOR EXPERTO de Novelec Cuba. Tu misión es convencer a inversores de comprar contenedores completos de equipos solares.
+        Eres el ASESOR EXPERTO de Novelec Cuba. IMPORTANTE: Novelec es PROVEEDOR DIRECTO de fábrica para las marcas EcoFlow y Deye. Esto significa mejores precios, stock original y garantía directa.
+        
+        Tu misión es convencer a inversores de comprar contenedores completos de equipos solares.
         
         INFORMACIÓN SOBRE NOVELEC:
+        - Estatus: Proveedor Directo (Canal Mayorista Oficial).
         - Ubicación: Almacenes Tradex, La Habana (Régimen In-Bond).
         - Proceso: Los equipos están en Cuba pero NO nacionalizados. El comprador ahorra aranceles aduanales.
         - Pago: Transferencia bancaria (Exterior), USDT/Cripto. No efectivo local.
@@ -64,9 +67,9 @@ export const AIAdvisor: React.FC = () => {
         ${CONTAINERS.map(c => `- Contenedor ${c.brand}: €${c.price.toLocaleString()}. Incluye: ${c.features.join(', ')}`).join('\n')}
 
         REGLAS DE RESPUESTA:
-        1. Sé profesional y experto.
+        1. Sé profesional y experto. Enfatiza que somos "Proveedores Directos" para generar confianza.
         2. Usa negritas (**) para resaltar nombres de productos, precios o datos clave.
-        3. Si preguntan por "ganancias", menciona el ROI superior al 90%.
+        3. Si preguntan por "ganancias", menciona el ROI superior al 90% debido a la compra directa.
         4. Siempre invita a contactar por WhatsApp (+${CONTACT_DETAILS.whatsapp}).
         5. Usa un lenguaje claro para el mercado cubano.
       `;
@@ -90,6 +93,7 @@ export const AIAdvisor: React.FC = () => {
   };
 
   const suggestedQuestions = [
+    "¿Son distribuidores oficiales?",
     "¿Qué garantía tienen los equipos?",
     "¿Diferencia entre EcoFlow y Deye?",
     "¿Cómo visito el almacén Tradex?",
@@ -103,7 +107,7 @@ export const AIAdvisor: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-black uppercase tracking-widest mb-4">
             <Sparkles size={16} /> Inteligencia Artificial Novelec
           </div>
-          <p className="text-slate-400 text-lg">Resuelve cualquier duda sobre el inventario o la logística del contenedor al instante.</p>
+          <p className="text-slate-400 text-lg">Consulte con nuestro experto sobre la ventaja competitiva de ser **Proveedor Directo**.</p>
         </div>
 
         <div className="bg-slate-950 border border-slate-800 rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col h-[600px] relative">
@@ -113,12 +117,16 @@ export const AIAdvisor: React.FC = () => {
                 <Bot className="text-white" size={28} />
               </div>
               <div>
-                <h3 className="text-white font-black uppercase tracking-widest text-xs">Soporte Inteligente</h3>
+                <h3 className="text-white font-black uppercase tracking-widest text-xs">Soporte Inteligente Novelec</h3>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Activo - Gemini 3 Flash</span>
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Canal Directo Activo</span>
                 </div>
               </div>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700">
+               <Award size={14} className="text-cyan-400" />
+               <span className="text-[9px] font-black text-white uppercase tracking-widest">Official Partner</span>
             </div>
           </div>
 
@@ -147,7 +155,7 @@ export const AIAdvisor: React.FC = () => {
                     <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                     <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                   </div>
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Consultando Inventario...</span>
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Validando con Fábrica...</span>
                 </div>
               </div>
             )}
@@ -170,7 +178,7 @@ export const AIAdvisor: React.FC = () => {
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Pregunta sobre los equipos, pagos o logística..."
+                placeholder="Pregunta sobre garantía directa, equipos o logística..."
                 className="flex-1 bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors shadow-inner"
               />
               <button 
@@ -186,13 +194,13 @@ export const AIAdvisor: React.FC = () => {
 
         <div className="mt-8 flex flex-wrap justify-center gap-8 opacity-60">
             <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                <ShieldCheck size={14} className="text-emerald-500" /> Datos Oficiales Novelec
+                <ShieldCheck size={14} className="text-emerald-500" /> Canal de Fábrica Oficial
             </div>
             <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                <Zap size={14} className="text-yellow-500" /> Actualizado Feb 2025
+                <Zap size={14} className="text-yellow-500" /> Sin Intermediarios
             </div>
             <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                <Info size={14} className="text-cyan-500" /> Contexto Logístico Cuba
+                <Info size={14} className="text-cyan-500" /> Garantía Directa Novelec
             </div>
         </div>
       </div>

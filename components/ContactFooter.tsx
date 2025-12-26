@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { CONTACT_DETAILS, CONTAINERS } from '../constants';
-import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
+import { Phone, MessageCircle, ArrowRight, Award } from 'lucide-react';
 import { NovelecLogo } from '../App';
 
 export const ContactFooter: React.FC = () => {
@@ -13,10 +13,13 @@ export const ContactFooter: React.FC = () => {
             <div className="bg-white inline-block px-6 py-4 rounded-xl mb-8 shadow-md">
                 <NovelecLogo className="h-16 w-auto" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">Contacto Directo</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <Award className="text-cyan-400 w-5 h-5" />
+              <span className="text-cyan-400 font-black uppercase text-xs tracking-widest">Proveedor Directo EcoFlow & Deye</span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">Contacto Directo con Distribución</h3>
             <p className="text-slate-400 mb-8 leading-relaxed">
-              Novelec facilita la adquisición de estos contenedores para el mercado cubano.
-              Contáctenos para detalles de logística, pago y documentación legal para la importación.
+              Al ser proveedores directos de las marcas **EcoFlow** y **Deye**, Novelec garantiza el mejor precio por contenedor en Cuba, eliminando intermediarios y ofreciendo soporte técnico de primer nivel.
             </p>
             <div className="flex flex-col space-y-5">
                <div className="flex items-center text-slate-300 bg-slate-900/50 p-4 rounded-lg border border-slate-800">
@@ -31,15 +34,16 @@ export const ContactFooter: React.FC = () => {
           </div>
           
           <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-2">Iniciar Proceso de Compra</h3>
+            <h3 className="text-xl font-bold text-white mb-6 border-b border-slate-800 pb-2">Canal Mayorista Oficial</h3>
             {CONTAINERS.map(offer => (
                 <div key={offer.id} className="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-slate-600 transition-colors">
                     <div className="text-center sm:text-left">
                         <div className="font-bold text-white text-lg">Contenedor {offer.brand}</div>
-                        <div className="text-cyan-400 font-mono">€{offer.price.toLocaleString()}</div>
+                        <div className="text-cyan-400 font-mono text-xs mb-1">TRATO DIRECTO DE FÁBRICA</div>
+                        <div className="text-white font-black text-xl">€{offer.price.toLocaleString()}</div>
                     </div>
                     <a 
-                        href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20deseo%20comprar%20el%20contenedor%20${offer.brand}%20por%20${offer.price.toLocaleString()}%20Euros.`}
+                        href={`https://wa.me/${CONTACT_DETAILS.whatsapp}?text=Hola,%20deseo%20comprar%20el%20contenedor%20${offer.brand}%20por%20${offer.price.toLocaleString()}%20Euros.%20Me%20interesa%20la%20garantía%20directa.`}
                         className={`inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-black text-white shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 ${
                              offer.id === 'ecoflow' ? 'bg-cyan-600 hover:bg-cyan-500 shadow-cyan-900/20' : 'bg-yellow-600 hover:bg-yellow-500 shadow-yellow-900/20'
                         }`}
@@ -50,14 +54,14 @@ export const ContactFooter: React.FC = () => {
             ))}
              <div className="bg-slate-800/30 p-4 rounded-lg mt-8 border border-slate-700">
                <p className="text-xs text-slate-300 text-center sm:text-left italic leading-relaxed">
-                  * Nota importante: Estos contenedores están <strong>exentos de aranceles aduanales</strong> bajo la normativa vigente. La mercancía se encuentra en régimen In-Bond en Almacenes Tradex; el comprador solo debe realizar el <strong>proceso de nacionalización</strong> tras la adquisición. El pago se efectúa mediante transferencia bancaria desde el exterior.
+                  * Nota importante: Novelec Cuba es **proveedor directo**, lo que asegura que todos los números de serie son rastreables y cuentan con el respaldo de las marcas originales. Los equipos se encuentran en régimen In-Bond; el comprador solo asume la nacionalización.
               </p>
              </div>
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-slate-900 text-center">
             <p className="text-sm text-slate-600 font-medium">
-              &copy; {new Date().getFullYear()} Novelec Cuba • División de Energías Renovables
+              &copy; {new Date().getFullYear()} Novelec Cuba • Canal de Distribución Directo EcoFlow & Deye
             </p>
         </div>
       </div>

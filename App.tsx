@@ -6,7 +6,7 @@ import { ProductHighlights } from './components/ProductHighlights';
 import { ProfitabilityAnalysis } from './components/ProfitabilityAnalysis';
 import { DownloadCenter } from './components/DownloadCenter';
 import { ContactFooter } from './components/ContactFooter';
-import { Menu, X, MessageCircle, Download } from 'lucide-react';
+import { Menu, X, MessageCircle, Download, Award } from 'lucide-react';
 
 /**
  * NovelecLogo: Reconstrucción vectorial de alta precisión de la identidad de marca Novelec.
@@ -66,12 +66,15 @@ const Navbar = () => {
               <NovelecLogo className="h-full" />
             </div>
             <div className="flex ml-6 flex-col justify-center border-l border-slate-700 pl-6 h-12">
-              <span className="text-white font-bold text-base leading-tight">División Energía</span>
+              <span className="text-white font-bold text-base leading-tight flex items-center gap-2">
+                División Energía
+                <span className="bg-cyan-500/20 text-cyan-400 text-[9px] px-1.5 py-0.5 rounded border border-cyan-500/30 font-black tracking-widest uppercase">Directo</span>
+              </span>
               <span className="text-slate-400 text-xs tracking-wider">MERCADO CUBA</span>
             </div>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-4 lg:space-x-6">
               <a href="#highlights" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Equipos</a>
               <a href="#profitability" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Rentabilidad</a>
@@ -79,13 +82,13 @@ const Navbar = () => {
                 <Download size={14} /> Recursos
               </a>
               <a href="#inventory" className="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-semibold transition-colors">Inventario</a>
-              <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5">
-                Cotizar Contenedor
+              <a href={`https://wa.me/5358183649`} className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-lg shadow-cyan-900/20 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                <MessageCircle size={16} /> Cotizar
               </a>
             </div>
           </div>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button 
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 transition-all"
@@ -96,7 +99,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className={`md:hidden fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`lg:hidden fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeMenu} />
         <div className="absolute right-0 w-3/4 max-w-sm h-full bg-slate-900 shadow-2xl border-l border-slate-800 p-8 flex flex-col">
           <div className="flex items-center justify-between mb-10">
