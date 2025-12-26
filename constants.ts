@@ -313,12 +313,27 @@ export const INVENTORY: InventoryItem[] = [
     sku: "EFDeltaProUltra-BP-US",
     quantity: 20,
     category: "Battery",
-    description: "Unidad de energía masiva de 6kWh diseñada para el sistema Ultra. Construcción robusta con certificación IP54, capaz de soportar condiciones exigentes mientras proporciona un flujo constante de energía para las cargas más pesadas del hogar o taller, como hornos, secadoras y sistemas de climatización central.",
+    description: "Unidad de almacenamiento masivo de 6.144 Wh diseñada para el ecosistema Delta Pro Ultra. Equipada con química LiFePo4 (LFP) y un BMS avanzado, garantiza más de 3500 ciclos de vida al 80%. Su diseño robusto con certificación IP54 la protege contra polvo y salpicaduras, permitiendo su uso en condiciones exigentes. Se integra perfectamente con el inversor Ultra, soportando carga combinada de red y solar de hasta 8.8kW y gestión inteligente vía App con función Storm Guard para preparación automática ante tormentas.",
     specs: {
-      capacity: "6 kWh",
+      capacity: "6.144 kWh",
       weight: "50.7 kg",
-      extras: ["LFP Battery", "IP54"]
+      extras: [
+        "LFP Battery (3.500 ciclos)",
+        "Certificación IP54",
+        "BMS Inteligente Integrado",
+        "Dimensiones: 66 x 45.5 x 20.4 cm",
+        "Temp. de descarga: -10°C a 45°C",
+        "Carga EV hasta 6.900W (vía Inverter)",
+        "Garantía de 5 años",
+        "Modular Plug-and-Play"
+      ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg"
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg",
+    additionalImages: [
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-2.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-3.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-4.jpg",
+      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-5.jpg"
+    ]
   }
 ];
