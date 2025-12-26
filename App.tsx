@@ -108,7 +108,7 @@ const Navbar = () => {
           <div className="flex flex-col space-y-6">
             <a href="#highlights" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Equipos</a>
             <a href="#profitability" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Rentabilidad</a>
-            <a href="#downloads" onClick={closeMenu} className="text-cyan-400 hover:text-white bg-cyan-500/10 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-cyan-500/30">Descargas</a>
+            <a href="#downloads" onClick={closeMenu} className="text-cyan-400 hover:text-white bg-cyan-500/10 px-6 py-4 rounded-xl text-xl font-bold transition-all border border-cyan-500/30 flex items-center gap-2"><Download size={20} /> Recursos</a>
             <a href="#inventory" onClick={closeMenu} className="text-slate-300 hover:text-white px-6 py-4 rounded-xl text-xl font-bold transition-all border border-slate-800">Inventario</a>
             <div className="pt-12 mt-auto">
               <a href={`https://wa.me/5358183649`} className="flex items-center justify-center gap-3 w-full bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-5 rounded-2xl text-xl font-black shadow-2xl shadow-cyan-900/20">
