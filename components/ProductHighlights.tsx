@@ -9,37 +9,36 @@ export const ProductHighlights: React.FC = () => {
   const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
   /**
-   * Datos sincronizados con el nuevo análisis Landed (inc. conversiones y tasas)
-   * y el promedio real de Revolico.
+   * Datos sincronizados con la PRUEBA DE ESTRÉS (Landed USD inc. 20% + 10%)
    */
   const marketData: Record<string, { unitCost: string; pvp: string; profit: string; marketInsight: string; qualityFactor: string }> = {
     'sun10k': {
-      unitCost: "$2,071 USD", // Costo Landed Estimado
-      pvp: "$2,500 - $3,200 USD",
-      profit: "$429 - $1,129 USD",
-      marketInsight: "Equipo crítico para negocios (MIPYMES). La demanda es masiva ante la inestabilidad de la red.",
+      unitCost: "$2,210 USD", // Ajustado por estrés
+      pvp: "$2,800 - $3,500 USD",
+      profit: "$590 - $1,290 USD",
+      marketInsight: "Equipo crítico para negocios. La demanda es masiva ante la inestabilidad de la red.",
       qualityFactor: "Grado industrial. Soporta integración con generadores diésel y tiene vida útil superior a 15 años."
     },
     'seg102': {
-      unitCost: "$2,301 USD", // Costo Landed Estimado
-      pvp: "$2,800 - $3,400 USD",
-      profit: "$499 - $1,099 USD",
-      marketInsight: "La solución de almacenamiento más robusta. Se vende como el complemento indispensable del inversor de 10kW.",
+      unitCost: "$2,450 USD", // Ajustado por estrés
+      pvp: "$3,000 - $3,800 USD",
+      profit: "$550 - $1,350 USD",
+      marketInsight: "La solución de almacenamiento más robusta. Complemento indispensable para el inversor de 10kW.",
       qualityFactor: "Química LiFePO4 con 6000 ciclos. BMS inteligente que protege contra calor extremo."
     },
     'proultra': {
-      unitCost: "$5,822 USD", // Costo Landed Real
+      unitCost: "$5,595 USD", // De la gráfica de estrés
       pvp: "$6,710 USD (Avg)",
-      profit: "$888 USD",
-      marketInsight: "Producto de nicho premium. Es la solución de respaldo más potente disponible actualmente.",
-      qualityFactor: "Tecnología modular. Funcionamiento ultra-silencioso y diseño plug-and-play sin obras."
+      profit: "$1,115 USD",
+      marketInsight: "Producto premium. La solución de respaldo más potente disponible actualmente.",
+      qualityFactor: "Tecnología modular. Funcionamiento ultra-silencioso y diseño plug-and-play."
     },
     'deltapro3': {
-      unitCost: "$1,832 USD", // Costo Landed Real
-      pvp: "$3,125 USD (Avg)",
-      profit: "$1,293 USD",
-      marketInsight: "El equipo con mayor margen por unidad. Su portabilidad lo hace el favorito de familias con alto presupuesto.",
-      qualityFactor: "Carga 0-80% en 1 hora. Baterías LFP seguras y conmutación UPS de grado médico."
+      unitCost: "$1,761 USD", // De la gráfica de estrés
+      pvp: "$3,000 USD (Avg)",
+      profit: "$1,239 USD",
+      marketInsight: "El campeón de la rentabilidad. El equipo favorito de las familias con alto presupuesto.",
+      qualityFactor: "Carga 0-80% en 1 hora. Baterías LFP seguras y conmutación UPS < 10ms."
     }
   };
 
@@ -53,8 +52,8 @@ export const ProductHighlights: React.FC = () => {
           <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tighter uppercase mb-6 leading-tight">
             Equipos <span className="gradient-text">Estrella</span> <br className="sm:hidden" /> del Contenedor
           </h2>
-          <p className="mt-4 max-w-3xl text-xl text-slate-400 mx-auto leading-relaxed">
-            Márgenes de ganancia calculados sobre **Costo Landed USD** (incluye todos los cargos operativos de importación).
+          <p className="mt-4 max-w-3xl text-xl text-slate-400 mx-auto leading-relaxed italic">
+            Márgenes de ganancia calculados bajo <strong>Prueba de Estrés</strong> (+20% Moneda, +10% Tasas).
           </p>
         </div>
 
@@ -94,17 +93,17 @@ export const ProductHighlights: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-700/50 shadow-inner group/pvp relative overflow-hidden flex flex-col justify-between min-h-[140px]">
                       <div>
-                        <div className="flex items-center gap-2 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-3">
-                          <TrendingUp size={14} /> Tu Inversión Landed
+                        <div className="flex items-center gap-2 text-red-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                           Costo Real (Landed)
                         </div>
                         <div className="space-y-3">
                           <div>
-                            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Costo Final USD</span>
+                            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Máximo Proyectado</span>
                             <span className="text-xl font-black text-white">{market.unitCost}</span>
                           </div>
                           <div>
                             <span className="text-[9px] text-cyan-500 font-black uppercase tracking-widest block flex items-center gap-1">
-                              <ShoppingBag size={10} /> Reventa Revolico
+                              <ShoppingBag size={10} /> Reventa Avg
                             </span>
                             <span className="text-xl font-black text-cyan-400">{market.pvp}</span>
                           </div>
@@ -114,11 +113,11 @@ export const ProductHighlights: React.FC = () => {
 
                     <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/20 shadow-inner group/profit flex flex-col justify-center min-h-[140px]">
                       <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-2">
-                        <DollarSign size={14} /> Utilidad Neta
+                        <DollarSign size={14} /> Utilidad Neta Real
                       </div>
                       <div className="text-3xl font-black text-emerald-400">+{market.profit}</div>
                       <div className="text-[9px] text-emerald-500/60 font-bold uppercase tracking-tight mt-2 flex items-center gap-1">
-                        <Check size={10} /> Ganancia real por unidad
+                        <Check size={10} /> Ganancia neta operativa
                       </div>
                     </div>
                   </div>
@@ -126,7 +125,7 @@ export const ProductHighlights: React.FC = () => {
                   <div className="space-y-6 flex-grow">
                     <div className="bg-slate-900/40 p-5 rounded-2xl border border-slate-700/30">
                       <h4 className={`text-[10px] font-black text-${accentColor}-400 uppercase tracking-widest mb-3 flex items-center gap-2`}>
-                        <Globe size={14} /> Mercado Cuba
+                        <Globe size={14} /> Visión del Mercado
                       </h4>
                       <p className="text-xs text-slate-300 leading-relaxed font-medium">
                         {market.marketInsight}
