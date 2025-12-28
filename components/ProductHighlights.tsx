@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { INVENTORY } from '../constants';
-import { CheckCircle, TrendingUp, DollarSign, Star, ShieldCheck, Globe, Info, ShoppingBag, Check } from 'lucide-react';
+import { CheckCircle, TrendingUp, DollarSign, Star, ShieldCheck, Globe, ShoppingBag, Check } from 'lucide-react';
 
 export const ProductHighlights: React.FC = () => {
   // Highlights: Deye 10kW, Deye Battery 10.2, Delta Pro Ultra, Delta Pro 3
@@ -9,37 +9,37 @@ export const ProductHighlights: React.FC = () => {
   const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
   /**
-   * Datos sincronizados con la Hoja de Ruta Financiera (Imagen Proporcionada)
-   * y el análisis de Revolico actualizado.
+   * Datos sincronizados con el nuevo análisis Landed (inc. conversiones y tasas)
+   * y el promedio real de Revolico.
    */
   const marketData: Record<string, { unitCost: string; pvp: string; profit: string; marketInsight: string; qualityFactor: string }> = {
     'sun10k': {
-      unitCost: "$1,598 USD", 
+      unitCost: "$2,071 USD", // Costo Landed Estimado
       pvp: "$2,500 - $3,200 USD",
-      profit: "$900 - $1,600 USD",
-      marketInsight: "Equipo crítico para negocios (MIPYMES) y residencias con alto consumo. La demanda es masiva ante la inestabilidad de la red.",
-      qualityFactor: "Grado industrial con componentes de alta gama. Soporta integración con generadores diésel y tiene una vida útil superior a 15 años."
+      profit: "$429 - $1,129 USD",
+      marketInsight: "Equipo crítico para negocios (MIPYMES). La demanda es masiva ante la inestabilidad de la red.",
+      qualityFactor: "Grado industrial. Soporta integración con generadores diésel y tiene vida útil superior a 15 años."
     },
     'seg102': {
-      unitCost: "$1,776 USD",
-      pvp: "$2,200 - $3,000 USD",
-      profit: "$424 - $1,224 USD",
+      unitCost: "$2,301 USD", // Costo Landed Estimado
+      pvp: "$2,800 - $3,400 USD",
+      profit: "$499 - $1,099 USD",
       marketInsight: "La solución de almacenamiento más robusta. Se vende como el complemento indispensable del inversor de 10kW.",
-      qualityFactor: "Química LiFePO4 (LFP) con 6000 ciclos de carga. BMS inteligente que protege las celdas contra el calor extremo."
+      qualityFactor: "Química LiFePO4 con 6000 ciclos. BMS inteligente que protege contra calor extremo."
     },
     'proultra': {
-      unitCost: "$4,493 USD", // Exacto según Hoja de Ruta
-      pvp: "$6,722 USD (Avg)",
-      profit: "$707 USD", // Según etiqueta verde de la imagen proporcionada
-      marketInsight: "Producto de nicho premium. Es la solución de respaldo más potente disponible actualmente en el inventario Novelec.",
-      qualityFactor: "Tecnología modular revolucionaria. Funcionamiento ultra-silencioso y diseño plug-and-play que no requiere obras."
+      unitCost: "$5,822 USD", // Costo Landed Real
+      pvp: "$6,710 USD (Avg)",
+      profit: "$888 USD",
+      marketInsight: "Producto de nicho premium. Es la solución de respaldo más potente disponible actualmente.",
+      qualityFactor: "Tecnología modular. Funcionamiento ultra-silencioso y diseño plug-and-play sin obras."
     },
     'deltapro3': {
-      unitCost: "$1,414 USD", // Exacto según Hoja de Ruta
-      pvp: "$3,208 USD (Avg)",
-      profit: "$1,586 USD", // Según etiqueta verde de la imagen proporcionada
-      marketInsight: "El equipo con mayor margen por unidad. Su portabilidad y potencia lo hacen el favorito de familias con alto presupuesto.",
-      qualityFactor: "Carga ultra-rápida (0-80% en 1 hora). Baterías LFP seguras para uso en interiores y conmutación UPS de grado médico."
+      unitCost: "$1,832 USD", // Costo Landed Real
+      pvp: "$3,125 USD (Avg)",
+      profit: "$1,293 USD",
+      marketInsight: "El equipo con mayor margen por unidad. Su portabilidad lo hace el favorito de familias con alto presupuesto.",
+      qualityFactor: "Carga 0-80% en 1 hora. Baterías LFP seguras y conmutación UPS de grado médico."
     }
   };
 
@@ -50,11 +50,11 @@ export const ProductHighlights: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest mb-6">
             <Star size={14} fill="currentColor" /> Selección Elite Novelec
           </div>
-          <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tighter uppercase mb-6">
-            Equipos <span className="gradient-text">Estrella</span> del Contenedor
+          <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tighter uppercase mb-6 leading-tight">
+            Equipos <span className="gradient-text">Estrella</span> <br className="sm:hidden" /> del Contenedor
           </h2>
           <p className="mt-4 max-w-3xl text-xl text-slate-400 mx-auto leading-relaxed">
-            Este envío exclusivo agrupa la tecnología más demandada en Cuba. Equipos de alta eficiencia con el mayor retorno de inversión del mercado.
+            Márgenes de ganancia calculados sobre **Costo Landed USD** (incluye todos los cargos operativos de importación).
           </p>
         </div>
 
@@ -76,9 +76,6 @@ export const ProductHighlights: React.FC = () => {
                     <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Stock</span>
                     <span className={`text-2xl font-black text-${accentColor}-400 leading-none mt-1`}>x{item.quantity}</span>
                   </div>
-                  <div className={`absolute top-6 right-6 bg-${accentColor}-500 text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-lg uppercase tracking-widest`}>
-                    {isEcoFlow ? 'EcoFlow' : 'Deye'}
-                  </div>
                 </div>
 
                 <div className="flex-1 p-8 sm:p-10 flex flex-col">
@@ -92,23 +89,22 @@ export const ProductHighlights: React.FC = () => {
                       </span>
                     </div>
                     <h3 className="text-3xl font-black text-white mb-4 leading-tight">{item.modelName}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6 italic">"{item.description.substring(0, 160)}..."</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-700/50 shadow-inner group/pvp relative overflow-hidden flex flex-col justify-between min-h-[140px]">
                       <div>
                         <div className="flex items-center gap-2 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-3">
-                          <TrendingUp size={14} /> Tu Margen de Negocio
+                          <TrendingUp size={14} /> Tu Inversión Landed
                         </div>
                         <div className="space-y-3">
                           <div>
-                            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Precio en el Contenedor</span>
-                            <span className="text-xl font-black text-white">{market.unitCost} <span className="text-xs text-slate-500">/ unidad</span></span>
+                            <span className="text-[9px] text-slate-500 font-black uppercase tracking-widest block">Costo Final USD</span>
+                            <span className="text-xl font-black text-white">{market.unitCost}</span>
                           </div>
                           <div>
                             <span className="text-[9px] text-cyan-500 font-black uppercase tracking-widest block flex items-center gap-1">
-                              <ShoppingBag size={10} /> Reventa en Revolico (Avg)
+                              <ShoppingBag size={10} /> Reventa Revolico
                             </span>
                             <span className="text-xl font-black text-cyan-400">{market.pvp}</span>
                           </div>
@@ -118,11 +114,11 @@ export const ProductHighlights: React.FC = () => {
 
                     <div className="bg-emerald-500/10 p-5 rounded-2xl border border-emerald-500/20 shadow-inner group/profit flex flex-col justify-center min-h-[140px]">
                       <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-2">
-                        <DollarSign size={14} /> Ganancia Limpia
+                        <DollarSign size={14} /> Utilidad Neta
                       </div>
                       <div className="text-3xl font-black text-emerald-400">+{market.profit}</div>
                       <div className="text-[9px] text-emerald-500/60 font-bold uppercase tracking-tight mt-2 flex items-center gap-1">
-                        <Check size={10} /> Margen neto por unidad
+                        <Check size={10} /> Ganancia real por unidad
                       </div>
                     </div>
                   </div>
@@ -130,19 +126,10 @@ export const ProductHighlights: React.FC = () => {
                   <div className="space-y-6 flex-grow">
                     <div className="bg-slate-900/40 p-5 rounded-2xl border border-slate-700/30">
                       <h4 className={`text-[10px] font-black text-${accentColor}-400 uppercase tracking-widest mb-3 flex items-center gap-2`}>
-                        <Globe size={14} /> Contexto Mercado Cuba
+                        <Globe size={14} /> Mercado Cuba
                       </h4>
                       <p className="text-xs text-slate-300 leading-relaxed font-medium">
                         {market.marketInsight}
-                      </p>
-                    </div>
-
-                    <div className="bg-slate-900/40 p-5 rounded-2xl border border-slate-700/30">
-                      <h4 className="text-[10px] font-black text-white uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <Star size={14} className="text-yellow-500" /> ¿Por qué es Alta Calidad?
-                      </h4>
-                      <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                        {market.qualityFactor}
                       </p>
                     </div>
 
