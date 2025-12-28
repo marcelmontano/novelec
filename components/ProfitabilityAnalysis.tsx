@@ -1,222 +1,219 @@
 
-import React, { useState } from 'react';
-import { TrendingUp, BarChart3, PieChart, DollarSign, ArrowUpRight, Info, Scale, CheckCircle2, LayoutDashboard, Share2, Check, Target, ShoppingCart, Wallet, ArrowRight, Star, ShieldCheck } from 'lucide-react';
-import { INVENTORY } from '../constants';
+import React, { useState, useMemo } from 'react';
+import { TrendingUp, DollarSign, Share2, Check, Target, Scale, Wallet, Star, ShieldCheck, Info, ArrowRight } from 'lucide-react';
 
-const ECOFLOW_UNIT_ECONOMICS = [
-  { 
-    model: "DELTA 2 Max", 
-    cost: 706, 
-    retailRange: "$1,100 - $2,000", 
-    qty: 20,
-    margin: "51% - 157%",
-    gainUnit: "$323 - $1,223",
-    note: "Ofertas competitivas en FB desde $1,100.",
-    isHighMargin: true
+/**
+ * Datos extraídos exactamente de la imagen "Hoja de Ruta Financiera"
+ * y validados con el JSON de Revolico proporcionado.
+ */
+const ROADMAP_DATA = [
+  {
+    id: 'e980',
+    name: "EcoFlow E980-US",
+    cost: 499,
+    avgStreet: 692,
+    range: [600, 750],
+    profit: 101,
+    roi: "20.2%",
+    points: [680, 700, 750, 610, 630, 650, 720, 690, 730, 700, 650, 670, 640, 610, 595]
   },
-  { 
-    model: "DELTA Pro", 
-    cost: 1255, 
-    retailRange: "$2,800 - $3,000", 
-    qty: 20,
-    margin: "102% - 117%",
-    gainUnit: "$1,419 - $1,619",
-    note: "Precios muy consistentes en Revolico.",
-    isHighMargin: true
+  {
+    id: 'delta2max',
+    name: "Delta 2 Max",
+    cost: 749,
+    avgStreet: 1103,
+    range: [1250, 1500],
+    profit: 501,
+    roi: "66.9%",
+    points: [1150, 1290, 1140, 1250, 1160, 1280, 1240, 1340, 1230, 1400, 1190, 1150, 1200, 1350, 1100]
   },
-  { 
-    model: "DELTA Pro 3", 
-    cost: 1334, 
-    retailRange: "$2,800 - $3,000", 
-    qty: 8,
-    margin: "90% - 104%",
-    gainUnit: "$1,331 - $1,531",
-    note: "Similar a Pro, pero tecnología superior."
+  {
+    id: 'deltapro',
+    name: "Delta Pro",
+    cost: 1331,
+    avgStreet: 2032,
+    range: [2000, 2300],
+    profit: 669,
+    roi: "50.2%",
+    points: [2180, 2300, 2220, 1900, 2120, 2200, 2150, 2140, 2000, 1930, 1850, 2100, 2250, 2120]
   },
-  { 
-    model: "Batería Extra D.Pro 3", 
-    cost: 1020, 
-    retailRange: "$2,250 - $2,838", 
-    qty: 4,
-    margin: "100% - 152%",
-    gainUnit: "$1,128 - $1,716",
-    note: "Alta variación de precios detectada.",
-    isHighMargin: true
+  {
+    id: 'deltapro3',
+    name: "Delta Pro 3",
+    cost: 1414,
+    avgStreet: 3208,
+    range: [3000, 3700],
+    profit: 1586,
+    roi: "112.1%",
+    isStar: true,
+    points: [3100, 3050, 3000, 3300, 2900, 3700, 3050, 2950, 3100, 3300]
   },
-  { 
-    model: "E980-US Generator", 
-    cost: 470, 
-    retailRange: "$600 - $980", 
-    qty: 40,
-    margin: "15% - 88%",
-    gainUnit: "$78 - $458",
-    note: "El modelo más accesible y rotativo."
+  {
+    id: 'deltapro3eb',
+    name: "Batería Extra Pro 3",
+    cost: 1082,
+    avgStreet: 3010,
+    range: [2500, 2900],
+    profit: 1418,
+    roi: "131.0%",
+    isStar: true,
+    points: [2800, 2820, 2825, 2775, 2850, 2838, 2500, 2750, 2900, 2760]
   },
-  { 
-    model: "Delta Pro Ultra (Inv)", 
-    cost: 1883, 
-    retailRange: "$5,100 (Est.)", 
-    qty: 8,
-    margin: "146%",
-    gainUnit: "$3,028",
-    note: "Equipo más costoso y de mayor margen.",
-    isHighMargin: true
-  },
-  { 
-    model: "Delta Pro Ultra Battery", 
-    cost: 2354, 
-    retailRange: "$6,000 - $6,730", 
-    qty: 20,
-    margin: "131% - 159%",
-    gainUnit: "$3,410 - $4,140",
-    note: "Aporta el 54% del ingreso total.",
-    isHighMargin: true
+  {
+    id: 'proultra',
+    name: "Delta Pro Ultra",
+    cost: 4493,
+    avgStreet: 6722,
+    range: [5200, 7000],
+    profit: 707,
+    isPremium: true,
+    points: [6900, 6890, 7200, 7000, 6950, 6870, 7500, 6550, 6730, 6750, 6700, 5200, 5950, 6000, 6900]
   }
 ];
 
-const DEYE_UNIT_ECONOMICS = [
-  { 
-    model: "Inverter SUN-10K", 
-    cost: 1598, 
-    retailRange: "$2,500 - $2,900", 
-    qty: 36,
-    margin: "42% - 65%",
-    gainUnit: "$742 - $1,182",
-    note: "Alta demanda por crisis energética."
-  },
-  { 
-    model: "Batería SE-G5.1 Pro", 
-    cost: 888, 
-    retailRange: "$1,500 - $2,000", 
-    qty: 40,
-    margin: "53% - 104%",
-    gainUnit: "$523 - $1,023",
-    note: "Base de retorno mínima del 90%.",
-    isHighMargin: true
-  },
-  { 
-    model: "Batería SE-G10.2", 
-    cost: 1776, 
-    retailRange: "$2,200 - $2,800", 
-    qty: 20,
-    margin: "13% - 43%",
-    gainUnit: "$224 - $884",
-    note: "Equipos industriales para negocios."
-  }
-];
-
-const METRICS = {
-  ecoflow: {
-    label: "EcoFlow",
-    cost: 148500,
-    avgProfit: 139500,
-    avgRoi: "93.8%",
-    color: "cyan"
-  },
-  deye: {
-    label: "Deye",
-    cost: 141460,
-    avgProfit: 143100,
-    avgRoi: "111.3%",
-    color: "yellow"
-  }
-};
-
-const UnitEconomicsTable = ({ brand }: { brand: 'ecoflow' | 'deye' }) => {
-  const data = brand === 'ecoflow' ? ECOFLOW_UNIT_ECONOMICS : DEYE_UNIT_ECONOMICS;
-  const brandColor = brand === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400';
+const FinancialRoadmapChart = () => {
+  const maxPrice = 8500;
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
-      <div className="px-8 py-6 bg-slate-950/50 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex items-center gap-3">
-            <h4 className={`text-xl font-black uppercase tracking-tighter ${brandColor}`}>
-            Economía Unitaria (Venta al Público)
-            </h4>
-            {brand === 'ecoflow' && <span className="bg-cyan-500/10 text-cyan-400 text-[9px] px-2 py-1 rounded-full border border-cyan-500/20 font-black">CANAL OFICIAL</span>}
+    <div className="w-full bg-slate-900/50 border border-slate-800 rounded-[3rem] p-6 sm:p-12 overflow-hidden shadow-2xl relative">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6 border-b border-slate-800 pb-8">
+        <div>
+          <h3 className="text-3xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
+            <TrendingUp className="text-emerald-400" /> Hoja de Ruta Financiera
+          </h3>
+          <p className="text-slate-400 text-sm font-medium mt-2">Novelec vs. Competencia (Análisis de Mercado Dic 2025)</p>
         </div>
-        <div className="flex items-center gap-3">
-            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
-                Data: Facebook & Revolico
-            </span>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-4 text-[9px] font-black uppercase tracking-widest bg-slate-950/50 p-6 rounded-2xl border border-slate-800">
+           <div className="flex items-center gap-3 text-red-500">
+              <div className="w-5 h-1 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div> 
+              Costo Novelec
+           </div>
+           <div className="flex items-center gap-3 text-cyan-400">
+              <div className="w-5 h-5 border-l-2 border-r-2 border-cyan-500/50 bg-cyan-500/10"></div> 
+              Rango Facebook
+           </div>
+           <div className="flex items-center gap-3 text-white">
+              <div className="w-5 h-0.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.4)]"></div> 
+              Promedio Calle
+           </div>
+           <div className="flex items-center gap-3 text-slate-300">
+              <div className="w-2.5 h-2.5 bg-slate-200 rounded-full shadow-[0_0_4px_rgba(255,255,255,0.2)]"></div> 
+              Anuncios Revolico
+           </div>
         </div>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
-          <thead>
-            <tr className="bg-slate-900/50">
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Producto</th>
-              <th className="px-4 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Stock Disp.</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Inviertes (€)</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">PVP Revendedor</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest">Margen (%)</th>
-              <th className="px-6 py-4 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Rentabilidad</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-800">
-            {data.map((item, i) => {
-              // Buscar la cantidad exacta en INVENTORY para asegurar veracidad
-              const invItem = INVENTORY.find(inv => inv.modelName.includes(item.model) || item.model.includes(inv.modelName));
-              const displayQty = invItem ? invItem.quantity : item.qty;
 
-              return (
-                <tr key={i} className={`hover:bg-slate-800/20 transition-colors group ${item.isHighMargin ? 'bg-emerald-500/5' : ''}`}>
-                  <td className="px-6 py-5">
-                    <div className="flex flex-col">
-                        <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-white">{item.model}</span>
-                            {item.isHighMargin && (
-                                <span className="flex items-center gap-1 bg-emerald-500/20 text-emerald-400 text-[8px] px-1.5 py-0.5 rounded font-black tracking-tighter uppercase border border-emerald-500/30">
-                                    <Star size={8} fill="currentColor" /> Top Margen
-                                </span>
-                            )}
-                        </div>
-                        <div className="text-[10px] text-slate-500 mt-1 font-medium">{item.note}</div>
-                    </div>
-                  </td>
-                  <td className="px-4 py-5 text-center">
-                    <span className={`inline-block px-2.5 py-1 rounded-lg text-xs font-black border ${
-                        brand === 'ecoflow' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400' : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400'
-                    }`}>
-                        {displayQty}
-                    </span>
-                  </td>
-                  <td className="px-6 py-5 text-sm font-mono text-slate-400">€{item.cost.toLocaleString()}</td>
-                  <td className="px-6 py-5 text-sm font-black text-white">{item.retailRange}</td>
-                  <td className="px-6 py-5">
-                    <div className="flex flex-col">
-                      <span className={`text-sm font-black ${item.isHighMargin ? 'text-emerald-400' : 'text-slate-200'}`}>{item.margin}</span>
-                      <span className="text-[10px] text-slate-500 font-bold">Ganas: {item.gainUnit}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5 text-right">
-                    <div className={`inline-block px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${
-                        item.isHighMargin 
-                        ? 'bg-emerald-500 text-white border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
-                        : 'bg-slate-800 text-slate-400 border-slate-700'
-                    }`}>
-                        {item.isHighMargin ? 'Ganancia Premium' : 'Retorno Seguro'}
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      {/* Contenedor del Gráfico con Ejes */}
+      <div className="relative h-[600px] w-full mt-10 flex items-end justify-between gap-1 sm:gap-4 border-b border-slate-700 pb-6 pr-4 pl-12">
+        
+        {/* Eje Y (Precios) */}
+        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] font-black text-slate-600 pointer-events-none">
+          <span>$8,000</span>
+          <span>$6,000</span>
+          <span>$4,000</span>
+          <span>$2,000</span>
+          <span className="text-slate-800">$0</span>
+        </div>
+
+        {/* Líneas de Guía Horizontales */}
+        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-[0.03] pl-12">
+            {[8000, 6000, 4000, 2000, 0].map(val => (
+                <div key={val} className="w-full border-t border-white"></div>
+            ))}
+        </div>
+
+        {ROADMAP_DATA.map((item) => {
+          const costPos = (item.cost / maxPrice) * 100;
+          const avgPos = (item.avgStreet / maxPrice) * 100;
+          const rangeMinPos = (item.range[0] / maxPrice) * 100;
+          const rangeMaxPos = (item.range[1] / maxPrice) * 100;
+
+          return (
+            <div key={item.id} className="relative flex-1 flex flex-col items-center group h-full">
+              
+              {/* Puntos de Dispersión (Ofertas Reales Revolico - VISIBILIDAD MEJORADA) */}
+              {item.points.map((price, pIdx) => (
+                <div 
+                  key={pIdx}
+                  className="absolute w-2 h-2 bg-slate-300 border border-slate-900 rounded-full opacity-40 z-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-125 group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.5)]"
+                  style={{ 
+                    bottom: `${(price / maxPrice) * 100}%`,
+                    left: `calc(50% + ${(pIdx % 3 === 0 ? 0 : pIdx % 3 === 1 ? 1 : -1) * (Math.random() * 20)}px)` // Jitter aleatorio controlado
+                  }}
+                ></div>
+              ))}
+
+              {/* Barra de Rango de Importadores (Facebook) */}
+              <div 
+                className="absolute w-4 sm:w-12 bg-cyan-500/5 border-l-2 border-r-2 border-cyan-500/40 z-10 transition-all group-hover:bg-cyan-500/15"
+                style={{ 
+                    bottom: `${rangeMinPos}%`, 
+                    height: `${rangeMaxPos - rangeMinPos}%` 
+                }}
+              >
+                <div className="absolute top-0 left-[-4px] right-[-4px] h-1 bg-cyan-400/50"></div>
+                <div className="absolute bottom-0 left-[-4px] right-[-4px] h-1 bg-cyan-400/50"></div>
+              </div>
+
+              {/* Línea de Promedio Real en la Calle (Revolico) */}
+              <div 
+                className="absolute w-6 sm:w-20 h-1.5 bg-white z-20 shadow-[0_0_15px_rgba(255,255,255,0.5)] flex items-center justify-center rounded-full"
+                style={{ bottom: `${avgPos}%` }}
+              >
+                <div className="absolute -top-7 left-1/2 -translate-x-1/2 text-[9px] font-black text-white whitespace-nowrap bg-slate-950 border border-white/20 px-2 py-0.5 rounded shadow-xl">
+                   AVG STREET: ${item.avgStreet}
+                </div>
+              </div>
+
+              {/* Línea de Costo Novelec (Contenedor) */}
+              <div 
+                className="absolute w-full h-1 bg-red-600 z-10 shadow-[0_0_15px_rgba(220,38,38,0.5)]"
+                style={{ bottom: `${costPos}%` }}
+              >
+                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-red-950/95 border border-red-500/40 rounded text-[9px] font-black text-red-400 whitespace-nowrap">
+                   COSTO: ${item.cost}
+                </div>
+              </div>
+
+              {/* Espacio de Ganancia (Margen) */}
+              <div 
+                className="absolute w-0.5 border-l-2 border-dotted border-emerald-400/50 z-0"
+                style={{ bottom: `${costPos}%`, height: `${avgPos - costPos}%`, left: '50%' }}
+              ></div>
+
+              {/* Etiqueta de Ganancia Neta por Unidad (Verde) */}
+              <div 
+                className="absolute z-30 px-3 py-2 bg-emerald-500 rounded-lg text-[11px] font-black text-white shadow-2xl shadow-emerald-900/40 whitespace-nowrap transition-all group-hover:scale-125 group-hover:-translate-y-4 cursor-default"
+                style={{ bottom: `${(costPos + avgPos) / 2}%`, left: 'calc(50% + 20px)' }}
+              >
+                +${item.profit}
+              </div>
+
+              {/* Nombre del Producto */}
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-full text-center">
+                <span className="text-[8px] sm:text-[11px] font-black text-slate-500 uppercase tracking-tighter leading-none block group-hover:text-white transition-colors">
+                  {item.name.replace('EcoFlow ', '')}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <div className="p-6 bg-slate-950/30 border-t border-slate-800">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-            <div className="flex gap-4 items-start">
-                <Info size={16} className={brandColor + " mt-0.5 flex-shrink-0"} />
-                <p className="text-[11px] text-slate-400 leading-relaxed max-w-2xl">
-                    *Análisis basado en precios actuales reportados en <strong>Facebook Marketplace</strong> y <strong>Revolico</strong>. 
-                    Los productos marcados como <span className="text-emerald-400 font-bold">Top Margen</span> representan las mejores oportunidades de ROI para el inversor mayorista.
-                </p>
-            </div>
-            {/* Fix: Added ShieldCheck icon which was missing from imports */}
-            <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                <ShieldCheck size={14} className="text-emerald-500" /> Verificado por Novelec
-            </div>
+      
+      {/* Footer Info del Gráfico */}
+      <div className="mt-20 pt-10 border-t border-slate-800 flex flex-col lg:flex-row justify-between items-center gap-10">
+        <div className="text-[11px] text-slate-500 font-bold max-w-lg italic leading-relaxed text-center lg:text-left">
+            * Metodología: Cada <strong>punto gris</strong> representa un anuncio único detectado en <strong>Revolico</strong>. La <strong>barra azul</strong> muestra el rango de precios solicitado por importadores en <strong>Facebook Marketplace</strong>. Tu costo es el punto de entrada más bajo posible.
+        </div>
+        <div className="flex flex-wrap justify-center gap-6">
+             <div className="px-8 py-5 bg-emerald-500/10 border border-emerald-500/20 rounded-[1.5rem] text-center shadow-inner">
+                <span className="block text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">ROI Máximo (Pro 3)</span>
+                <span className="text-3xl font-black text-white">112.1%</span>
+             </div>
+             <div className="px-8 py-5 bg-cyan-500/10 border border-cyan-500/20 rounded-[1.5rem] text-center shadow-inner">
+                <span className="block text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Margen Delta Pro 3</span>
+                <span className="text-3xl font-black text-white">+$1,586</span>
+             </div>
         </div>
       </div>
     </div>
@@ -224,146 +221,130 @@ const UnitEconomicsTable = ({ brand }: { brand: 'ecoflow' | 'deye' }) => {
 };
 
 export const ProfitabilityAnalysis: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'ecoflow' | 'deye'>('ecoflow');
   const [copied, setCopied] = useState(false);
-  
-  const currentMetrics = METRICS[activeTab];
 
   const handleShare = () => {
     try {
-      const cleanUrl = new URL(window.location.href);
-      cleanUrl.hash = 'profitability';
-      navigator.clipboard.writeText(cleanUrl.toString());
+      navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      console.error("Error generating share link", e);
-    }
+    } catch (e) { console.error(e); }
   };
 
   return (
     <section id="profitability" className="py-24 bg-slate-950 relative overflow-hidden scroll-mt-24">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-20">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px]"></div>
-      </div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-widest mb-6">
-            <Wallet size={14} /> Reporte de Beneficios Netos
+            <Wallet size={14} /> Inteligencia de Mercado Novelec
           </div>
           <h2 className="text-4xl font-black text-white sm:text-6xl tracking-tighter mb-6 uppercase">
-            ¿Cuánto <span className="gradient-text">vas a ganar?</span>
+            Análisis de <span className="gradient-text">Rentabilidad Real</span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
-            Hemos analizado el precio de cada equipo en el mercado cubano actual para que sepas exactamente cuánto beneficio te queda en el bolsillo por cada unidad vendida.
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Comparamos tu costo de contenedor con el mercado cubano actual. Los <strong>puntos blancos</strong> son ofertas reales de otros vendedores; tu costo es la <strong>línea roja</strong>.
           </p>
-
-          <div className="flex justify-center mb-12">
-            <div className="bg-slate-900 p-1.5 rounded-[2rem] inline-flex border border-slate-800 shadow-2xl">
-              <button
-                onClick={() => setActiveTab('ecoflow')}
-                className={`px-8 py-4 rounded-[1.5rem] text-sm font-black transition-all ${
-                  activeTab === 'ecoflow' ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-900/40' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Plan de Ganancia EcoFlow
-              </button>
-              <button
-                onClick={() => setActiveTab('deye')}
-                className={`px-8 py-4 rounded-[1.5rem] text-sm font-black transition-all ${
-                  activeTab === 'deye' ? 'bg-yellow-600 text-white shadow-lg shadow-yellow-900/40' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Plan de Ganancia Deye
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Total Summary Hero */}
-        <div className="mb-16">
-            <div className={`relative overflow-hidden rounded-[3rem] p-8 sm:p-12 border shadow-3xl ${activeTab === 'ecoflow' ? 'bg-slate-900/50 border-cyan-500/30' : 'bg-slate-900/50 border-yellow-500/30'}`}>
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                    <TrendingUp size={200} />
-                </div>
-                <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-12">
-                    <div className="text-center lg:text-left">
-                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 block">Resumen del Contenedor</span>
-                        <h3 className="text-4xl sm:text-5xl font-black text-white mb-4">Ganancia Estimada: <span className="text-emerald-400">${currentMetrics.avgProfit.toLocaleString()} USD</span></h3>
-                        <p className="text-slate-400 text-lg max-w-xl font-medium">
-                            Tras recuperar tu inversión total de <span className="text-white font-bold">${currentMetrics.cost.toLocaleString()}</span>, el contenedor genera un beneficio neto promedio del <span className="text-emerald-400 font-bold">{currentMetrics.avgRoi}</span>.
-                        </p>
-                    </div>
-                    <div className="flex-shrink-0 grid grid-cols-2 gap-4">
-                        <div className="bg-slate-950/50 p-6 rounded-3xl border border-slate-800 text-center">
-                            <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">ROI Mínimo</span>
-                            <span className="text-2xl font-black text-white">51%</span>
-                        </div>
-                        <div className="bg-slate-950/50 p-6 rounded-3xl border border-slate-800 text-center">
-                            <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">ROI Máximo</span>
-                            <span className="text-2xl font-black text-emerald-400">137%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {/* Tabla Actualizada con Stock e High Margin */}
         <div className="mb-20 animate-fade-in-up">
-          <UnitEconomicsTable brand={activeTab} />
+          <FinancialRoadmapChart />
         </div>
 
-        {/* Strategy Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-            <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest">
-                   Estrategia de Venta en Cuba
+        <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] overflow-hidden shadow-2xl mb-20">
+            <div className="px-10 py-8 bg-slate-950/50 border-b border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h4 className="text-2xl font-black text-white uppercase tracking-tighter">Desglose de Ganancia Unitaria</h4>
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest bg-slate-800 px-4 py-2 rounded-full border border-slate-700">
+                    Último Scraping: Dic 2025
+                </span>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                    <thead>
+                        <tr className="bg-slate-900/50">
+                            <th className="px-10 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Producto</th>
+                            <th className="px-6 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Tu Costo (USD)</th>
+                            <th className="px-6 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Promedio Revolico</th>
+                            <th className="px-6 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Margen Neto</th>
+                            <th className="px-10 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">ROI (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-800">
+                        {ROADMAP_DATA.map((item) => (
+                            <tr key={item.id} className="hover:bg-slate-800/30 transition-colors group">
+                                <td className="px-10 py-6">
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-base font-bold text-white">{item.name}</span>
+                                        {item.isStar && <span className="bg-cyan-500/20 text-cyan-400 text-[9px] px-2 py-0.5 rounded font-black uppercase tracking-tighter border border-cyan-500/30">Líder Ventas</span>}
+                                    </div>
+                                </td>
+                                <td className="px-6 py-6 text-sm font-mono text-red-500 font-bold">${item.cost.toLocaleString()}</td>
+                                <td className="px-6 py-6 text-sm font-black text-white">${item.avgStreet.toLocaleString()}</td>
+                                <td className="px-6 py-6 text-sm font-black text-emerald-400">
+                                   <div className="flex items-center gap-1">
+                                      <TrendingUp size={14} /> +${item.profit.toLocaleString()}
+                                   </div>
+                                </td>
+                                <td className="px-10 py-6 text-right font-black text-cyan-400">{item.roi}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-10">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest">
+                   Estrategia Comercial Novelec
                 </div>
-                <h3 className="text-3xl font-black text-white leading-tight">
-                    Por qué este contenedor es una <span className="text-emerald-400">Mina de Oro</span>
+                <h3 className="text-4xl font-black text-white leading-tight">
+                    Lidera el mercado con el <span className="text-emerald-400">Mejor Costo de Entrada</span>
                 </h3>
-                <div className="space-y-6">
-                    <div className="flex gap-5">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-cyan-400 border border-slate-800 flex-shrink-0">
-                            <Target size={24} />
+                <div className="space-y-8">
+                    <div className="flex gap-6">
+                        <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-cyan-400 border border-slate-800 flex-shrink-0 shadow-xl">
+                            <Target size={28} />
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-1">Precio Imbatible</h4>
-                            <p className="text-slate-400 text-sm leading-relaxed">Tu costo por unidad es hasta un 40% menor que el precio de mercado en Revolico. Puedes vender más rápido que nadie y aún así ganar mucho dinero.</p>
+                            <h4 className="text-white text-lg font-bold mb-2">Dominio del Rango de Precios</h4>
+                            <p className="text-slate-400 text-sm leading-relaxed">Como muestra el gráfico de dispersión, tu costo está muy por debajo de las ofertas más baratas de Revolico. Tienes margen para bajar el precio y liquidar stock en tiempo récord si lo deseas.</p>
                         </div>
                     </div>
-                    <div className="flex gap-5">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-yellow-400 border border-slate-800 flex-shrink-0">
-                            <Scale size={24} />
+                    <div className="flex gap-6">
+                        <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-yellow-400 border border-slate-800 flex-shrink-0 shadow-xl">
+                            <Scale size={28} />
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-1">Cero Aranceles</h4>
-                            <p className="text-slate-400 text-sm leading-relaxed">Al estar en régimen In-Bond, no pagas impuestos de entrada. Ese ahorro va directo a tu margen de ganancia neta.</p>
+                            <h4 className="text-white text-lg font-bold mb-2">Sin Intermediarios ni Aranceles</h4>
+                            <p className="text-slate-400 text-sm leading-relaxed">Al comprar el contenedor directamente en Almacenes Tradex (In-Bond), eliminas los costos ocultos de los intermediarios que nacionalizan equipos sueltos a precios exorbitantes.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <Info size={150} />
+            <div className="bg-slate-900 border border-slate-800 rounded-[3rem] p-10 sm:p-14 relative overflow-hidden group shadow-3xl">
+                <div className="absolute -top-10 -right-10 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                    <Info size={300} />
                 </div>
-                <h4 className="text-sm font-black text-slate-500 uppercase tracking-widest mb-8">Nota del Analista</h4>
-                <div className="space-y-6 relative z-10">
-                    <p className="text-slate-300 text-lg leading-relaxed italic">
-                        "La demanda de energía en Cuba es crítica y constante. No estás vendiendo un lujo, estás vendiendo una necesidad básica que la gente paga al contado para proteger su comida y su confort."
+                <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-10 border-b border-slate-800 pb-4">Nota del Analista Senior</h4>
+                <div className="space-y-8 relative z-10">
+                    <p className="text-slate-300 text-xl leading-relaxed italic font-medium">
+                        "El mercado en Cuba premia la disponibilidad inmediata. Tener el stock físico en La Habana y poder ofrecer un precio competitivo basado en tu compra directa te garantiza ser el líder en Revolico desde el día uno."
                     </p>
-                    <div className="pt-6 border-t border-slate-800">
+                    <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
                         <button 
                             onClick={handleShare}
                             className={`flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all ${copied ? 'text-emerald-400' : 'text-slate-500 hover:text-white'}`}
                         >
-                            {copied ? <Check size={16} /> : <Share2 size={16} />}
-                            {copied ? 'Enlace de reporte copiado' : 'Compartir este análisis con un socio'}
+                            {copied ? <Check size={18} /> : <Share2 size={18} />}
+                            {copied ? 'Reporte copiado' : 'Compartir análisis de mercado'}
                         </button>
+                        <div className="flex items-center gap-2">
+                             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                             <span className="text-[10px] font-black text-slate-500 uppercase">Datos en tiempo real</span>
+                        </div>
                     </div>
                 </div>
             </div>

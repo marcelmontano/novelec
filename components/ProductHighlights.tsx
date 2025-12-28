@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { INVENTORY } from '../constants';
-// Added 'Check' to the imports from lucide-react
-import { Zap, Battery, Cpu, CheckCircle, Check, TrendingUp, DollarSign, Star, ShieldCheck, Globe, Info, ShoppingBag } from 'lucide-react';
+import { CheckCircle, TrendingUp, DollarSign, Star, ShieldCheck, Globe, Info, ShoppingBag, Check } from 'lucide-react';
 
 export const ProductHighlights: React.FC = () => {
   // Highlights: Deye 10kW, Deye Battery 10.2, Delta Pro Ultra, Delta Pro 3
@@ -10,37 +9,36 @@ export const ProductHighlights: React.FC = () => {
   const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
   /**
-   * Datos de mercado alineados con ProfitabilityAnalysis.tsx
-   * Costo: Precio unitario al comprar el contenedor completo (en Euros).
-   * PVP: Precio de venta estimado en el mercado informal de Cuba (en USD).
+   * Datos sincronizados con la Hoja de Ruta Financiera (Imagen Proporcionada)
+   * y el análisis de Revolico actualizado.
    */
   const marketData: Record<string, { unitCost: string; pvp: string; profit: string; marketInsight: string; qualityFactor: string }> = {
     'sun10k': {
-      unitCost: "€1,598",
+      unitCost: "$1,598 USD", 
       pvp: "$2,500 - $3,200 USD",
-      profit: "$900 - $1,500 USD",
-      marketInsight: "Equipo crítico para negocios (MIPYMES) y residencias con alto consumo de climatización. La demanda es masiva ante la inestabilidad de la red.",
+      profit: "$900 - $1,600 USD",
+      marketInsight: "Equipo crítico para negocios (MIPYMES) y residencias con alto consumo. La demanda es masiva ante la inestabilidad de la red.",
       qualityFactor: "Grado industrial con componentes de alta gama. Soporta integración con generadores diésel y tiene una vida útil superior a 15 años."
     },
     'seg102': {
-      unitCost: "€1,776",
+      unitCost: "$1,776 USD",
       pvp: "$2,200 - $3,000 USD",
-      profit: "$500 - $1,200 USD",
-      marketInsight: "La solución de almacenamiento más robusta del mercado. Se vende como el complemento indispensable del inversor de 10kW.",
-      qualityFactor: "Química LiFePO4 (LFP) con 6000 ciclos de carga. BMS inteligente que protege las celdas contra el calor extremo de Cuba."
+      profit: "$424 - $1,224 USD",
+      marketInsight: "La solución de almacenamiento más robusta. Se vende como el complemento indispensable del inversor de 10kW.",
+      qualityFactor: "Química LiFePO4 (LFP) con 6000 ciclos de carga. BMS inteligente que protege las celdas contra el calor extremo."
     },
     'proultra': {
-      unitCost: "€1,883",
-      pvp: "$5,200 - $6,000 USD",
-      profit: "$3,000+ USD",
-      marketInsight: "Producto de nicho premium. Es el margen de ganancia más alto por unidad del contenedor, ideal para clientes corporativos o embajadas.",
-      qualityFactor: "Tecnología modular revolucionaria. Funcionamiento ultra-silencioso y diseño plug-and-play que no requiere instalaciones complejas."
+      unitCost: "$4,493 USD", // Exacto según Hoja de Ruta
+      pvp: "$6,722 USD (Avg)",
+      profit: "$707 USD", // Según etiqueta verde de la imagen proporcionada
+      marketInsight: "Producto de nicho premium. Es la solución de respaldo más potente disponible actualmente en el inventario Novelec.",
+      qualityFactor: "Tecnología modular revolucionaria. Funcionamiento ultra-silencioso y diseño plug-and-play que no requiere obras."
     },
     'deltapro3': {
-      unitCost: "€1,334",
-      pvp: "$2,800 - $3,500 USD",
-      profit: "$1,400 - $2,100 USD",
-      marketInsight: "El equipo más buscado en Revolico. Su portabilidad y potencia lo hacen el favorito de familias que buscan respaldo inmediato sin obras.",
+      unitCost: "$1,414 USD", // Exacto según Hoja de Ruta
+      pvp: "$3,208 USD (Avg)",
+      profit: "$1,586 USD", // Según etiqueta verde de la imagen proporcionada
+      marketInsight: "El equipo con mayor margen por unidad. Su portabilidad y potencia lo hacen el favorito de familias con alto presupuesto.",
       qualityFactor: "Carga ultra-rápida (0-80% en 1 hora). Baterías LFP seguras para uso en interiores y conmutación UPS de grado médico."
     }
   };
@@ -97,7 +95,6 @@ export const ProductHighlights: React.FC = () => {
                     <p className="text-slate-400 text-sm leading-relaxed mb-6 italic">"{item.description.substring(0, 160)}..."</p>
                   </div>
 
-                  {/* Sección de Rentabilidad Detallada: Costo vs Reventa */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-700/50 shadow-inner group/pvp relative overflow-hidden flex flex-col justify-between min-h-[140px]">
                       <div>
@@ -111,7 +108,7 @@ export const ProductHighlights: React.FC = () => {
                           </div>
                           <div>
                             <span className="text-[9px] text-cyan-500 font-black uppercase tracking-widest block flex items-center gap-1">
-                              <ShoppingBag size={10} /> A cuánto lo revendes
+                              <ShoppingBag size={10} /> Reventa en Revolico (Avg)
                             </span>
                             <span className="text-xl font-black text-cyan-400">{market.pvp}</span>
                           </div>
@@ -123,9 +120,9 @@ export const ProductHighlights: React.FC = () => {
                       <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest mb-2">
                         <DollarSign size={14} /> Ganancia Limpia
                       </div>
-                      <div className="text-3xl font-black text-emerald-400">{market.profit}</div>
+                      <div className="text-3xl font-black text-emerald-400">+{market.profit}</div>
                       <div className="text-[9px] text-emerald-500/60 font-bold uppercase tracking-tight mt-2 flex items-center gap-1">
-                        <Check size={10} /> Beneficio neto por unidad
+                        <Check size={10} /> Margen neto por unidad
                       </div>
                     </div>
                   </div>
@@ -165,13 +162,6 @@ export const ProductHighlights: React.FC = () => {
               </div>
             );
           })}
-        </div>
-        
-        <div className="mt-20 p-8 rounded-[2rem] bg-gradient-to-r from-cyan-600/10 to-yellow-600/10 border border-slate-700 text-center">
-          <p className="text-slate-300 text-lg font-medium leading-relaxed max-w-4xl mx-auto">
-            <span className="text-white font-black uppercase text-sm block mb-4 tracking-[0.2em]">Resumen de Calidad</span>
-            Novelec solo importa equipos con certificación internacional (UL/CE) y química de Litio Ferro-fosfato (LFP), garantizando que su inversión no se deprecie y ofrezca seguridad total en el entorno climático de Cuba.
-          </p>
         </div>
       </div>
     </section>
