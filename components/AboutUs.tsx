@@ -37,46 +37,46 @@ export const AboutUs: React.FC = () => {
 
             <div className="flex items-center gap-4 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl">
               <ShieldCheck className="text-emerald-500 shrink-0" size={24} />
-              <p className="text-emerald-400 text-xs font-black uppercase tracking-widest">
+              <p className="text-emerald-400 text-[10px] sm:text-xs font-black uppercase tracking-widest">
                 Garantía Directa de Fábrica: Sin Intermediarios.
               </p>
             </div>
           </div>
 
           <div className="relative">
-            <div className="aspect-square bg-slate-900 rounded-[3rem] border border-slate-800 p-8 sm:p-12 shadow-3xl overflow-hidden group">
+            <div className="bg-slate-900 rounded-[2rem] sm:rounded-[3rem] border border-slate-800 p-8 sm:p-12 shadow-3xl overflow-hidden group min-h-[400px] sm:min-h-[500px] flex flex-col justify-center">
               {/* Overlay de marca */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
               <div className="relative z-10 h-full flex flex-col justify-center">
-                <div className="mb-12">
-                  <div className="text-5xl font-black text-white mb-2">10+</div>
-                  <div className="text-xs font-black text-slate-500 uppercase tracking-[0.3em]">Años Operando en Cuba</div>
+                <div className="mb-10 text-center sm:text-left">
+                  <div className="text-7xl sm:text-8xl font-black text-white mb-2 leading-none">10+</div>
+                  <div className="text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-[0.3em]">Años Operando en Cuba</div>
                 </div>
                 
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-white border border-slate-700">
-                      <Globe size={24} />
+                <div className="space-y-6 sm:space-y-8">
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-800 flex items-center justify-center text-white border border-slate-700 shrink-0">
+                      <Globe size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h5 className="text-white font-black uppercase text-xs tracking-widest">Presencia Europea</h5>
-                      <p className="text-slate-500 text-[11px] font-bold">Oficinas centrales en España para gestión de pagos internacionales.</p>
+                      <h5 className="text-white font-black uppercase text-[10px] sm:text-xs tracking-widest">Presencia Europea</h5>
+                      <p className="text-slate-500 text-[10px] sm:text-[11px] font-bold leading-tight">Oficinas centrales en España para gestión de pagos internacionales.</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-6">
-                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-white border border-slate-700">
-                      <Building2 size={24} />
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-800 flex items-center justify-center text-white border border-slate-700 shrink-0">
+                      <Building2 size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h5 className="text-white font-black uppercase text-xs tracking-widest">Infraestructura Real</h5>
-                      <p className="text-slate-500 text-[11px] font-bold">Oficinas en el Náutico y stock físico verificado en Almacenes Tradex.</p>
+                      <h5 className="text-white font-black uppercase text-[10px] sm:text-xs tracking-widest">Infraestructura Real</h5>
+                      <p className="text-slate-500 text-[10px] sm:text-[11px] font-bold leading-tight">Oficinas en el Náutico y stock físico verificado en Almacenes Tradex.</p>
                     </div>
                   </div>
 
-                  <div className="pt-8 border-t border-slate-800">
-                    <p className="text-[10px] text-slate-400 font-bold italic leading-relaxed">
+                  <div className="pt-6 sm:pt-8 border-t border-slate-800">
+                    <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold italic leading-relaxed">
                       "Nuestro compromiso es la seriedad y la transparencia. Buscamos socios comerciales de largo plazo que valoren la seguridad jurídica y el stock verificado."
                     </p>
                     <p className="text-white font-black text-[10px] uppercase mt-2">— Luis Fluxá, Director Novelec</p>
