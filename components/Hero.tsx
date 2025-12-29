@@ -63,20 +63,30 @@ export const Hero: React.FC = () => {
           Venta de lotes cerrados con stock verificado en Almacenes Tradex.
         </p>
 
-        <div className="bg-slate-950/50 border border-slate-800 p-6 rounded-3xl mb-12 max-w-2xl w-full backdrop-blur-md flex flex-col sm:flex-row items-center justify-center gap-8 shadow-2xl">
-            <div className="text-center sm:text-left">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Inversión Mínima</span>
-                <span className="text-2xl font-black text-white">€128,600</span>
+        {/* Bloque de Precios Destacados */}
+        <div className="bg-slate-950/50 border border-slate-800 p-8 rounded-3xl mb-12 max-w-4xl w-full backdrop-blur-md shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div className="text-center md:text-left">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Contenedor Deye</span>
+                    <span className="text-3xl font-black text-white">€128,600</span>
+                    <span className="block text-[9px] text-emerald-400 font-bold uppercase mt-1">Lote Híbrido 10kW</span>
+                </div>
+                <div className="hidden md:block h-12 w-px bg-slate-800 mx-auto"></div>
+                <div className="text-center md:text-right">
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Contenedor EcoFlow</span>
+                    <span className="text-3xl font-black text-white">€135,000</span>
+                    <span className="block text-[9px] text-cyan-400 font-bold uppercase mt-1">Lote Delta Pro & Ultra</span>
+                </div>
             </div>
-            <div className="h-px sm:h-12 w-full sm:w-px bg-slate-800"></div>
-            <div className="text-center sm:text-left">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Estatus</span>
-                <span className="text-2xl font-black text-emerald-400 uppercase tracking-tighter">In-Bond (Cuba)</span>
-            </div>
-            <div className="h-px sm:h-12 w-full sm:w-px bg-slate-800"></div>
-            <div className="text-center sm:text-left">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Modo de Pago</span>
-                <span className="text-xl font-black text-cyan-400 uppercase tracking-tighter">Transferencia Ext.</span>
+            <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-6">
+                <div className="flex items-center gap-2">
+                    <Globe size={14} className="text-slate-400" />
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pago Bancario Exterior</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <ShieldCheck size={14} className="text-emerald-500" />
+                    <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">In-Bond Tradex Cuba</span>
+                </div>
             </div>
         </div>
 

@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { INVENTORY, CONTAINERS } from '../constants';
-import { Battery, Zap, Cpu, Package, FileSpreadsheet, ChevronDown, Info, FileDown, Building2, Lock } from 'lucide-react';
+import { Battery, Zap, Cpu, Package, FileSpreadsheet, ChevronDown, Info, FileDown, Building2, Lock, Tag } from 'lucide-react';
 
 const getIcon = (category: string) => {
   switch (category) {
@@ -110,19 +110,23 @@ export const InventoryTable: React.FC = () => {
                 ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <button
-                  onClick={downloadCSV}
-                  className="group inline-flex items-center gap-2 px-8 py-4 text-xs font-black text-white bg-slate-800 rounded-full hover:bg-slate-700 transition-all shadow-xl"
-              >
-                  <FileSpreadsheet className="h-4 w-4" />
-                  PACKING LIST (.CSV)
-              </button>
-              <div className="bg-red-500/10 border border-red-500/20 px-4 py-3 rounded-2xl">
-                 <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">
-                    AVISO: SOLO VENTA B2B POR CONTENEDOR COMPLETO
-                 </p>
-              </div>
+            {/* Banner de Precio de Lote Dinámico */}
+            <div className={`flex flex-col sm:flex-row items-center gap-4 p-6 rounded-3xl border ${activeTab === 'ecoflow' ? 'bg-cyan-500/5 border-cyan-500/20' : 'bg-yellow-500/5 border-yellow-500/20'}`}>
+                <div className="flex items-center gap-3">
+                    <Tag className={activeTab === 'ecoflow' ? 'text-cyan-400' : 'text-yellow-400'} size={24} />
+                    <div className="text-left">
+                        <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Precio Total del Lote {activeContainer?.brand}</span>
+                        <span className="text-3xl font-black text-white leading-tight">€{activeContainer?.price.toLocaleString()}</span>
+                    </div>
+                </div>
+                <div className="hidden sm:block h-10 w-px bg-slate-800 mx-4"></div>
+                <button
+                    onClick={downloadCSV}
+                    className="group inline-flex items-center gap-2 px-6 py-3 text-[10px] font-black text-white bg-slate-800 rounded-xl hover:bg-slate-700 transition-all shadow-xl border border-slate-700 uppercase tracking-widest"
+                >
+                    <FileSpreadsheet className="h-4 w-4" />
+                    Bajar Packing List
+                </button>
             </div>
         </div>
 
