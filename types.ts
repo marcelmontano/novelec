@@ -1,3 +1,4 @@
+
 export interface ProductSpec {
   capacity: string;
   output?: string;
@@ -7,20 +8,24 @@ export interface ProductSpec {
 
 export interface InventoryItem {
   id: string;
-  containerId: 'ecoflow' | 'deye'; // New field to separate containers
+  // Added 'longi' to the allowed container IDs
+  containerId: 'ecoflow' | 'deye' | 'longi';
   modelName: string;
   sku: string;
   quantity: number;
-  category: 'Generator' | 'Battery' | 'Inverter' | 'Accessory';
+  category: 'Generator' | 'Battery' | 'Inverter' | 'Accessory' | 'Solar Panel';
   description: string;
   specs: ProductSpec;
   imagePlaceholder: string;
   additionalImages?: string[];
-  datasheetUrl?: string; // New optional field for PDF downloads
+  datasheetUrl?: string;
+  saleUnit?: 'Container' | 'Pallet';
+  pricePerUnit?: number;
 }
 
 export interface ContainerOffer {
-  id: 'ecoflow' | 'deye';
+  // Added 'longi' to the allowed container offer IDs
+  id: 'ecoflow' | 'deye' | 'longi';
   title: string;
   brand: string;
   price: number;

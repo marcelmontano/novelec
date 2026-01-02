@@ -4,10 +4,24 @@ import { InventoryItem, ContactInfo, ContainerOffer } from './types';
 export const CONTACT_DETAILS: ContactInfo = {
   phone: "58183649",
   whatsapp: "5358183649", // Format for API
-  currency: "EUR"
+  currency: "USD"
 };
 
 export const CONTAINERS: ContainerOffer[] = [
+  {
+    id: 'longi',
+    title: "Lote Paneles LONGi",
+    brand: "LONGi",
+    price: 122400, // 40 pallets * 3060 USD
+    description: "Paneles Bifaciales de alta eficiencia. Tecnología Hi-MO 7. Disponibilidad de 40 pallets cerrados.",
+    features: [
+      "Precio: $85 USD por Panel",
+      "Venta por Pallet (36 Uni.)",
+      "Tecnología Bifacial G2",
+      "Garantía de Potencia 30 años"
+    ],
+    color: "orange"
+  },
   {
     id: 'ecoflow',
     title: "Contenedor EcoFlow",
@@ -42,6 +56,32 @@ export const CONTAINERS: ContainerOffer[] = [
 const getDriveImage = (id: string) => `https://drive.google.com/thumbnail?id=${id}&sz=w800`;
 
 export const INVENTORY: InventoryItem[] = [
+  // --- LOTE LONGI (AÑADIDO AL PRINCIPIO) ---
+  {
+    id: "longi-himo7",
+    // Removed 'as any' cast as 'longi' is now a valid value for containerId in types.ts
+    containerId: 'longi',
+    modelName: "LONGi Hi-MO 7 (Bifacial Dual Glass)",
+    sku: "LR8-48HGD-455M",
+    quantity: 1440, // 40 pallets * 36 panels
+    category: "Solar Panel",
+    description: "Panel solar de última generación Hi-MO 7. Diseño de doble vidrio (Dual Glass) con tecnología Bifacial que permite capturar energía por ambas caras, aumentando el rendimiento hasta un 25% extra. Ideal para climas tropicales por su bajo coeficiente de temperatura. Estructura de aluminio anodizado y alta resistencia a carga estática (5400Pa).",
+    specs: {
+      capacity: "455W (Max Efficiency 22.8%)",
+      output: "Bifacial / Half-Cell",
+      weight: "23.0 kg",
+      extras: [
+        "Venta por Pallet: $3,060 USD",
+        "Precio por Unidad: $85 USD",
+        "36 Unidades por Pallet",
+        "40 Pallets Disponibles",
+        "Garantía de potencia de 30 años",
+        "Tecnología SMBB para mejor captura"
+      ]
+    },
+    imagePlaceholder: "https://drive.google.com/thumbnail?id=1_S0u-V_R8yqN9I2XW-o7T_J7mCjWpP2T&sz=w800", // Placeholder for Longi
+    saleUnit: 'Pallet'
+  },
   // --- CONTENEDOR DEYE ---
   {
     id: "sun10k",
@@ -111,7 +151,6 @@ export const INVENTORY: InventoryItem[] = [
     imagePlaceholder: "https://deye.com/wp-content/uploads/2025/01/se-g10.2%E4%BE%A7%E9%9D%A2.jpg",
     datasheetUrl: "https://drive.google.com/uc?export=download&id=1sXox2WziwDd7JGLZvFGpFfhtikuCejtR"
   },
-  
   // --- CONTENEDOR ECOFLOW ---
   {
     id: "e980",
@@ -151,21 +190,7 @@ export const INVENTORY: InventoryItem[] = [
         "Soporta Smart Generator Dual Fuel"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-6.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-7.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station-lifestyle-8.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-2-max-power-station.jpg"
   },
   {
     id: "deltapro",
@@ -190,14 +215,7 @@ export const INVENTORY: InventoryItem[] = [
         "Salida Anderson 12.6V 30A"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station-6.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-power-station.jpg"
   },
   {
     id: "deltapro3",
@@ -222,25 +240,7 @@ export const INVENTORY: InventoryItem[] = [
         "Garantía de 5 años"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-2.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-11.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-10.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-9.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-8.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-7.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-6.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-1.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-6.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-scenario.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-power-station-2.jpg"
   },
   {
     id: "deltapro3eb",
@@ -262,16 +262,7 @@ export const INVENTORY: InventoryItem[] = [
         "Salida Extra Battery Port"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-combo-1.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-5.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-6.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery-7.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-3-extra-battery.jpg"
   },
   {
     id: "proultra",
@@ -298,13 +289,7 @@ export const INVENTORY: InventoryItem[] = [
         "WiFi y Bluetooth integrados"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter-5.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-inverter.jpg"
   },
   {
     id: "proultraeb",
@@ -328,12 +313,6 @@ export const INVENTORY: InventoryItem[] = [
         "Modular Plug-and-Play"
       ]
     },
-    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg",
-    additionalImages: [
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-2.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-3.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-4.jpg",
-      "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery-5.jpg"
-    ]
+    imagePlaceholder: "https://www.ecoflow.nl/data/upload/Shop/images/ecoflow-delta-pro-ultra-extra-battery.jpg"
   }
 ];

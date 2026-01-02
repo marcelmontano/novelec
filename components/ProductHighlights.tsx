@@ -1,32 +1,33 @@
 
 import React from 'react';
 import { INVENTORY } from '../constants';
-import { CheckCircle, TrendingUp, DollarSign, Star, ShieldCheck, Globe, ShoppingBag, Check, Award } from 'lucide-react';
+import { TrendingUp, Star, Award, Globe } from 'lucide-react';
 
 export const ProductHighlights: React.FC = () => {
-  const highlightedIds = ['sun10k', 'seg102', 'proultra', 'deltapro3'];
+  // Destacamos los equipos de mayor valor del nuevo inventario
+  const highlightedIds = ['dp-ultra-inv', 'sun10k', 'deltapro3', 'seg102'];
   const highlights = INVENTORY.filter(i => highlightedIds.includes(i.id));
 
   const marketData: Record<string, { marketInsight: string; qualityFactor: string; demandLevel: string }> = {
     'sun10k': {
-      marketInsight: "Equipo crítico para MIPYMES y negocios locales. Demanda masiva ante la inestabilidad energética actual.",
-      qualityFactor: "Grado industrial. Soporta integración con generadores y vida útil de +15 años.",
+      marketInsight: "Equipo crítico para el sector comercial. Es el inversor más buscado para independizar negocios de la red eléctrica.",
+      qualityFactor: "Grado industrial. 5 años de garantía directa Novelec.",
       demandLevel: "Crítica / Alta Rotación"
     },
-    'seg102': {
-      marketInsight: "La solución de almacenamiento más robusta en Cuba. Complemento indispensable para sistemas de 10kW.",
-      qualityFactor: "Química LiFePO4 con 6000 ciclos. BMS inteligente de última generación.",
-      demandLevel: "Alta / Complemento Top"
-    },
-    'proultra': {
-      marketInsight: "Producto premium para el segmento de lujo. La solución de respaldo más potente disponible en el país.",
-      qualityFactor: "Tecnología modular. Funcionamiento silencioso y diseño plug-and-play.",
-      demandLevel: "Nicho Premium / Alto Valor"
+    'dp-ultra-inv': {
+      marketInsight: "La joya de la corona. Respaldo de hogar completo con capacidad de arrancar aires acondicionados centrales.",
+      qualityFactor: "Tecnología X-Fusion exclusiva. Integración total con panel inteligente.",
+      demandLevel: "Premium / Segmento Alto"
     },
     'deltapro3': {
-      marketInsight: "Campeón de la rentabilidad. El equipo más deseado por familias por su facilidad de uso y potencia.",
-      qualityFactor: "Carga 0-80% en 1 hora. Baterías LFP seguras y conmutación UPS de grado médico.",
-      demandLevel: "Masiva / Ventas Rápidas"
+      marketInsight: "El lanzamiento más esperado de 2025. Supera al Delta Pro original en eficiencia y nivel de ruido.",
+      qualityFactor: "X-Quiet (30dB). Carga ultra rápida 0-80% en 1 hora.",
+      demandLevel: "Muy Alta / Lanzamiento"
+    },
+    'seg102': {
+      marketInsight: "Base energética para sistemas Deye. Imprescindible para instalaciones de 10kW.",
+      qualityFactor: "Celdas de grado automotriz. BMS integrado de monitoreo remoto.",
+      demandLevel: "Alta / Complemento"
     }
   };
 
@@ -41,7 +42,7 @@ export const ProductHighlights: React.FC = () => {
             Equipos con Mayor <br className="hidden sm:block" /> <span className="gradient-text">Potencial de Reventa</span>
           </h2>
           <p className="mt-4 max-w-3xl text-xl text-slate-400 mx-auto leading-relaxed">
-            Hemos seleccionado los modelos con mayor rotación en el mercado cubano para maximizar su retorno de inversión.
+            Estos modelos lideran la demanda en el mercado cubano actual por su confiabilidad y potencia.
           </p>
         </div>
 
@@ -60,7 +61,7 @@ export const ProductHighlights: React.FC = () => {
                     alt={item.modelName} 
                   />
                   <div className={`absolute top-6 left-6 bg-slate-900/90 backdrop-blur px-4 py-2 rounded-2xl border border-${accentColor}-500/30 flex flex-col items-center`}>
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Stock</span>
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Lote</span>
                     <span className={`text-2xl font-black text-${accentColor}-400 leading-none mt-1`}>x{item.quantity}</span>
                   </div>
                 </div>
@@ -75,11 +76,11 @@ export const ProductHighlights: React.FC = () => {
                         <Award size={10} /> Canal Mayorista
                       </span>
                     </div>
-                    <h3 className="text-3xl font-black text-white mb-4 leading-tight">{item.modelName}</h3>
+                    <h3 className="text-2xl font-black text-white mb-4 leading-tight uppercase">{item.modelName}</h3>
                   </div>
 
                   <div className="mb-8">
-                     <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-700/50 flex items-center justify-between">
+                     <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800/50 flex items-center justify-between">
                         <div>
                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Nivel de Demanda</p>
                            <p className="text-lg font-black text-white">{market.demandLevel}</p>
